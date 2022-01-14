@@ -1,13 +1,11 @@
-import Navbar from './components/Navbar';
-import Announcement from './components/Announcement';
-import Slider from './components/Slider';
+import { Fragment } from 'react';
+import Home from './pages/Home';
+
 function App() {
   return (
-    <div>
-      <Announcement/>
-      <Navbar/>
-      <Slider/>
-    </div>
+    <Fragment>
+      <Home/>
+    </Fragment>
   );
 }
 
