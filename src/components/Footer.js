@@ -26,7 +26,7 @@ const SocialIcon = styled.div`
     height: 40px;
     border-radius: 50%;
     color: white;
-    background-color: #${(props) => props.color};
+    background-color: #${(i) => i.color};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,7 +69,7 @@ function Footer() {
     return (
     <Container>
         <Left>
-            <Logo>Computer Store</Logo>
+            <Logo>The Red Planet Shop</Logo>
             <Desc>
                 There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable.
             </Desc>
