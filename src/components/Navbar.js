@@ -74,7 +74,7 @@ function Navbar() {
                     </SearchContainer>
                 </Left>
                 <Center>
-                    <Logo>The Red Planet Shop</Logo>
+                    <Logo>Mars</Logo>
                 </Center>
                 <Right>
                     <MenuItem>REGISTER</MenuItem>
