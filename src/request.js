@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = "http://localhost:5000/api/"
+const BASE_URL = process.env.REACT_APP_BASE_URL
 const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZTU2NmUxMWEzZjI1NzZkNzVjMjAyZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0MjUxOTk0NCwiZXhwIjoxNjQyNzc5MTQ0fQ.vE6b6nFfTF9Lk4HEK9wT18-3BZTxu2Rlzr8v39_t-JE"
 
 export const generalRequest = axios.create({

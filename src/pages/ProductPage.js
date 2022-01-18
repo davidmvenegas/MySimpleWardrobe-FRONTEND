@@ -114,6 +114,10 @@ function ProductPage() {
         async function getProduct() {
             try {
                 const response = await generalRequest.get(`products/${productID}`)
+                const selectedColor = await response.data.color.at(0).toString()
+                const selectedSize = await response.data.size.at(0).toString()
+                setColor(selectedColor)
+                setSize(selectedSize)
                 setProduct(response.data)
             } catch (error) {
                 console.error(error)
@@ -122,8 +126,8 @@ function ProductPage() {
         getProduct()
     }, [productID])
 
-    const handleQuantity = (input) => ((input === "remove") ? (quantity > 1 && setQuantity(quantity - 1)) : (setQuantity(quantity + 1)))
-    const handleAdd = () => (dispatch(addProduct({...product, quantity, color, size})))
+    const handleQuantity = (input) => (input === "remove" ? quantity > 1 && setQuantity(quantity - 1) : setQuantity(quantity + 1))
+    const handleAddToCart = () => (dispatch(addProduct({...product, quantity, color, size})))
 
     return (
         <Container>
@@ -145,9 +149,9 @@ function ProductPage() {
                 </Filter>
                 <Filter>
                 <FilterTitle>Size</FilterTitle>
-                <FilterSize>
+                <FilterSize onChange={(e)=>setSize(e.target.value)}>
                     {product.size?.map((sizeItem) => (
-                        <FilterSizeOption key={sizeItem} onClick={()=>setSize(sizeItem)}>{sizeItem}</FilterSizeOption>
+                        <FilterSizeOption key={sizeItem}>{sizeItem}</FilterSizeOption>
                     ))}
                 </FilterSize>
                 </Filter>
@@ -158,7 +162,7 @@ function ProductPage() {
                 <Amount>{quantity}</Amount>
                 <Add onClick={()=>handleQuantity("add")}/>
                 </AmountContainer>
-                <Button onClick={handleAdd}>ADD TO CART</Button>
+                <Button onClick={handleAddToCart}>ADD TO CART</Button>
             </AddContainer>
             </InfoContainer>
         </Wrapper>

@@ -67,7 +67,6 @@ const MenuItem = styled.div`
 function Navbar() {
     const navigate = useNavigate()
     const quantity = useSelector(state => state.cart.quantity)
-
     return (
         <Container>
             <Wrapper>
@@ -84,7 +83,7 @@ function Navbar() {
                 <Right>
                     <MenuItem>REGISTER</MenuItem>
                     <MenuItem>SIGN IN</MenuItem>
-                    <MenuItem>
+                    <MenuItem onClick={() => navigate('/cart')}>
                         <Badge badgeContent={quantity} color="primary">
                             <ShoppingCartOutlined/>
                         </Badge>

@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage'
 import ShoppingPage from "./pages/ShoppingPage"
 import ProductPage from './pages/ProductPage'
 import CartPage from './pages/CartPage'
+import SuccessPage from "./pages/SuccessPage"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/products/:category" element={<ShoppingPage/>} />
           <Route path="/product/:id" element={<ProductPage/>} />
           <Route path="/cart" element={<CartPage/>} />
+          <Route path="/success" element={<SuccessPage/>} />
       </Routes>
     </BrowserRouter>
   );
