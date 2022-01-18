@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import { mobile } from "../responsive";
 
-
-function Announcement() {
     const Container = styled.div`
         height: 35px;
         background-color: teal;
@@ -14,6 +12,8 @@ function Announcement() {
         font-weight: 500;
         ${mobile({ margin: "2.5px 0 6.5px" })}
     `
+
+function Announcement() {
     return (
         <Container>Free Shipping on Orders Over $50</Container>
     )

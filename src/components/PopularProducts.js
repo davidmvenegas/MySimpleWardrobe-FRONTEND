@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react"
 import styled from "styled-components"
-import { popularProducts } from "../Data"
 import PopularProductItem from "./PopularProductItem"
+import axios from "axios"
 
 const Container = styled.div`
     display: flex;
@@ -9,11 +10,35 @@ const Container = styled.div`
     padding: 20px;
 `
 
-function PopularProducts() {
+function PopularProducts({category, filters, sort}) {
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        const getProducts = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/api/products?category=${category}`)
+                setProducts(response.data.filter((item) => Object.entries(filters).every(([key, value]) => item[key].includes(value))))
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        getProducts()
+    }, [category, filters])
+
+    useEffect(() => {
+        if (sort === "newest") {
+            setProducts((items) => [...items].sort((a, b) => a.createdAt - b.createdAt))
+        } else if (sort === "high") {
+            setProducts((items) => [...items].sort((a, b) => a.price - b.price))
+        } else if (sort === "low") {
+            setProducts((items) => [...items].sort((a, b) => b.price - a.price))
+        }
+    }, [sort])
+
     return (
         <Container>
-            {popularProducts.map((item) => (
-                <PopularProductItem key={item.id} item={item}/>
+            {products.map((item) => (
+                <PopularProductItem key={item._id} item={item}/>
             ))}
         </Container>
     )
