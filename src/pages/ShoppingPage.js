@@ -5,7 +5,7 @@ import Shopping from "../components/Shopping";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { mobile } from "../responsive";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Container = styled.div``;
 
@@ -34,6 +34,7 @@ const Select = styled.select`
 const Option = styled.option``;
 
 function ShoppingPage() {
+    useEffect(() => window.scrollTo(0, 0))
     const location = useLocation()
     const category = location.pathname.split("/")[2]
     const [filters, setFilters] = useState({})
@@ -45,7 +46,7 @@ function ShoppingPage() {
     return (
         <Container>
         <Navbar />
-        <Title>Dresses</Title>
+        <Title>{category.charAt(0).toUpperCase() + category.slice(1)}</Title>
         <FilterContainer>
             <Filter>
             <FilterText>Filter Products:</FilterText>

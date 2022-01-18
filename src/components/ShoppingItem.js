@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import styled from "styled-components"
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from "@material-ui/icons"
 
@@ -49,6 +50,7 @@ const Container = styled.div`
 `
 
 function ProductPage({item}) {
+    const navigate = useNavigate()
     return (
         <Container>
             <Image src={item.img}/>
@@ -57,7 +59,7 @@ function ProductPage({item}) {
                     <ShoppingCartOutlined/>
                 </Icon>
                 <Icon>
-                    <SearchOutlined/>
+                    <SearchOutlined onClick={() => navigate(`/product/${item._id}`)} />
                 </Icon>
                 <Icon>
                     <FavoriteBorderOutlined/>

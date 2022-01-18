@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 import styled from "styled-components";
 import { mobile } from "../responsive";
+
 
 const Container = styled.div`
     position: relative;
@@ -39,15 +40,14 @@ font-weight: 600;
 `
 
 function CategoryItem({item}) {
+    const navigate = useNavigate()
     return (
-        <Container>
-            <Link to={`/products/${item.category}`}>
-                <Image src={item.img}/>
-                <Info>
-                    <Title>{item.title}</Title>
-                    <Button>SHOP NOW</Button>
-                </Info>
-            </Link>
+        <Container onClick={() => navigate(`/products/${item.category}`)}>
+            <Image src={item.img}/>
+            <Info>
+                <Title>{item.title}</Title>
+                <Button>SHOP NOW</Button>
+            </Info>
         </Container>
     )
 }
