@@ -48,7 +48,7 @@ const Button = styled.button`
     cursor: pointer;
 `
 
-function Register() {
+function RegisterPage() {
     return (
         <Container>
         <Wrapper>
@@ -71,4 +71,4 @@ function Register() {
     )
 }
 
-export default Register;
+export default RegisterPage;

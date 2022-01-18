@@ -124,7 +124,7 @@ const Button = styled.button`
     font-weight: 600;
 `
 
-function Cart() {
+function CartPage() {
     return (
         <Container>
             <Navbar />
@@ -219,4 +219,4 @@ function Cart() {
     )
 }
 
-export default Cart;
+export default CartPage;

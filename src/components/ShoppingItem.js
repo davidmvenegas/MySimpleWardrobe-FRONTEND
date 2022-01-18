@@ -48,7 +48,7 @@ const Container = styled.div`
     }
 `
 
-function PopularProductItem({item}) {
+function ProductPage({item}) {
     return (
         <Container>
             <Image src={item.img}/>
@@ -67,4 +67,4 @@ function PopularProductItem({item}) {
     )
 }
 
-export default PopularProductItem
+export default ProductPage

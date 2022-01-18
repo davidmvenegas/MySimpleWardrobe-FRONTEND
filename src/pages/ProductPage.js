@@ -1,82 +1,146 @@
-import { useLocation } from "react-router-dom"
+import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components";
-import Navbar from "../components/Navbar";
-import PopularProducts from "../components/PopularProducts";
-import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import Newsletter from "../components/Newsletter";
 import { mobile } from "../responsive";
-import { useState } from "react";
 
 const Container = styled.div``;
-
+const Wrapper = styled.div`
+    padding: 50px;
+    display: flex;
+    ${mobile({ padding: "10px", flexDirection:"column" })}
+`
+const ImgContainer = styled.div`
+    flex: 1;
+`
+const Image = styled.img`
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+    ${mobile({ height: "40vh" })}
+`
+const InfoContainer = styled.div`
+    flex: 1;
+    padding: 0px 50px;
+    ${mobile({ padding: "10px" })}
+`
 const Title = styled.h1`
-    margin: 20px;
+    font-weight: 200;
+`
+const Desc = styled.p`
+    margin: 20px 0px;
+`
+const Price = styled.span`
+    font-weight: 100;
+    font-size: 40px;
 `
 const FilterContainer = styled.div`
+    width: 50%;
+    margin: 30px 0px;
     display: flex;
     justify-content: space-between;
+    ${mobile({ width: "100%" })}
 `
 const Filter = styled.div`
-    margin: 20px;
-    ${mobile({ width: "0px 20px", display: "flex", flexDirection: "column" })}
+    display: flex;
+    align-items: center;
 `
-const FilterText = styled.span`
+const FilterTitle = styled.span`
     font-size: 20px;
-    font-weight: 600;
-    margin-right: 20px;
-    ${mobile({ marginRight: "0px" })}
+    font-weight: 200;
 `
-const Select = styled.select`
-    padding: 10px;
-    margin-right: 20px;
-    ${mobile({ margin: "10px 0px" })}
+const FilterColor = styled.div`
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: ${(i) => i.color};
+    margin: 0px 5px;
+    cursor: pointer;
 `
-const Option = styled.option``;
-
-function ProductPage() {
-    const location = useLocation()
-    const category = location.pathname.split("/")[2]
-    const [filters, setFilters] = useState({})
-    const [sort, setSort] = useState("newest")
-
-    function handleFilters(e){
-        setFilters({...filters, [e.target.name]: e.target.value})
+const FilterSize = styled.select`
+    margin-left: 10px;
+    padding: 5px;
+`
+const FilterSizeOption = styled.option``
+const AddContainer = styled.div`
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    ${mobile({ width: "100%" })}
+`
+const AmountContainer = styled.div`
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+`
+const Amount = styled.span`
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid teal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 5px;
+`
+const Button = styled.button`
+    padding: 15px;
+    border: 2px solid teal;
+    background-color: white;
+    cursor: pointer;
+    font-weight: 500;
+    &:hover{
+        background-color: #f8f4f4;
     }
+`
+function ProductPage() {
     return (
         <Container>
         <Navbar />
-        <Title>Dresses</Title>
-        <FilterContainer>
-            <Filter>
-            <FilterText>Filter Products:</FilterText>
-            <Select name="color" onChange={handleFilters}>
-                <Option disabled selected hidden>Color</Option>
-                <Option>White</Option>
-                <Option>Black</Option>
-                <Option>Red</Option>
-                <Option>Blue</Option>
-                <Option>Yellow</Option>
-                <Option>Green</Option>
-            </Select>
-            <Select name="size" onChange={handleFilters}>
-                <Option disabled selected hidden>Size</Option>
-                <Option>XS</Option>
-                <Option>S</Option>
-                <Option>M</Option>
-                <Option>LG</Option>
-                <Option>XL</Option>
-            </Select>
-            </Filter>
-            <Filter>
-            <FilterText>Sort Products:</FilterText>
-            <Select onChange={e => setSort(e.target.value)}>
-                <Option value="newest">Newest</Option>
-                <Option value="low">Price (Low)</Option>
-                <Option value="high">Price (High)</Option>
-            </Select>
-            </Filter>
-        </FilterContainer>
-        <PopularProducts category={category} filters={filters} sort={sort} />
+        <Wrapper>
+            <ImgContainer>
+            <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+            </ImgContainer>
+            <InfoContainer>
+            <Title>Denim Jumpsuit</Title>
+            <Desc>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
+                iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
+                tristique tortor pretium ut. Curabitur elit justo, consequat id
+                condimentum ac, volutpat ornare.
+            </Desc>
+            <Price>$ 20</Price>
+            <FilterContainer>
+                <Filter>
+                <FilterTitle>Color</FilterTitle>
+                <FilterColor color="black" />
+                <FilterColor color="darkblue" />
+                <FilterColor color="gray" />
+                </Filter>
+                <Filter>
+                <FilterTitle>Size</FilterTitle>
+                <FilterSize>
+                    <FilterSizeOption>XS</FilterSizeOption>
+                    <FilterSizeOption>S</FilterSizeOption>
+                    <FilterSizeOption>M</FilterSizeOption>
+                    <FilterSizeOption>L</FilterSizeOption>
+                    <FilterSizeOption>XL</FilterSizeOption>
+                </FilterSize>
+                </Filter>
+            </FilterContainer>
+            <AddContainer>
+                <AmountContainer>
+                <Remove />
+                <Amount>1</Amount>
+                <Add />
+                </AmountContainer>
+                <Button>ADD TO CART</Button>
+            </AddContainer>
+            </InfoContainer>
+        </Wrapper>
         <Newsletter />
         <Footer />
         </Container>

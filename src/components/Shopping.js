@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
-import PopularProductItem from "./PopularProductItem"
+import ShoppingItem from "./ShoppingItem"
 import axios from "axios"
 
 const Container = styled.div`
@@ -10,7 +10,7 @@ const Container = styled.div`
     padding: 20px;
 `
 
-function PopularProducts({category, filters, sort}) {
+function ProductPageItem({category, filters, sort}) {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -38,10 +38,10 @@ function PopularProducts({category, filters, sort}) {
     return (
         <Container>
             {products.map((item) => (
-                <PopularProductItem key={item._id} item={item}/>
+                <ShoppingItem key={item._id} item={item}/>
             ))}
         </Container>
     )
 }
 
-export default PopularProducts
+export default ProductPageItem

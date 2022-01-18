@@ -50,7 +50,7 @@ const Link = styled.a`
     text-decoration: underline;
     cursor: pointer;
 `
-function Login() {
+function LoginPage() {
     return (
         <Container>
             <Wrapper>
@@ -67,4 +67,4 @@ function Login() {
     )
 }
 
-export default Login;
+export default LoginPage;
