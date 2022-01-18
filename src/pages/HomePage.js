@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Announcement from '../components/Announcement';
 import Slider from '../components/Slider';
@@ -8,6 +8,7 @@ import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 
 function HomePage() {
+    useEffect(() => window.scrollTo(0, 0))
     return (
         <Fragment>
             <Navbar/>

@@ -1,10 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
-import ShoppingPage from "./pages/ShoppingPage";
+import ShoppingPage from "./pages/ShoppingPage"
 import ProductPage from './pages/ProductPage'
-import CartPage from './pages/CartPage';
+import CartPage from './pages/CartPage'
 
 function App() {
   return (

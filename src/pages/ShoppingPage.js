@@ -1,13 +1,13 @@
+import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
-import styled from "styled-components";
-import Navbar from "../components/Navbar";
-import Shopping from "../components/Shopping";
-import Newsletter from "../components/Newsletter";
-import Footer from "../components/Footer";
-import { mobile } from "../responsive";
-import { useEffect, useState } from "react";
+import styled from "styled-components"
+import Navbar from "../components/Navbar"
+import Shopping from "../components/Shopping"
+import Newsletter from "../components/Newsletter"
+import Footer from "../components/Footer"
+import { mobile } from "../responsive"
 
-const Container = styled.div``;
+const Container = styled.div``
 
 const Title = styled.h1`
     margin: 20px;
@@ -36,7 +36,7 @@ const Option = styled.option``;
 function ShoppingPage() {
     useEffect(() => window.scrollTo(0, 0))
     const location = useLocation()
-    const category = location.pathname.split("/")[2]
+    const category = location.pathname.split("/").at(-1)
     const [filters, setFilters] = useState({})
     const [sort, setSort] = useState("newest")
 
@@ -64,7 +64,7 @@ function ShoppingPage() {
                 <Option>XS</Option>
                 <Option>S</Option>
                 <Option>M</Option>
-                <Option>LG</Option>
+                <Option>L</Option>
                 <Option>XL</Option>
             </Select>
             </Filter>

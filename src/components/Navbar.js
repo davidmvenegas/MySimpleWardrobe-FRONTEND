@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components';
 import { Badge } from '@mui/material';
 import { Search, ShoppingCartOutlined } from '@material-ui/icons';
@@ -63,6 +65,9 @@ const MenuItem = styled.div`
 `
 
 function Navbar() {
+    const navigate = useNavigate()
+    const quantity = useSelector(state => state.cart.quantity)
+
     return (
         <Container>
             <Wrapper>
@@ -74,13 +79,13 @@ function Navbar() {
                     </SearchContainer>
                 </Left>
                 <Center>
-                    <Logo>Mars</Logo>
+                    <Logo onClick={() => navigate('/')}>Mars</Logo>
                 </Center>
                 <Right>
                     <MenuItem>REGISTER</MenuItem>
                     <MenuItem>SIGN IN</MenuItem>
                     <MenuItem>
-                        <Badge badgeContent={4} color="primary">
+                        <Badge badgeContent={quantity} color="primary">
                             <ShoppingCartOutlined/>
                         </Badge>
                     </MenuItem>

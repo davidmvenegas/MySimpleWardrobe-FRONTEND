@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import ShoppingItem from "./ShoppingItem"
-import axios from "axios"
+import { generalRequest } from "../request"
+
 
 const Container = styled.div`
     display: flex;
@@ -16,7 +17,7 @@ function ProductPageItem({category, filters, sort}) {
     useEffect(() => {
         const getProducts = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/products?category=${category}`)
+                const response = await generalRequest.get(`products?category=${category}`)
                 setProducts(response.data.filter((item) => Object.entries(filters).every(([key, value]) => item[key].includes(value))))
             } catch (error) {
                 console.error(error)
