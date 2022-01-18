@@ -143,8 +143,7 @@ function CartPage() {
                     tokenId: stripeToken.id,
                     amount: cart.total * 100
                 })
-                console.log(response)
-                navigate("/success")
+                navigate("/success", {state: response.data})
             } catch (error) {
                 console.error(error)
             }
@@ -213,7 +212,7 @@ function CartPage() {
                         <SummaryItemPrice>$ {totalAmount}</SummaryItemPrice>
                     </SummaryItem>
                     <StripeCheckout
-                        name="Space"
+                        name="Mars"
                         image="https://www.nasa.gov/sites/default/files/thumbnails/image/for_press_release.jpg"
                         billingAddress
                         shippingAddress
