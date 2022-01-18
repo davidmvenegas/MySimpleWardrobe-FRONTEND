@@ -29,9 +29,9 @@ function ProductPageItem({category, filters, sort}) {
     useEffect(() => {
         if (sort === "newest") {
             setProducts((items) => [...items].sort((a, b) => a.createdAt - b.createdAt))
-        } else if (sort === "high") {
-            setProducts((items) => [...items].sort((a, b) => a.price - b.price))
         } else if (sort === "low") {
+            setProducts((items) => [...items].sort((a, b) => a.price - b.price))
+        } else if (sort === "high") {
             setProducts((items) => [...items].sort((a, b) => b.price - a.price))
         }
     }, [sort])
