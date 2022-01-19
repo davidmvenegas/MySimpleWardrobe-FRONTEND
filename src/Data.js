@@ -2,22 +2,22 @@ export const sliderItems = [
     {
         id: 1,
         img: "https://www.bite.lv/sites/default/files/2020-07/apple-airpods-2019-wireless-case-1-_0.png",
-        title: "SUMMER SALE",
-        desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+        title: "SUPER SALE (or whatever)",
+        desc: "THESE ARE GREAT, GIVE ME ALL YOU MONEY RN HAHAHAHA",
         bg: "f5fafd",
     },
     {
         id: 2,
-        img: "https://i.ibb.co/DG69bQ4/2.png",
-        title: "AUTUMN COLLECTION",
-        desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+        img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-midnight-select-2021?wid=940&hei=1112&fmt=png-alpha&.v=1629907844000",
+        title: "LOREM BLAH BLAH",
+        desc: "THESE ARE GREAT, GIVE ME ALL YOU MONEY RN HAHAHAHA",
         bg: "fcf1ed",
     },
     {
         id: 3,
-        img: "https://i.ibb.co/cXFnLLV/3.png",
-        title: "LOUNGEWEAR LOVE",
-        desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+        img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-air-select-wifi-spacegray-202009_FMT_WHH?wid=940&hei=1112&fmt=png-alpha&.v=1598653762000",
+        title: "LOREM BLAH BLAH",
+        desc: "THESE ARE GREAT, GIVE ME ALL YOU MONEY RN HAHAHAHA",
         bg: "fbf0f4",
     },
 ];
@@ -25,55 +25,20 @@ export const sliderItems = [
 export const categories = [
     {
         id: 1,
-        img: "https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        title: "SHIRT STYLE!",
+        img: "https://foodtank.com/wp-content/uploads/2021/07/alfons-morales-YLSwjSy7stw-unsplash.jpg",
+        title: "BOOKS",
         category: "man"
     },
     {
         id: 2,
-        img: "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        title: "LOUNGEWEAR LOVE",
+        img: "https://images.prismic.io/frameworkmarketplace/6c51ea62-8e78-4301-9d8f-b283dfcd3367_Pre-Marketplace+-+image_01.jpg?auto=compress,format",
+        title: "COMPUTERS",
         category: "rover"
     },
     {
         id: 3,
-        img: "https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-        title: "LIGHT JACKETS",
-        category: "coats"
+        img: "https://asset.bloomnation.com/c_pad,d_vendor:global:catalog:product:image.png,f_auto,fl_preserve_transparency,q_auto/v1612051686/vendor/5294/catalog/product/f/u/full_heart_-_16_premium_red_roses_by_teleflora_65_1_77.jpg",
+        title: "SOMETHING",
+        category: "books"
     },
 ];
-
-export const popularProducts = [
-    {
-        id:1,
-        img:"https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png",
-    },
-    {
-        id:2,
-        img:"https://cdn.shopify.com/s/files/1/0101/4832/products/Angela_Natural_Tee.png?v=1606780388",
-    },
-    {
-        id:3,
-        img:"https://www.prada.com/content/dam/pradanux_products/U/UCS/UCS319/1YOTF010O/UCS319_1YOT_F010O_S_182_SLF.png",
-    },
-    {
-        id:4,
-        img:"https://www.burdastyle.com/pub/media/catalog/product/cache/7bd3727382ce0a860b68816435d76e26/107/BUS-PAT-BURTE-1320516/1170x1470_BS_2016_05_132_front.png",
-    },
-    {
-        id:5,
-        img:"https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png",
-    },
-    {
-        id:6,
-        img:"https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png",
-    },
-    {
-        id:7,
-        img:"https://cdn.shopify.com/s/files/1/0183/5769/products/Macbook-Air_0002_438554-Product-0-I-637205827845419382_800x800_1e75397b-9032-4a1d-916b-b04427963470.png?v=1618283698",
-    },
-    {
-        id:8,
-        img:"https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
-    },
-]

@@ -48,6 +48,7 @@ const Center = styled.div`
 `
 const Logo = styled.h1`
     font-weight: bold;
+    cursor: pointer;
     ${mobile({ position: "absolute", fontSize: "26px", top: "6px", left: 0, width: "100%" })}
 `
 const Right = styled.div`
@@ -81,8 +82,8 @@ function Navbar() {
                     <Logo onClick={() => navigate('/')}>Mars</Logo>
                 </Center>
                 <Right>
-                    <MenuItem>REGISTER</MenuItem>
-                    <MenuItem>SIGN IN</MenuItem>
+                    <MenuItem onClick={() => navigate('/register')}>REGISTER</MenuItem>
+                    <MenuItem onClick={() => navigate('/login')}>SIGN IN</MenuItem>
                     <MenuItem onClick={() => navigate('/cart')}>
                         <Badge badgeContent={quantity} color="primary">
                             <ShoppingCartOutlined/>
