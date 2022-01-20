@@ -20,7 +20,7 @@ export const sliderItems = [
         desc: "THESE ARE GREAT, GIVE ME ALL YOU MONEY RN HAHAHAHA",
         bg: "fbf0f4",
     },
-];
+]
 
 export const categories = [
     {
@@ -41,4 +41,4 @@ export const categories = [
         title: "SOMETHING",
         category: "books"
     },
-];
+]
