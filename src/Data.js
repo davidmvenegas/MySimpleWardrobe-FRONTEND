@@ -1,27 +1,3 @@
-export const sliderItems = [
-    {
-        id: 1,
-        img: "https://www.bite.lv/sites/default/files/2020-07/apple-airpods-2019-wireless-case-1-_0.png",
-        title: "SUPER SALE (or whatever)",
-        desc: "THESE ARE GREAT, GIVE ME ALL YOU MONEY RN HAHAHAHA",
-        bg: "f5fafd",
-    },
-    {
-        id: 2,
-        img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-midnight-select-2021?wid=940&hei=1112&fmt=png-alpha&.v=1629907844000",
-        title: "LOREM BLAH BLAH",
-        desc: "THESE ARE GREAT, GIVE ME ALL YOU MONEY RN HAHAHAHA",
-        bg: "fcf1ed",
-    },
-    {
-        id: 3,
-        img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-air-select-wifi-spacegray-202009_FMT_WHH?wid=940&hei=1112&fmt=png-alpha&.v=1598653762000",
-        title: "LOREM BLAH BLAH",
-        desc: "THESE ARE GREAT, GIVE ME ALL YOU MONEY RN HAHAHAHA",
-        bg: "fbf0f4",
-    },
-]
-
 export const categories = [
     {
         id: 1,

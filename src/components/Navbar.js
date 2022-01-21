@@ -2,15 +2,16 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components';
 import { Badge } from '@mui/material';
-import { Search, ShoppingCartOutlined } from '@material-ui/icons';
+import { ShoppingCartOutlined } from '@material-ui/icons';
 import { mobile } from "../responsive";
 
 const Container = styled.div`
-    height: 60px;
+    height: 70px;
     ${mobile({ height: "50px", marginTop: "40px" })}
+    box-shadow: 0 2px 6px -2px #ffffff45;
 `
 const Wrapper = styled.div`
-    padding: 10px 20px;
+    padding: 13.5px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,27 +28,13 @@ const Language = styled.span`
     cursor: pointer;
     ${mobile({ padding: "10px 0px" })}
 `
-const SearchContainer = styled.div`
-    border: 0.5px solid lightgray;
-    display: flex;
-    align-items: center;
-    margin-left: 25px;
-    padding: 5px;
-    ${mobile({ marginLeft: "5px" })}
-`
-const Input = styled.input`
-    border: none;
-    outline: none;
-    line-height: 1.4;
-    ${mobile({ width: "115px" })}
-`
 const Center = styled.div`
     flex: 1;
     text-align: center;
     ${mobile({ flex: 0 })}
 `
 const Logo = styled.h1`
-    font-weight: bold;
+    font-weight: 500;
     cursor: pointer;
     ${mobile({ position: "absolute", fontSize: "26px", top: "6px", left: 0, width: "100%" })}
 `
@@ -73,13 +60,9 @@ function Navbar() {
             <Wrapper>
                 <Left>
                     <Language>EN</Language>
-                    <SearchContainer>
-                        <Input/>
-                        <Search style={{color:'gray', fontSize:'16px'}} />
-                    </SearchContainer>
                 </Left>
                 <Center>
-                    <Logo onClick={() => navigate('/')}>Mars</Logo>
+                    <Logo onClick={() => navigate('/')}>The Red Planet Shop</Logo>
                 </Center>
                 <Right>
                     <MenuItem onClick={() => navigate('/register')}>REGISTER</MenuItem>
