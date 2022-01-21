@@ -4,13 +4,15 @@ import { mobile } from "../responsive"
 
     const Container = styled.div`
         position: relative;
-        height: 50px;
+        height: 40px;
+        width: 100%;
         background-color: teal;
         color: white;
         display: flex;
         align-items: center;
         justify-content: center;
         ${mobile({ margin: "2.5px 0 6.5px" })}
+        z-index: 100;
     `
     const Content = styled.div`
         color: white;
