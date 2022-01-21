@@ -58,7 +58,7 @@ const FilterColor = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: ${(i) => i.color};
+    background-color: #${(i) => i.color};
     margin: 0px 5px;
     cursor: pointer;
 `
@@ -127,6 +127,8 @@ function ProductPage() {
 
     const handleQuantity = (input) => (input === "remove" ? quantity > 1 && setQuantity(quantity - 1) : setQuantity(quantity + 1))
     const handleAddToCart = () => (dispatch(addProduct({...product, quantity, color, size})))
+
+    console.log(product)
 
     return (
         <Container>

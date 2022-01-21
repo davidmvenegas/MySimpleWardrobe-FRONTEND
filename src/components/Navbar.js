@@ -8,7 +8,7 @@ import { mobile } from "../responsive";
 const Container = styled.div`
     height: 70px;
     ${mobile({ height: "50px", marginTop: "40px" })}
-    box-shadow: 0 2px 6px -2px #ffffff45;
+    box-shadow: 0 2px 6px -2px #00000045;
 `
 const Wrapper = styled.div`
     padding: 13.5px 20px;
@@ -34,7 +34,7 @@ const Center = styled.div`
     ${mobile({ flex: 0 })}
 `
 const Logo = styled.h1`
-    font-weight: 500;
+    font-weight: 800;
     cursor: pointer;
     ${mobile({ position: "absolute", fontSize: "26px", top: "6px", left: 0, width: "100%" })}
 `

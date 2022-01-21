@@ -52,8 +52,8 @@ function ShoppingPage() {
             <Select name="color" onChange={handleFilters}>
                 <Option disabled selected hidden>Color</Option>
                 <Option>White</Option>
-                <Option>Black</Option>
-                <Option>Red</Option>
+                <Option name="000">Black</Option>
+                <Option name="888">Gray</Option>
                 <Option>Blue</Option>
                 <Option>Yellow</Option>
                 <Option>Green</Option>
