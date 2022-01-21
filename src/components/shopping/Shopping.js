@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import ShoppingItem from "./ShoppingItem"
-import { generalRequest } from "../request"
+import { generalRequest } from "../../request"
 
 
 const Container = styled.div`

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
-import Shopping from "../components/Shopping"
+import Shopping from "../components/shopping/Shopping"
 import Footer from "../components/Footer"
 import { mobile } from "../responsive"
 

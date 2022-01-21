@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import styled from "styled-components";
-import { mobile } from "../responsive";
+import { mobile } from "../../responsive";
 
 
 const Container = styled.div`
     position: relative;
     flex: 1;
-    margin: 3px;
+    margin: 10px;
     height: 70vh;
 `
 const Image = styled.img`

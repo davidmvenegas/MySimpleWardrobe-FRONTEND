@@ -1,10 +1,10 @@
 import { Fragment, useEffect } from 'react'
 import Navbar from '../components/Navbar'
-import Landing from '../components/Landing'
 import Announcement from '../components/Announcement'
-import Categories from '../components/Categories'
+import Landing from '../components/Landing'
+import Slider from '../components/slider/Slider.js'
+import Categories from '../components/categories/Categories'
 import Footer from '../components/Footer'
-import About from '../components/About'
 
 function HomePage() {
     useEffect(() => window.scrollTo(0, 0))
@@ -13,8 +13,8 @@ function HomePage() {
             <Announcement/>
             <Navbar/>
             <Landing/>
+            <Slider/>
             <Categories/>
-            <About/>
             <Footer/>
         </Fragment>
     )

@@ -62,7 +62,7 @@ function Navbar() {
                     <Language>EN</Language>
                 </Left>
                 <Center>
-                    <Logo onClick={() => navigate('/')}>The Red Planet Shop</Logo>
+                    <Logo onClick={() => navigate('/')}>My Simple Wardrobe</Logo>
                 </Center>
                 <Right>
                     <MenuItem onClick={() => navigate('/register')}>REGISTER</MenuItem>
