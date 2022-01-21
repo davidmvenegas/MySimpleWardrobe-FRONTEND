@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom"
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
 import Shopping from "../components/Shopping"
-import Newsletter from "../components/Newsletter"
 import Footer from "../components/Footer"
 import { mobile } from "../responsive"
 
@@ -78,7 +77,6 @@ function ShoppingPage() {
             </Filter>
         </FilterContainer>
         <Shopping category={category} filters={filters} sort={sort} />
-        <Newsletter />
         <Footer />
         </Container>
     )

@@ -6,7 +6,6 @@ import { Add, Remove } from "@material-ui/icons"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
-import Newsletter from "../components/Newsletter"
 import { generalRequest } from "../request"
 import { mobile } from "../responsive"
 
@@ -166,7 +165,6 @@ function ProductPage() {
             </AddContainer>
             </InfoContainer>
         </Wrapper>
-        <Newsletter />
         <Footer />
         </Container>
     )

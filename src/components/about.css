@@ -1,3 +1,33 @@
 .aboutContainer {
+    position: relative;
     height: 80vh;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.aboutLeft {
+    width: 70rem;
+    margin-left: 20rem;
+    text-align: center;
+    margin-top: -2.5rem;
+}
+.aboutLeft h1 {
+    font-size: 3.35rem;
+    margin-bottom: 1rem;
+}
+.aboutLeft h1 span {
+    font-size: 3.25rem;
+    font-weight: 100;
+    margin-left: .5rem;
+}
+.aboutLeft p {
+    font-size: 1.25rem;
+    line-height: 2;
+    width: 90%;
+    margin: 0 auto;
+}
+.aboutRight img {
+    height: 40rem;
+    opacity: .5;
 }
