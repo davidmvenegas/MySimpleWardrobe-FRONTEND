@@ -10,7 +10,7 @@ const Container = styled.div`
     height: 70px;
     ${mobile({ height: "50px", marginTop: "40px" })}
     box-shadow: 0 2px 6px -2px #00000045;
-    margin-bottom: .5rem;
+    margin-bottom: .25rem;
 `
 const Wrapper = styled.div`
     padding: 13.5px 20px;

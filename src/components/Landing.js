@@ -2,6 +2,7 @@ import './landing.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BtnSlider from './BtnSlider'
+import { ChevronRight } from "@material-ui/icons"
 import { dataSlider } from '../LandingData'
 
 function Landing() {
@@ -35,8 +36,12 @@ function Landing() {
                         {dataSlider.map((obj, index) => {
                             return (
                                 <div key={obj.id} className={slideIndex === index + 1 ? "slide active-anim" : "slide"}>
-                                    <button id='sliderButtonHome' onClick={() => navigate(`/products/${obj.category}`)}>{obj.title}</button>
                                     <img src={obj.img} alt='pic' />
+                                        <div className="slideTextWrapper">
+                                            <h1>{obj.title}</h1>
+                                            <h4>{obj.subtitle}</h4>
+                                            <div id='sliderButtonWrapperIhateyou'><button id='sliderButtonHome' onClick={() => navigate(`/products/${obj.category}`)}>Start Shopping</button><ChevronRight id="slideChev"/></div>
+                                        </div>
                                 </div>
                             )
                         })}
