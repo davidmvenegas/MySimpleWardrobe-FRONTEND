@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import { Badge } from '@mui/material';
 import { ShoppingCartOutlined } from '@material-ui/icons';
 import { mobile } from "../responsive";
+import LogoImage from '../images/logo.png'
 
 const Container = styled.div`
     height: 70px;
     ${mobile({ height: "50px", marginTop: "40px" })}
     box-shadow: 0 2px 6px -2px #00000045;
+    margin-bottom: .5rem;
 `
 const Wrapper = styled.div`
     padding: 13.5px 20px;
@@ -21,12 +23,12 @@ const Left = styled.div`
     flex: 1;
     display: flex;
     align-items: center;
+    height: 2rem;
     ${mobile({ justifyContent: "center" })}
 `
-const Language = styled.span`
-    font-size: 14px;
-    cursor: pointer;
-    ${mobile({ padding: "10px 0px" })}
+const ImageLogo = styled.img`
+    height: 3.75rem;
+    width: 3.75rem;
 `
 const Center = styled.div`
     flex: 1;
@@ -34,7 +36,7 @@ const Center = styled.div`
     ${mobile({ flex: 0 })}
 `
 const Logo = styled.h1`
-    font-weight: 800;
+    font-weight: 600;
     cursor: pointer;
     ${mobile({ position: "absolute", fontSize: "26px", top: "6px", left: 0, width: "100%" })}
 `
@@ -59,10 +61,10 @@ function Navbar() {
         <Container>
             <Wrapper>
                 <Left>
-                    <Language>EN</Language>
+                    <ImageLogo src={LogoImage}/>
                 </Left>
                 <Center>
-                    <Logo onClick={() => navigate('/')}>My Simple Wardrobe</Logo>
+                    <Logo onClick={() => navigate('/')}>My Simple Wardrobe.</Logo>
                 </Center>
                 <Right>
                     <MenuItem onClick={() => navigate('/register')}>REGISTER</MenuItem>

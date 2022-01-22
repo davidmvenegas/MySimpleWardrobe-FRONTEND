@@ -1,0 +1,57 @@
+.categoriesContainer {
+    margin: .5rem;
+}
+.categoriesWrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+}
+.aCategory {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 25rem;
+    margin: .5rem;
+    background-color: lightblue;
+}
+.aCategory img {
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.aCategoryText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 12.5rem;
+}
+.aCategoryText h1 {
+    font-size: 2.5rem;
+}
+.aCategoryText h2 {
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin: 1rem auto;
+}
+.buttonWrapperCat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.aCategoryText button {
+    font-size: 1.25rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+.aCategoryText button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#catRight {
+    margin-top: .145rem;
+}

@@ -2,6 +2,7 @@ import { Fragment, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Announcement from '../components/Announcement'
 import Landing from '../components/Landing'
+import Categories from '../components/Categories'
 import Footer from '../components/Footer'
 
 function HomePage() {
@@ -11,6 +12,7 @@ function HomePage() {
             <Announcement/>
             <Navbar/>
             <Landing/>
+            <Categories/>
             <Footer/>
         </Fragment>
     )
