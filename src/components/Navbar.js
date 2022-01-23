@@ -1,16 +1,19 @@
+import { Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import styled from 'styled-components';
-import { Badge } from '@mui/material';
-import { ShoppingCartOutlined } from '@material-ui/icons';
-import { mobile } from "../responsive";
+import { useSelector, useDispatch } from 'react-redux'
+import styled from 'styled-components'
+import { Badge } from '@mui/material'
+import { ShoppingCartOutlined, Person } from '@material-ui/icons'
 import LogoImage from '../images/logo.png'
+import { logout } from "../redux/userRedux"
+import { mobile } from "../responsive"
 
 const Container = styled.div`
     height: 70px;
-    ${mobile({ height: "50px", marginTop: "40px" })}
-    box-shadow: 0 2px 6px -2px #00000045;
+    background-color: white;
     margin-bottom: .25rem;
+    box-shadow: 0 2px 6px -2px #00000045;
+    ${mobile({ height: "50px", marginTop: "40px" })}
 `
 const Wrapper = styled.div`
     padding: 13.5px 20px;
@@ -57,7 +60,13 @@ const MenuItem = styled.div`
 
 function Navbar() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const quantity = useSelector(state => state.cart.quantity)
+    const user = useSelector(state => state.user.currentUser)
+    function handleLogout() {
+        dispatch(logout())
+        // navigate("/")
+    }
     return (
         <Container>
             <Wrapper>
@@ -68,11 +77,19 @@ function Navbar() {
                     <Logo onClick={() => navigate('/')}>My Simple Wardrobe.</Logo>
                 </Center>
                 <Right>
-                    <MenuItem onClick={() => navigate('/register')}>REGISTER</MenuItem>
-                    <MenuItem onClick={() => navigate('/login')}>SIGN IN</MenuItem>
+                    {!user &&
+                    <Fragment>
+                        <MenuItem onClick={() => navigate('/register')}>REGISTER</MenuItem>
+                        <MenuItem onClick={() => navigate('/login')}>SIGN IN</MenuItem>
+                    </Fragment>}
+                    {user &&
+                    <Fragment>
+                        <MenuItem onClick={handleLogout}>LOG OUT</MenuItem>
+                        <MenuItem onClick={() => navigate('/profile')}><Person style={{fontSize: "2rem"}}/></MenuItem>
+                    </Fragment>}
                     <MenuItem onClick={() => navigate('/cart')}>
                         <Badge badgeContent={quantity} color="primary">
-                            <ShoppingCartOutlined/>
+                            <ShoppingCartOutlined style={{fontSize: "1.75rem"}}/>
                         </Badge>
                     </MenuItem>
                 </Right>

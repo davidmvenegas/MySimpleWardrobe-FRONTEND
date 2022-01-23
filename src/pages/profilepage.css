@@ -1,0 +1,43 @@
+.profileContainer {
+    height: 40rem;
+}
+.profileHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 1.5rem;
+}
+.profileHeaderLinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+.profileHeaderLinks p {
+    margin: 0 2rem;
+    font-size: 1.125rem;
+    cursor: pointer;
+}
+#sec {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 4px;
+}
+#sec:after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 3px;
+    width: 0px;
+    background: transparent;
+    transition: width .5s ease, background-color .5s ease;
+}
+#sec.secActive:after {
+    width: 100%;
+    background: teal;
+}
+#sec:hover:after {
+    width: 100%;
+    background: teal;
+}

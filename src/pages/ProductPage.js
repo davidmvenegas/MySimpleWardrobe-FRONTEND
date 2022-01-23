@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { addProduct } from "../redux/cartRedux"
-import { Add, Remove } from "@material-ui/icons"
+import { Add, Remove, ArrowBack } from "@material-ui/icons"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
@@ -10,14 +10,15 @@ import Menu from "../components/Menu"
 import { generalRequest } from "../request"
 import { mobile } from "../responsive"
 
-const Container = styled.div``;
+const Container = styled.div``
 const Wrapper = styled.div`
-    padding: 50px;
+    position: relative;
+    padding: 0 50px;
     display: flex;
     ${mobile({ padding: "10px", flexDirection:"column" })}
 `
 const ImgContainer = styled.div`
-    flex: 1;
+    flex: 5;
 `
 const Image = styled.img`
     width: 100%;
@@ -26,23 +27,26 @@ const Image = styled.img`
     ${mobile({ height: "40vh" })}
 `
 const InfoContainer = styled.div`
-    flex: 1;
-    padding: 0px 50px;
+    flex: 4;
+    padding: 75px 50px;
     ${mobile({ padding: "10px" })}
 `
 const Title = styled.h1`
     font-weight: 200;
+    font-size: 3rem;
 `
 const Desc = styled.p`
-    margin: 20px 0px;
+    margin: 20px 0px 22.5px;
+    font-size: 1.25rem;
+    font-weight: 200;
 `
 const Price = styled.span`
     font-weight: 100;
-    font-size: 40px;
+    font-size: 45px;
 `
 const FilterContainer = styled.div`
-    width: 50%;
-    margin: 30px 0px;
+    width: fit-content;
+    margin: 25px 0 32.5px;
     display: flex;
     justify-content: space-between;
     ${mobile({ width: "100%" })}
@@ -50,10 +54,12 @@ const FilterContainer = styled.div`
 const Filter = styled.div`
     display: flex;
     align-items: center;
+    margin-right: 1.5rem;
 `
 const FilterTitle = styled.span`
-    font-size: 20px;
+    font-size: 22.5px;
     font-weight: 200;
+    margin-right: .25rem;
 `
 const FilterColor = styled.div`
     width: 20px;
@@ -94,13 +100,25 @@ const Button = styled.button`
     padding: 15px;
     border: 2px solid teal;
     background-color: white;
+    width: 8rem;
     cursor: pointer;
     font-weight: 500;
     &:hover{
         background-color: #f8f4f4;
     }
 `
+const AbsoluteBack = styled.div`
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    height: 3rem;
+    width: 5rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+`
 function ProductPage() {
+    const navigate = useNavigate()
     useEffect(() => window.scrollTo(0, 0))
     const dispatch = useDispatch()
     const location = useLocation()
@@ -109,6 +127,7 @@ function ProductPage() {
     const [quantity, setQuantity] = useState(1)
     const [color, setColor] = useState(null)
     const [size, setSize] = useState(null)
+    const [inCart, setInCart] = useState(false)
 
     useEffect(() => {
         async function getProduct() {
@@ -126,16 +145,31 @@ function ProductPage() {
         getProduct()
     }, [productID])
 
-    const handleQuantity = (input) => (input === "remove" ? quantity > 1 && setQuantity(quantity - 1) : setQuantity(quantity + 1))
-    const handleAddToCart = () => (dispatch(addProduct({...product, quantity, color, size})))
-
-    console.log(product)
+    const handleQuantity = (input) => {
+        input === "remove" ? quantity > 1 && setQuantity(quantity - 1) : setQuantity(quantity + 1)
+        setInCart(false)
+    }
+    function handleColor(colorItem) {
+        setColor(colorItem)
+        setQuantity(1)
+        setInCart(false)
+    }
+    function handleSize(e) {
+        setSize(e.target.value)
+        setQuantity(1)
+        setInCart(false)
+    }
+    function handleAddToCart() {
+        dispatch(addProduct({...product, quantity, color, size}))
+        setInCart(true)
+    }
 
     return (
         <Container>
         <Navbar />
         <Menu/>
         <Wrapper>
+            <AbsoluteBack><ArrowBack style={{cursor: "pointer", fontSize: "2.5rem"}} onClick={() => navigate(-1)}/></AbsoluteBack>
             <ImgContainer>
             <Image src={product.img} />
             </ImgContainer>
@@ -147,12 +181,12 @@ function ProductPage() {
                 <Filter>
                 <FilterTitle>Color</FilterTitle>
                     {product.color?.map((colorItem) => (
-                        <FilterColor key={colorItem} color={colorItem} onClick={()=>setColor(colorItem)} style={color === colorItem ? {border: "3px solid #888"} : null} />
+                        <FilterColor key={colorItem} color={colorItem} onClick={() => handleColor(colorItem)} style={color === colorItem ? {border: "3px solid #888"} : null} />
                     ))}
                 </Filter>
                 <Filter>
                 <FilterTitle>Size</FilterTitle>
-                <FilterSize onChange={(e)=>setSize(e.target.value)}>
+                <FilterSize onChange={(e) => handleSize(e)}>
                     {product.size?.map((sizeItem) => (
                         <FilterSizeOption key={sizeItem}>{sizeItem}</FilterSizeOption>
                     ))}
@@ -161,11 +195,11 @@ function ProductPage() {
             </FilterContainer>
             <AddContainer>
                 <AmountContainer>
-                <Remove onClick={()=>handleQuantity("remove")} />
+                <Remove style={{cursor: "pointer"}} onClick={()=>handleQuantity("remove")} />
                 <Amount>{quantity}</Amount>
-                <Add onClick={()=>handleQuantity("add")}/>
+                <Add style={{cursor: "pointer"}} onClick={()=>handleQuantity("add")}/>
                 </AmountContainer>
-                <Button onClick={handleAddToCart}>ADD TO CART</Button>
+                <Button onClick={handleAddToCart}>{inCart ? "ADDED!" : "ADD TO CART"}</Button>
             </AddContainer>
             </InfoContainer>
         </Wrapper>

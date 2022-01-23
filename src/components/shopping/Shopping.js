@@ -5,8 +5,9 @@ import { generalRequest } from "../../request"
 
 
 const Container = styled.div`
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
     flex-wrap: wrap;
     padding: 20px;
 `

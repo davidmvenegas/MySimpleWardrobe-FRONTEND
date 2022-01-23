@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import styled from "styled-components"
-import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from "@material-ui/icons"
+import { FavoriteBorderOutlined, ShoppingCartOutlined } from "@material-ui/icons"
 
 const Image = styled.img`
     height: 75%;
@@ -11,12 +11,14 @@ const Info = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.2);
     transition: all .3s ease;
+    cursor: pointer;
 `
 const Icon = styled.div`
     display: flex;
@@ -33,6 +35,19 @@ const Icon = styled.div`
         transform: scale(1.085);
         cursor: pointer;
     }
+`
+const Title = styled.h1`
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: white;
+    -webkit-text-stroke: 1px black;
+    margin-bottom: 2rem;
+    text-align: center;
+`
+const IconContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 const Container = styled.div`
     position: relative;
@@ -54,16 +69,16 @@ function ProductPage({item}) {
     return (
         <Container>
             <Image src={item.img}/>
-            <Info>
-                <Icon>
-                    <ShoppingCartOutlined/>
-                </Icon>
-                <Icon>
-                    <SearchOutlined onClick={() => navigate(`/product/${item._id}`)} />
-                </Icon>
-                <Icon>
-                    <FavoriteBorderOutlined/>
-                </Icon>
+            <Info onClick={() => navigate(`/product/${item._id}`)}>
+                <Title>{item.title}</Title>
+                <IconContainer>
+                    <Icon>
+                        <ShoppingCartOutlined/>
+                    </Icon>
+                    <Icon>
+                        <FavoriteBorderOutlined/>
+                    </Icon>
+                </IconContainer>
             </Info>
         </Container>
     )

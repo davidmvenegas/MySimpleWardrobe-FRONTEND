@@ -10,14 +10,15 @@ import { mobile } from "../responsive"
 const Container = styled.div``
 
 const Title = styled.h1`
-    margin: 20px;
+    margin: 20px 20px 0;
+    font-size: 2.5rem;
 `
 const FilterContainer = styled.div`
     display: flex;
     justify-content: space-between;
 `
 const Filter = styled.div`
-    margin: 20px;
+    margin: 20px 20px 5px;
     ${mobile({ width: "0px 20px", display: "flex", flexDirection: "column" })}
 `
 const FilterText = styled.span`
