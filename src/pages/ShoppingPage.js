@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
+import Menu from "../components/Menu"
 import Shopping from "../components/shopping/Shopping"
 import Footer from "../components/Footer"
 import { mobile } from "../responsive"
@@ -45,6 +46,7 @@ function ShoppingPage() {
     return (
         <Container>
         <Navbar />
+        <Menu/>
         <Title>{category.charAt(0).toUpperCase() + category.slice(1)}</Title>
         <FilterContainer>
             <Filter>

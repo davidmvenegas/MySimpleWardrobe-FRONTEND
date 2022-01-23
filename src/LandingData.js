@@ -24,7 +24,7 @@ export const dataSlider = [
         id: uuidv4(),
         title: "Outerware",
         subtitle: "Stay Warm every day of the year",
-        category: "hoodies",
+        category: "outerware",
         img: hoodieSlide
     },
     {
@@ -36,7 +36,7 @@ export const dataSlider = [
     },
     {
         id: uuidv4(),
-        title: "accessories",
+        title: "Accessories",
         subtitle: "Finish the look with Hats and Sunglasses",
         category: "accessories",
         img: hatSlide

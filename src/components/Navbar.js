@@ -29,6 +29,7 @@ const Left = styled.div`
 const ImageLogo = styled.img`
     height: 3.75rem;
     width: 3.75rem;
+    cursor: pointer;
 `
 const Center = styled.div`
     flex: 1;
@@ -61,7 +62,7 @@ function Navbar() {
         <Container>
             <Wrapper>
                 <Left>
-                    <ImageLogo src={LogoImage}/>
+                    <ImageLogo onClick={() => navigate('/')} src={LogoImage}/>
                 </Left>
                 <Center>
                     <Logo onClick={() => navigate('/')}>My Simple Wardrobe.</Logo>

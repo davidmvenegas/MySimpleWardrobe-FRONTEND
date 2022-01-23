@@ -6,6 +6,7 @@ import { Add, Remove } from "@material-ui/icons"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
+import Menu from "../components/Menu"
 import { generalRequest } from "../request"
 import { mobile } from "../responsive"
 
@@ -133,6 +134,7 @@ function ProductPage() {
     return (
         <Container>
         <Navbar />
+        <Menu/>
         <Wrapper>
             <ImgContainer>
             <Image src={product.img} />
