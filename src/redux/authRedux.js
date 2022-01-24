@@ -1,5 +1,5 @@
 import { generalRequest } from "../request"
-import { loginSuccess, loginStart, loginFailure } from "./userRedux"
+import { loginSuccess, loginStart, loginFailure, updateUser } from "./userRedux"
 
 async function loginRequest(dispatch, user) {
     dispatch(loginStart())
@@ -11,5 +11,13 @@ async function loginRequest(dispatch, user) {
         console.error(error)
     }
 }
+async function editUser(id, user, dispatch) {
+    try {
+        const response = await generalRequest.patch(`/users/${id}`, user)
+        dispatch(updateUser(response.data))
+    } catch (error) {
+        console.error(error)
+    }
+}
 
-export { loginRequest }
+export { loginRequest, editUser }
