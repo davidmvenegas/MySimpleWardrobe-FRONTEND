@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom"
 import { Add, Remove } from "@material-ui/icons"
+import LogoImg from '../images/logo.png'
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import { mobile } from "../responsive"
 import { userRequest } from '../request' 
+import { removeAllProduct, removeProduct, addCartProduct } from '../redux/cartRedux'
+import Swal from 'sweetalert2'
 import StripeCheckout from "react-stripe-checkout"
 const KEY = process.env.REACT_APP_STRIPE_KEY
 
@@ -34,6 +37,7 @@ const TopButton = styled.button`
     color: ${(i) => i.type === "filled" && "white"};
 `
 const TopTexts = styled.div`
+    margin-left: -30px;
     ${mobile({ display: "none" })}
 `
 const TopText = styled.span`
@@ -47,7 +51,8 @@ const Bottom = styled.div`
     ${mobile({ flexDirection: "column" })}
 `
 const Info = styled.div`
-    flex: 3;
+    width: 74vw;
+    min-height: 25rem;
 `
 const Product = styled.div`
     display: flex;
@@ -55,7 +60,7 @@ const Product = styled.div`
     ${mobile({ flexDirection: "column" })}
 `
 const ProductDetail = styled.div`
-    flex: 2;
+    flex: 4;
     display: flex;
 `
 const Image = styled.img`
@@ -73,7 +78,7 @@ const ProductColor = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: ${(i) => i.color};
+    background-color: #${(i) => i.color};
 `
 const ProductSize = styled.span``
 const PriceDetail = styled.div`
@@ -86,11 +91,17 @@ const PriceDetail = styled.div`
 const ProductAmountContainer = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-top: 20px;
 `
 const ProductAmount = styled.div`
     font-size: 24px;
     margin: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    height: 2.085rem;
+    width: auto;
+    padding: 0 .5rem;
+    border-radius: .5rem;
+    text-align: center;
     ${mobile({ margin: "5px 15px" })}
 `
 const ProductPrice = styled.div`
@@ -99,17 +110,21 @@ const ProductPrice = styled.div`
     ${mobile({ marginBottom: "20px" })}
 `
 const Hr = styled.hr`
-    background-color: #eee;
+    background-color: #ddd;
     border: none;
     height: 1px;
     margin-bottom: 15px;
 `
 const Summary = styled.div`
     flex: 1;
+    position: fixed;
+    right: 2.25rem;
+    margin-top: .5rem;
     border: 0.5px solid lightgray;
     border-radius: 10px;
-    padding: 20px;
-    height: 50vh;
+    padding: 20px 30px;
+    max-height: 43vh;
+    background-color: white;
 `
 const SummaryTitle = styled.h1`
     font-weight: 200;
@@ -129,12 +144,55 @@ const Button = styled.button`
     background-color: black;
     color: white;
     font-weight: 600;
+    cursor: pointer;
+`
+const RemoveButton = styled.h3`
+    font-size: .9rem;
+    font-weight: 300;
+    border-bottom: 1px solid black;
+    margin-top: 1.35rem;
+    &:hover {
+        cursor: pointer;
+    }
+`
+const ReminderContainer = styled.div`
+    height: 25rem;
+    width: 100%;
+    display: grid;
+    place-content: center;
+    margin-left: -75vw;
+    margin-top: .5rem;
+    border-top: 1px solid lightgray;
+`
+const ReminderContent = styled.h1`
+    font-size: 1.5rem;
+    font-weight: 200;
+    color: #444;
 `
 
 function CartPage() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
     const [stripeToken, setStripeToken] = useState(null)
+
+    function handleRemoveAllProduct(product) {
+        const price = product.price
+        const quantity = product.quantity
+        dispatch(removeAllProduct({product, price, quantity}))
+    }
+    function handleAddProduct(product) {
+        const price = product.price
+        dispatch(addCartProduct({product, price}))
+    }
+    function handleRemoveProduct(product) {
+        const price = product.price
+        if (product.quantity === 1) {
+            handleRemoveAllProduct(product)
+        } else {
+            dispatch(removeProduct({product, price}))
+        }
+    }
 
     useEffect(() => {
         async function makeRequest() {
@@ -143,17 +201,32 @@ function CartPage() {
                     tokenId: stripeToken.id,
                     amount: cart.total * 100
                 })
-                navigate("/success", {state: response.data})
+                const responseData = response.data
+                const cartState = {responseData, cart}
+                navigate("/success", {state: cartState})
             } catch (error) {
                 console.error(error)
             }
         }
         stripeToken && makeRequest()
-    }, [cart.total, navigate, stripeToken])
+    }, [cart, cart.total, dispatch, navigate, stripeToken])
 
     const setToken = (token) => setStripeToken(token)
     const shippingAmount = cart.total > 0 ? 6.99 : 0
     const totalAmount = cart.total >= 50 ? parseInt(cart.total) : (cart.total + shippingAmount).toFixed(2)
+
+    function handleBuy() {
+        Swal.fire({
+            title: 'Hey there!',
+            text: "While this checkout process is PCI compliance and your information secure, the website is for demo purposes only. Feel free to use 4242 4242 4242 4242 as a burner card to enjoy the experience.",
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Got it!'
+        }).then((result) => {if (result.isConfirmed) {
+            document.getElementById("stripeButton").click()
+            }
+        })
+    }
+
     return (
         <Container>
             <Navbar />
@@ -162,9 +235,10 @@ function CartPage() {
                 <Top>
                     <TopButton onClick={() => navigate(-1)}>CONTINUE SHOPPING</TopButton>
                     <TopTexts>
-                        <TopText>Shopping Bag(2)</TopText>
+                        <TopText>Shopping Bag({cart.quantity})</TopText>
                         <TopText>Your Wishlist (0)</TopText>
                     </TopTexts>
+                    <TopButton disabled={totalAmount <= 0} type="filled" onClick={() => handleBuy()}>CHECKOUT NOW</TopButton>
                 </Top>
                 <Bottom>
                 <Info>
@@ -180,12 +254,13 @@ function CartPage() {
                                 </Details>
                             </ProductDetail>
                             <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Add />
-                                    <ProductAmount>2</ProductAmount>
-                                    <Remove />
-                                </ProductAmountContainer>
                                 <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
+                                <ProductAmountContainer>
+                                    <Remove style={{cursor:"pointer"}} onClick={() => handleRemoveProduct(product)}/>
+                                    <ProductAmount>{product.quantity}</ProductAmount>
+                                    <Add style={{cursor:"pointer"}} onClick={() => handleAddProduct(product)}/>
+                                </ProductAmountContainer>
+                                <RemoveButton onClick={() => handleRemoveAllProduct(product)}>Remove</RemoveButton>
                             </PriceDetail>
                         </Product>
                         <Hr /></>
@@ -210,9 +285,10 @@ function CartPage() {
                         <SummaryItemText>Total</SummaryItemText>
                         <SummaryItemPrice>$ {totalAmount}</SummaryItemPrice>
                     </SummaryItem>
+                    <Button disabled={totalAmount <= 0} onClick={() => handleBuy()}>CHECKOUT NOW</Button>
                     <StripeCheckout
-                        name="Mars"
-                        image="https://www.nasa.gov/sites/default/files/thumbnails/image/for_press_release.jpg"
+                        name="My Simple Wardrobe"
+                        image={LogoImg}
                         billingAddress
                         shippingAddress
                         description={`Your total is $${totalAmount}`}
@@ -220,10 +296,12 @@ function CartPage() {
                         token={setToken}
                         stripeKey={KEY}
                         >
-                        <Button disabled={totalAmount <= 0} >CHECKOUT NOW</Button>
+                        <button id='stripeButton' style={{display: "none", pointerEvents: "none", opacity: "0"}}></button>
                     </StripeCheckout>
                 </Summary> :
-                <p>ADD_START_SEARCHING_HERE</p>}
+                <ReminderContainer>
+                    <ReminderContent>Bag is Empty</ReminderContent>
+                </ReminderContainer>}
                 </Bottom>
             </Wrapper>
             <Footer />

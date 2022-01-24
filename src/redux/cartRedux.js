@@ -9,12 +9,39 @@ const cartSlice = createSlice({
     },
     reducers: {
         addProduct: (state, action) => {
-            state.quantity += 1
-            state.products.push(action.payload)
-            state.total += action.payload.price * action.payload.quantity
-        }
+            const oldItem = state.products.find(item => item._id === action.payload._id)
+            const oldItemColor = state.products.find(item => item._id === action.payload._id)?.color
+            const oldItemSize = state.products.find(item => item._id === action.payload._id)?.size
+            if (oldItem && oldItemColor === action.payload.color && oldItemSize === action.payload.size) {
+                state.products.find(item => item._id === action.payload._id).quantity += action.payload.quantity
+                state.total += action.payload.price * action.payload.quantity
+            } else {
+                state.quantity += 1
+                state.products.push(action.payload)
+                state.total += action.payload.price * action.payload.quantity
+            }
+        },
+        removeAllProduct: (state, action) => {
+            state.products = state.products.filter(item => ((item._id + item.color + item.size) !== (action.payload.product._id + action.payload.product.color + action.payload.product.size)))
+            state.total -= action.payload.price * action.payload.quantity
+            state.quantity -= 1
+        },
+        removeProduct: (state, action) => {
+            state.products.find(item => ((item._id + item.color + item.size) === (action.payload.product._id + action.payload.product.color + action.payload.product.size))).quantity -= 1
+            state.total -= action.payload.product.price
+        },
+        addCartProduct: (state, action) => {
+            state.products.find(item => ((item._id + item.color + item.size) === (action.payload.product._id + action.payload.product.color + action.payload.product.size))).quantity += 1
+            state.total += action.payload.product.price
+        },
+        emptyCart: (state) => {
+            state.products = []
+            state.quantity = 0
+            state.total = 0
+        },
     }
 })
 
-export const { addProduct } = cartSlice.actions
+
+export const { addProduct, removeAllProduct, removeProduct, addCartProduct, emptyCart } = cartSlice.actions
 export default cartSlice.reducer
