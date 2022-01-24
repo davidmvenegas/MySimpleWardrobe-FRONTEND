@@ -8,14 +8,14 @@ import Footer from "../components/Footer"
 import { mobile } from "../responsive"
 
 const Container = styled.div``
-
 const Title = styled.h1`
-    margin: 20px 20px 0;
-    font-size: 2.5rem;
+    margin: 20px 56.75px 0;
+    font-size: 2.65rem;
 `
 const FilterContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    margin: 0 1.125rem 0 2.35rem;
 `
 const Filter = styled.div`
     margin: 20px 20px 5px;

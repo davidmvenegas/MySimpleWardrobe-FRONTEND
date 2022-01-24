@@ -21,10 +21,6 @@ function Wishlist() {
                         <img src={TestImg} alt="Favorite Product" />
                         <div className="wishlistDescriptionWrapper">
                             <h1 id='WDIT'>Blouse</h1>
-                            <span>|</span>
-                            <h1 id='WDIS'>M</h1>
-                            <span>|</span>
-                            <div id='WDIC'></div>
                         </div>
                     </div>
                     <div className="wishlistItemButtons">
@@ -37,10 +33,6 @@ function Wishlist() {
                         <img src={TestImg2} alt="Favorite Product" />
                         <div className="wishlistDescriptionWrapper">
                             <h1 id='WDIT'>Blouse</h1>
-                            <span>|</span>
-                            <h1 id='WDIS'>M</h1>
-                            <span>|</span>
-                            <div id='WDIC'></div>
                         </div>
                     </div>
                     <div className="wishlistItemButtons">
@@ -53,10 +45,6 @@ function Wishlist() {
                         <img src={TestImg1} alt="Favorite Product" />
                         <div className="wishlistDescriptionWrapper">
                             <h1 id='WDIT'>Blouse</h1>
-                            <span>|</span>
-                            <h1 id='WDIS'>M</h1>
-                            <span>|</span>
-                            <div id='WDIC'></div>
                         </div>
                     </div>
                     <div className="wishlistItemButtons">
@@ -69,10 +57,6 @@ function Wishlist() {
                         <img src={TestImg2} alt="Favorite Product" />
                         <div className="wishlistDescriptionWrapper">
                             <h1 id='WDIT'>Blouse</h1>
-                            <span>|</span>
-                            <h1 id='WDIS'>M</h1>
-                            <span>|</span>
-                            <div id='WDIC'></div>
                         </div>
                     </div>
                     <div className="wishlistItemButtons">

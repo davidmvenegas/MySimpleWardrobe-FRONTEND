@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import styled from "styled-components"
-import { FavoriteBorderOutlined, ShoppingCartOutlined } from "@material-ui/icons"
+import { useDispatch, useSelector } from 'react-redux'
+import { addWishlistItem, removeWishlistItem } from '../../redux/wishlistRedux'
+import { Favorite, FavoriteBorder, ShoppingCartOutlined } from "@material-ui/icons"
 
 const Image = styled.img`
     height: 75%;
@@ -20,6 +22,13 @@ const Info = styled.div`
     transition: all .3s ease;
     cursor: pointer;
 `
+const Clicker = styled.div`
+position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    cursor: pointer;
+`
 const Icon = styled.div`
     display: flex;
     align-items: center;
@@ -30,6 +39,7 @@ const Icon = styled.div`
     background-color: white;
     margin: 10px;
     transition: all .3s ease;
+    z-index: 200;
     &:hover {
         background-color: #e9f5f5;
         transform: scale(1.085);
@@ -64,24 +74,39 @@ const Container = styled.div`
     }
 `
 
-function ProductPage({item}) {
+function ShoppingItem({item}) {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const currentUser = useSelector((state) => state.user.currentUser)
+    const currentWishlist = useSelector((state) => state.wishlist.wishlist)
+    const liked = currentWishlist.includes(item._id)
+    
+    function handleAddToWishlist() {
+        dispatch(addWishlistItem(item._id))
+    }
+    function handleRemoveFromWishlist() {
+        dispatch(removeWishlistItem(item._id))
+    }
+
+    console.log(currentWishlist)
     return (
         <Container>
             <Image src={item.img}/>
-            <Info onClick={() => navigate(`/product/${item._id}`)}>
+            <Clicker onClick={() => navigate(`/product/${item._id}`)}></Clicker>
+            <Info>
                 <Title>{item.title}</Title>
                 <IconContainer>
                     <Icon>
                         <ShoppingCartOutlined/>
                     </Icon>
+                    {currentUser &&
                     <Icon>
-                        <FavoriteBorderOutlined/>
-                    </Icon>
+                        {liked ? <Favorite onClick={handleRemoveFromWishlist} id="favoriteShoppingButtonSolid"/> : <FavoriteBorder onClick={handleAddToWishlist} id="favoriteShoppingButtonOutline"/>}
+                    </Icon>}
                 </IconContainer>
             </Info>
         </Container>
     )
 }
 
-export default ProductPage
+export default ShoppingItem

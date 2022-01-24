@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import cartReducer from "./cartRedux"
 import userReducer from "./userRedux"
 import modalReducer from "./modalRedux"
+import wishlistReducer from "./wishlistRedux"
 
 
 const persistConfig = {
@@ -12,7 +13,7 @@ const persistConfig = {
     storage,
 }
 
-const rootReducer = combineReducers({ user: userReducer, cart: cartReducer, modal: modalReducer })
+const rootReducer = combineReducers({ user: userReducer, cart: cartReducer, modal: modalReducer, wishlist: wishlistReducer })
 const persistentReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({

@@ -23,7 +23,8 @@
     display: block;
     text-decoration: none;
     color: white;
-    padding: 1rem 2.5rem;
+    padding: 1.05rem 2.35rem;
+    font-size: 1.085rem;
     cursor: pointer;
 }
 .menu-navbar-links li:hover {

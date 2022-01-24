@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addProduct } from "../redux/cartRedux"
-import { Add, Remove, ArrowBack } from "@material-ui/icons"
+import { addWishlistItem, removeWishlistItem } from "../redux/wishlistRedux"
+import { Add, Remove, ArrowBack, Favorite, FavoriteBorder } from "@material-ui/icons"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
@@ -119,6 +120,12 @@ const AbsoluteBack = styled.div`
     border: none;
     outline: none;
 `
+const TitleContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+`
+
 function ProductPage() {
     const navigate = useNavigate()
     useEffect(() => window.scrollTo(0, 0))
@@ -130,6 +137,9 @@ function ProductPage() {
     const [color, setColor] = useState(null)
     const [size, setSize] = useState(null)
     const [inCart, setInCart] = useState(false)
+    const currentUser = useSelector((state) => state.user.currentUser)
+    const currentWishlist = useSelector((state) => state.wishlist.wishlist)
+    const liked = currentWishlist.filter(item => (item === product._id)).length > 0 ? true : false
 
     useEffect(() => {
         async function getProduct() {
@@ -165,10 +175,15 @@ function ProductPage() {
         dispatch(addProduct({...product, quantity, color, size}))
         setInCart(true)
     }
+    function handleAddToWishlist() {
+        dispatch(addWishlistItem(product._id))
+    }
+    function handleRemoveFromWishlist() {
+        dispatch(removeWishlistItem(product._id))
+    }
 
     const productColors = product.color?.slice(0, -1)
 
-    console.log(product)
     return (
         <Container>
         <Navbar />
@@ -179,7 +194,10 @@ function ProductPage() {
             <Image src={product.img} />
             </ImgContainer>
             <InfoContainer>
-            <Title>{product.title}</Title>
+            <TitleContainer>
+                {currentUser && (liked ? <Favorite onClick={handleRemoveFromWishlist} id="favoriteProductButtonSolid"/> : <FavoriteBorder onClick={handleAddToWishlist} id="favoriteProductButtonOutline"/>)}
+                <Title>{product.title}</Title>
+            </TitleContainer>
             <Desc>{product.desc}</Desc>
             <Price>$ {product.price}</Price>
             <FilterContainer>
@@ -200,7 +218,7 @@ function ProductPage() {
             </FilterContainer>
             <AddContainer>
                 <AmountContainer>
-                <Remove style={{cursor: "pointer"}} onClick={()=>handleQuantity("remove")} />
+                <Remove style={quantity <= 1 ? {cursor: "not-allowed"} : {cursor: "pointer"}} onClick={()=>handleQuantity("remove")} />
                 <Amount>{quantity}</Amount>
                 <Add style={{cursor: "pointer"}} onClick={()=>handleQuantity("add")}/>
                 </AmountContainer>
