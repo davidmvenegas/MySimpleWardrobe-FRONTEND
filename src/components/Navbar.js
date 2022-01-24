@@ -2,8 +2,8 @@ import { Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { Badge } from '@mui/material'
 import { ShoppingCartOutlined, Person } from '@material-ui/icons'
+import { Badge } from '@mui/material'
 import LogoImage from '../images/logo.png'
 import { logout } from "../redux/userRedux"
 import { mobile } from "../responsive"

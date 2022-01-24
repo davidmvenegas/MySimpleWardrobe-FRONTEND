@@ -41,10 +41,10 @@ const FilterTextContainer = styled.div`
 `
 const CloseFilters = styled.h4`
 position: absolute;
-    font-size: .8rem;
+    font-size: .9rem;
     font-weight: 400;
     text-decoration: underline;
-    margin-top: -.025rem;
+    margin-top: 2.5px;
     &:hover {
         color: red;
         cursor: pointer;

@@ -91,7 +91,7 @@ const PriceDetail = styled.div`
 const ProductAmountContainer = styled.div`
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 22.5px;
 `
 const ProductAmount = styled.div`
     font-size: 24px;
@@ -147,12 +147,13 @@ const Button = styled.button`
     cursor: pointer;
 `
 const RemoveButton = styled.h3`
-    font-size: .9rem;
-    font-weight: 300;
-    border-bottom: 1px solid black;
-    margin-top: 1.35rem;
+    font-size: .925rem;
+    font-weight: 400;
+    text-decoration: underline;
+    margin-top: 1.325rem;
     &:hover {
         cursor: pointer;
+        color: red;
     }
 `
 const ReminderContainer = styled.div`

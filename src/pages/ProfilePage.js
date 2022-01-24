@@ -34,7 +34,7 @@ function ProfilePage() {
                     <h1>Your Profile</h1>
                     <div className="profileHeaderLinks">
                         <p id='sec' className={account ? "secActive" : null} onClick={() => handleAccount()}>Account Settings</p>
-                        <p id='sec' className={wish ? "secActive" : null} onClick={() => handleWish()}>Wish List</p>
+                        <p id='sec' className={wish ? "secActive" : null} onClick={() => handleWish()}>Favorites</p>
                         <p id='sec' className={orders ? "secActive" : null} onClick={() => handleOrders()}>Past Orders</p>
                     </div>
                 </div>
