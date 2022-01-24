@@ -1,7 +1,7 @@
 import './accountsettings.css'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Close } from "@material-ui/icons";
+import { Close } from "@material-ui/icons"
 import { openModal, closeModal } from '../../redux/modalRedux'
 import { editUser } from '../../redux/authRedux'
 

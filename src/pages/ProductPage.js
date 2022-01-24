@@ -164,6 +164,9 @@ function ProductPage() {
         setInCart(true)
     }
 
+    const productColors = product.color?.slice(0, -1)
+
+    console.log(product)
     return (
         <Container>
         <Navbar />
@@ -180,7 +183,7 @@ function ProductPage() {
             <FilterContainer>
                 <Filter>
                 <FilterTitle>Color</FilterTitle>
-                    {product.color?.map((colorItem) => (
+                    {productColors?.map((colorItem) => (
                         <FilterColor key={colorItem} color={colorItem} onClick={() => handleColor(colorItem)} style={color === colorItem ? {border: "3px solid #888"} : null} />
                     ))}
                 </Filter>

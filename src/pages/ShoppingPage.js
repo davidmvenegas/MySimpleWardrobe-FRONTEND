@@ -19,6 +19,8 @@ const FilterContainer = styled.div`
 `
 const Filter = styled.div`
     margin: 20px 20px 5px;
+    display: flex;
+    align-items: center;
     ${mobile({ width: "0px 20px", display: "flex", flexDirection: "column" })}
 `
 const FilterText = styled.span`
@@ -30,19 +32,44 @@ const FilterText = styled.span`
 const Select = styled.select`
     padding: 10px;
     margin-right: 20px;
+    cursor: pointer;
     ${mobile({ margin: "10px 0px" })}
 `
 const Option = styled.option``;
+const FilterTextContainer = styled.div`
+    position: relative;
+`
+const CloseFilters = styled.h4`
+position: absolute;
+    font-size: .8rem;
+    font-weight: 400;
+    text-decoration: underline;
+    margin-top: -.025rem;
+    &:hover {
+        color: red;
+        cursor: pointer;
+    }
+`
 
 function ShoppingPage() {
     useEffect(() => window.scrollTo(0, 0))
+    useEffect(() => setFiltersOn(false), [])
     const location = useLocation()
     const category = location.pathname.split("/").at(-1)
     const [filters, setFilters] = useState({})
+    const [filtersOn, setFiltersOn] = useState(true)
     const [sort, setSort] = useState("newest")
 
-    function handleFilters(e){
+
+    function handleFilters(e) {
         setFilters({...filters, [e.target.name]: e.target.value})
+        setFiltersOn(true)
+    }
+    function handleOffFilters() {
+        document.getElementById("selectedFilterShopping1").selectedIndex = 0
+        document.getElementById("selectedFilterShopping2").selectedIndex = 0
+        setFilters({})
+        setFiltersOn(false)
     }
     return (
         <Container>
@@ -51,17 +78,22 @@ function ShoppingPage() {
         <Title>{category.charAt(0).toUpperCase() + category.slice(1)}</Title>
         <FilterContainer>
             <Filter>
-            <FilterText>Filter Products:</FilterText>
-            <Select name="color" onChange={handleFilters}>
+            <FilterTextContainer>
+                <FilterText>Filter Products:</FilterText>
+                {filtersOn && <CloseFilters onClick={() => handleOffFilters()}>Clear</CloseFilters>}
+            </FilterTextContainer>
+            <Select name="color" id="selectedFilterShopping1" onChange={handleFilters}>
                 <Option disabled selected hidden>Color</Option>
+                <Option>Black</Option>
+                <Option>Gray</Option>
                 <Option>White</Option>
-                <Option name="000">Black</Option>
-                <Option name="888">Gray</Option>
-                <Option>Blue</Option>
-                <Option>Yellow</Option>
+                <Option>Brown</Option>
                 <Option>Green</Option>
+                <Option>Blue</Option>
+                <Option>Pink</Option>
+                <Option>Red</Option>
             </Select>
-            <Select name="size" onChange={handleFilters}>
+            <Select name="size" id="selectedFilterShopping2" onChange={handleFilters}>
                 <Option disabled selected hidden>Size</Option>
                 <Option>XS</Option>
                 <Option>S</Option>
@@ -79,7 +111,7 @@ function ShoppingPage() {
             </Select>
             </Filter>
         </FilterContainer>
-        <Shopping category={category} filters={filters} sort={sort} />
+        <Shopping category={category} filters={filters} sort={sort}/>
         <Footer />
         </Container>
     )
