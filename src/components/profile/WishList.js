@@ -1,10 +1,35 @@
 import './wishlist.css'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { editWishlist } from "../../redux/authRedux"
 import { Favorite } from '@material-ui/icons'
-import TestImg from '../../images/bestProducts/Blouse.png'
-import TestImg1 from '../../images/bestProducts/Hat.png'
-import TestImg2 from '../../images/bestProducts/Pant.png'
+import { generalRequest } from '../../request'
 
 function Wishlist() {
+    const dispatch = useDispatch()
+    const [products, setProducts] = useState([])
+    const currentWishlist = useSelector((state) => state.wishlist.wishlist)
+    const wishlistID = useSelector((state) => state.wishlist.wishlistId)
+    
+    useEffect(() => {
+        const getProducts = async () => {
+            try {
+                const response = await generalRequest.get(`products`)
+                setProducts(response.data.filter(item => currentWishlist.includes(item._id)))
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        getProducts()
+    }, [currentWishlist])
+
+    function handleRemoveFromWishlist(itemID) {
+        const itemIndex = currentWishlist.indexOf(itemID)
+        const updatedWishlist = [...currentWishlist.slice(0, itemIndex), ...currentWishlist.slice(itemIndex + 1)]    
+        const userInput = {wishlist: updatedWishlist}
+        editWishlist(wishlistID, userInput, dispatch)
+    }
+
     return (
     <div className='wishlistContainer'>
         <div className="wishlistWrapper">
@@ -16,57 +41,19 @@ function Wishlist() {
                 <p>1 Item</p>
             </div>
             <div className="wishlistBody">
-                <div className="wishlistItem">
+                {products.map((favorite) => (
+                <div key={favorite._id} className="wishlistItem">
                     <div className="wishlistImageWrapper">
-                        <img src={TestImg} alt="Favorite Product" />
+                        <img src={favorite.img} alt="Favorite Product" />
                         <div className="wishlistDescriptionWrapper">
-                            <h1 id='WDIT'>Blouse</h1>
+                            <h1 id='WDIT'>{favorite.title}</h1>
                         </div>
                     </div>
                     <div className="wishlistItemButtons">
                         <p>Add to Bag</p>
-                        <p>Remove</p>
+                        <p onClick={() => handleRemoveFromWishlist(favorite._id)}>Remove</p>
                     </div>
-                </div>
-                <div className="wishlistItem">
-                    <div className="wishlistImageWrapper">
-                        <img src={TestImg2} alt="Favorite Product" />
-                        <div className="wishlistDescriptionWrapper">
-                            <h1 id='WDIT'>Blouse</h1>
-                        </div>
-                    </div>
-                    <div className="wishlistItemButtons">
-                        <p>Add to Bag</p>
-                        <p>Remove</p>
-                    </div>
-                </div>
-                <div className="wishlistItem">
-                    <div className="wishlistImageWrapper">
-                        <img src={TestImg1} alt="Favorite Product" />
-                        <div className="wishlistDescriptionWrapper">
-                            <h1 id='WDIT'>Blouse</h1>
-                        </div>
-                    </div>
-                    <div className="wishlistItemButtons">
-                        <p>Add to Bag</p>
-                        <p>Remove</p>
-                    </div>
-                </div>
-                <div className="wishlistItem">
-                    <div className="wishlistImageWrapper">
-                        <img src={TestImg2} alt="Favorite Product" />
-                        <div className="wishlistDescriptionWrapper">
-                            <h1 id='WDIT'>Blouse</h1>
-                        </div>
-                    </div>
-                    <div className="wishlistItemButtons">
-                        <p>Add to Bag</p>
-                        <p>Remove</p>
-                    </div>
-                </div>
-
-
-
+                </div>))}
             </div>
         </div>
     </div>
