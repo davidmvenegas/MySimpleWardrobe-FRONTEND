@@ -140,6 +140,7 @@ function ProductPage() {
     const currentUser = useSelector((state) => state.user.currentUser)
     const currentWishlist = useSelector((state) => state.wishlist.wishlist)
     const wishlistID = useSelector((state) => state.wishlist.wishlistId)
+    const currentReviews = useSelector((state) => state.reviews)
     const liked = currentWishlist?.includes(product._id)
 
     useEffect(() => {
@@ -188,6 +189,8 @@ function ProductPage() {
         editWishlist(wishlistID, userInput, dispatch)
     }
 
+    console.log(currentReviews)
+
     const productColors = product.color?.slice(0, -1)
 
     return (
@@ -232,6 +235,9 @@ function ProductPage() {
             </AddContainer>
             </InfoContainer>
         </Wrapper>
+        <div className="reviewsContainer">
+            <h1>REVIEWS HERE</h1>
+        </div>
         <Footer />
         </Container>
     )
