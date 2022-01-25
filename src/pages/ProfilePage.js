@@ -26,6 +26,7 @@ function ProfilePage() {
         setWish(false)
         setOrders(true)
     }
+
     return (
     <div>
         <Navbar/>

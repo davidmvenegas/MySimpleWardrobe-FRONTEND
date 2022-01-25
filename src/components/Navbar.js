@@ -65,7 +65,7 @@ function Navbar() {
     const user = useSelector(state => state.user.currentUser)
     function handleLogout() {
         dispatch(logout())
-        // navigate("/")
+        navigate("/")
     }
     return (
         <Container>

@@ -1,5 +1,10 @@
-import styled from "styled-components";
-import { mobile } from "../responsive";
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { registerRequest } from "../redux/authRedux"
+import Swal from 'sweetalert2'
+import styled from "styled-components"
+import { mobile } from "../responsive"
 
 const Container = styled.div`
     width: 100vw;
@@ -42,24 +47,55 @@ const Button = styled.button`
     color: white;
     cursor: pointer;
 `
+const Error = styled.span`
+    color: red;
+`
 
 function RegisterPage() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    
+    const { isFetching, currentUser, error } = useSelector(state => state.user)
+
+    function checkPassword() {
+        if (password !== confirmPassword) {
+            Swal.fire('Error', "Passwords don't match", 'error')
+            return false
+        } else if (password.length < 5) {
+            Swal.fire('Error', "Password must be longer than 4 characters", 'error')
+            return false
+        }
+        return true
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        if (checkPassword()) {
+            registerRequest(dispatch, {username, password, email})
+        }
+    }
+
+    useEffect(() => currentUser && navigate("/"), [currentUser, navigate])
+
     return (
         <Container>
         <Wrapper>
             <Title>CREATE AN ACCOUNT</Title>
-            <Form>
-                <Input placeholder="name" />
-                <Input placeholder="last name" />
-                <Input placeholder="username" />
-                <Input placeholder="email" />
-                <Input placeholder="password" />
-                <Input placeholder="confirm password" />
+            <Form onSubmit={handleSubmit}>
+                <Input placeholder="Username" onChange={(e) => setUsername(e.target.value)} required />
+                <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} type="email" required/>
+                <Input placeholder="Password" onChange={(e) => setPassword(e.target.value)} type="password" required />
+                <Input placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} type="password" required/>
                 <Agreement>
                     By creating an account, I consent to the processing of my personal
                     data in accordance to the <b>PRIVACY POLICY</b>
                 </Agreement>
-                <Button>CREATE</Button>
+                <Button type="submit" disabled={isFetching || currentUser}>REGISTER</Button>
+                {error && <Error>Something went wrong...</Error>}
             </Form>
         </Wrapper>
         </Container>

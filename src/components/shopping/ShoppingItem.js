@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import styled from "styled-components"
 import { useDispatch, useSelector } from 'react-redux'
-import { addWishlistItem, removeWishlistItem } from '../../redux/wishlistRedux'
+import { editWishlist } from "../../redux/authRedux"
 import { Favorite, FavoriteBorder, ShoppingCartOutlined } from "@material-ui/icons"
 
 const Image = styled.img`
@@ -79,16 +79,21 @@ function ShoppingItem({item}) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => state.user.currentUser)
     const currentWishlist = useSelector((state) => state.wishlist.wishlist)
+    const wishlistID = useSelector((state) => state.wishlist.wishlistId)
     const liked = currentWishlist.includes(item._id)
     
     function handleAddToWishlist() {
-        dispatch(addWishlistItem(item._id))
+        const updatedWishlist = [...currentWishlist, item._id]
+        const userInput = {wishlist: updatedWishlist}
+        editWishlist(wishlistID, userInput, dispatch)
     }
     function handleRemoveFromWishlist() {
-        dispatch(removeWishlistItem(item._id))
+        const itemIndex = currentWishlist.indexOf(item._id)
+        const updatedWishlist = [...currentWishlist.slice(0, itemIndex), ...currentWishlist.slice(itemIndex + 1)]    
+        const userInput = {wishlist: updatedWishlist}
+        editWishlist(wishlistID, userInput, dispatch)
     }
 
-    console.log(currentWishlist)
     return (
         <Container>
             <Image src={item.img}/>

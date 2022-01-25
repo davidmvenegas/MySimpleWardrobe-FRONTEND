@@ -60,14 +60,14 @@ const Error = styled.span`
 function LoginPage() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     
     const { isFetching, currentUser, error } = useSelector(state => state.user)
     
     function handleSubmit(e) {
         e.preventDefault()
-        loginRequest(dispatch, {username, password})
+        loginRequest(dispatch, {email, password})
     }
 
     useEffect(() => currentUser && navigate("/"), [currentUser, navigate])
@@ -77,8 +77,8 @@ function LoginPage() {
             <Wrapper>
                 <Title>SIGN IN</Title>
                 <Form onSubmit={handleSubmit}>
-                    <Input placeholder="username" onChange={(e) => setUsername(e.target.value)} required />
-                    <Input placeholder="password" onChange={(e) => setPassword(e.target.value)} type="password" required />
+                    <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} type="email" required />
+                    <Input placeholder="Password" onChange={(e) => setPassword(e.target.value)} type="password" required />
                     <Button type="submit" disabled={isFetching || currentUser}>LOGIN</Button>
                     {error && <Error>Something went wrong...</Error>}
                     <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>

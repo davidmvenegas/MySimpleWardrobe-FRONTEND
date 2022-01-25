@@ -33,23 +33,21 @@ function Landing() {
             <div className="landingWrapper">
                 <div className="sliderContainerWrapper">
                     <div id='sliderMain' className="container-slider">
-                        {dataSlider.map((obj, index) => {
-                            return (
-                                <div key={obj.id} className={slideIndex === index + 1 ? "slide active-anim" : "slide"}>
-                                    <img src={obj.img} alt='pic' />
-                                        <div className="slideTextWrapper">
-                                            <h1>{obj.title}</h1>
-                                            <h4>{obj.subtitle}</h4>
-                                            <div id='sliderButtonWrapperIhateyou'><button id='sliderButtonHome' onClick={() => navigate(`/products/${obj.category}`)}>Start Shopping</button><ChevronRight id="slideChev"/></div>
-                                        </div>
-                                </div>
-                            )
-                        })}
+                        {dataSlider.map((obj, index) => (
+                            <div key={index} className={slideIndex === index + 1 ? "slide active-anim" : "slide"}>
+                                <img src={obj.img} alt='pic' />
+                                    <div className="slideTextWrapper">
+                                        <h1>{obj.title}</h1>
+                                        <h4>{obj.subtitle}</h4>
+                                        <div id='sliderButtonWrapperIhateyou'><button id='sliderButtonHome' onClick={() => navigate(`/products/${obj.category}`)}>Start Shopping</button><ChevronRight id="slideChev"/></div>
+                                    </div>
+                            </div>
+                        ))}
                         <BtnSlider moveSlide={nextSlide} direction={"next"} />
                         <BtnSlider moveSlide={prevSlide} direction={"prev"}/>
                         <div id='containerDots' className="container-dots">
                             {Array.from({length: 5}).map((item, index) => (
-                                <div onClick={() => moveDot(index + 1)} className={slideIndex === index + 1 ? "dot active" : "dot"}></div>
+                                <div key={index} onClick={() => moveDot(index + 1)} className={slideIndex === index + 1 ? "dot active" : "dot"}></div>
                             ))}
                         </div>
                     </div>

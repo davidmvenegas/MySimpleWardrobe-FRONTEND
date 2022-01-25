@@ -14,12 +14,12 @@ function AccountSettings() {
     <div className='accountContainer'>
         <div className="accountItem">
             <h1 className='aIU'>Customer Username:</h1>
-            <h1 className='aIM'>{user.username}</h1>
+            <h1 className='aIM'>{user?.username}</h1>
             <button className='aIB' onClick={() => handleModal("Username")}>Edit</button>
         </div>
         <div className="accountItem">
             <h1 className='aIU'>Customer Email:</h1>
-            <h1 className='aIM'>{user.email}</h1>
+            <h1 className='aIM'>{user?.email}</h1>
             <button className='aIB' onClick={() => handleModal("Email")}>Edit</button>
         </div>
         <div className="accountItem">
@@ -41,7 +41,7 @@ function Modal() {
 
     function handleUpdate(e) {
         e.preventDefault()
-        const userID = user._id
+        const userID = user?._id
         const userInput = {...input}
         setLoading(true)
         editUser(userID, userInput, dispatch)
@@ -79,7 +79,7 @@ function Modal() {
     }
     function placeholder() {
         if (modal.type === "Username") {
-            return user.username
+            return user?.username
         } else if (modal.type === "Email") {
             return user.email
         } else if (modal.type === "Password") {

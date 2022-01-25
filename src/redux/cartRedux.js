@@ -9,10 +9,7 @@ const cartSlice = createSlice({
     },
     reducers: {
         addProduct: (state, action) => {
-            const oldItem = state.products.find(item => item._id === action.payload._id)
-            const oldItemColor = state.products.find(item => item._id === action.payload._id)?.color
-            const oldItemSize = state.products.find(item => item._id === action.payload._id)?.size
-            if (oldItem && oldItemColor === action.payload.color && oldItemSize === action.payload.size) {
+            if (state.products.some(item => ((item._id + item.color + item.size) === (action.payload._id + action.payload.color + action.payload.size)))) {
                 state.products.find(item => item._id === action.payload._id).quantity += action.payload.quantity
                 state.total += action.payload.price * action.payload.quantity
             } else {

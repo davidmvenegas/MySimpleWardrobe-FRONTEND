@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addProduct } from "../redux/cartRedux"
-import { addWishlistItem, removeWishlistItem } from "../redux/wishlistRedux"
+import { editWishlist } from "../redux/authRedux"
 import { Add, Remove, ArrowBack, Favorite, FavoriteBorder } from "@material-ui/icons"
 import styled from "styled-components"
 import Footer from "../components/Footer"
@@ -139,7 +139,8 @@ function ProductPage() {
     const [inCart, setInCart] = useState(false)
     const currentUser = useSelector((state) => state.user.currentUser)
     const currentWishlist = useSelector((state) => state.wishlist.wishlist)
-    const liked = currentWishlist.filter(item => (item === product._id)).length > 0 ? true : false
+    const wishlistID = useSelector((state) => state.wishlist.wishlistId)
+    const liked = currentWishlist?.includes(product._id)
 
     useEffect(() => {
         async function getProduct() {
@@ -176,10 +177,15 @@ function ProductPage() {
         setInCart(true)
     }
     function handleAddToWishlist() {
-        dispatch(addWishlistItem(product._id))
+        const updatedWishlist = [...currentWishlist, product._id]
+        const userInput = {wishlist: updatedWishlist}
+        editWishlist(wishlistID, userInput, dispatch)
     }
     function handleRemoveFromWishlist() {
-        dispatch(removeWishlistItem(product._id))
+        const itemIndex = currentWishlist.indexOf(product._id)
+        const updatedWishlist = [...currentWishlist.slice(0, itemIndex), ...currentWishlist.slice(itemIndex + 1)]        
+        const userInput = {wishlist: updatedWishlist}
+        editWishlist(wishlistID, userInput, dispatch)
     }
 
     const productColors = product.color?.slice(0, -1)
