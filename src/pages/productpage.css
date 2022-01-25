@@ -1,93 +1,161 @@
-.modalBackground {
-    width: 100vw;
-    height: 100vh;
-    margin-top: -75vh;
-    margin-left: -20vw;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 100000;
+/* REVIEW HEADER */
+.reviewsContainer {
+    min-height: 25rem;
+    background-color: rgba(0,0,0,.085);
+    padding: 2rem 5rem;
 }
-.modalContainer {
-    width: 450px;
-    height: 350px;
+.reviewTopTitle {
+    font-size: 3rem;
+    font-weight: 300;
+    text-align: center;
+}
+.reviewsHeader {
+    margin: .6rem 0 1.85rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.reviewsHeader p {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    font-weight: 300;
+}
+
+/* REVIEW FORM */
+.reviewsForm {
+    height: auto;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+.reviewsFormOpenButton {
+    width: fit-content;
+    height: fit-content;
+    padding: .65rem .85rem;
+    border: none;
+    background-color: teal;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.reviewsFormOpenButton:hover {
+    background-color: rgb(0, 140, 140);
+}
+.reviewModalContainer {
+    width: 100%;
+    height: 17.5rem;
     border-radius: 6px;
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px, rgba(0, 0, 0, 0.2) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    margin: 5px;
     display: flex;
+    align-items: flex-start;
+    justify-content: center;
     flex-direction: column;
     padding: 25px;
 }
-.modalContainer .title {
+.reviewModalContainer .title {
     display: inline-block;
-    text-align: center;
-    margin-top: 10px;
+    margin-bottom: 25px;
+    margin-top: -5px;
 }
-.modalContainer .title.lighterM {
+.reviewModalContainer .title.lighterR {
     opacity: .5;
     pointer-events: none;
 }
-.modalContainer .title h1 {
-    font-weight: 400;
-    font-size: 2.25rem;
+.reviewModalContainer .title h1 {
+    font-weight: 500;
+    font-size: 2rem;
+    padding-bottom: .2rem;
 }
-.titleCloseBtnM {
-    display: flex;
-    justify-content: flex-end;
+.reviewModalContainer .title h1 span {
+    font-size: 2.4rem;
+    display: inline-block;
+    font-weight: 700;
+    padding-left: .25rem;
+    line-height: .9;
 }
-.titleCloseBtnM button {
-    background-color: transparent;
-    border: none;
-}
-#closeModalX {
-    font-size: 25px;
-    font-weight: 100;
-    cursor: pointer;
-    transition: all .25s ease-in-out;
-}
-#closeModalX:hover {
-    transform: rotate(180deg);
-}
-.titleCloseBtnM.lighterM {
+.reviewTitleCloseBtnM.lighterR {
     opacity: .5;
     pointer-events: none;
 }
-.modalContainer .body {
+.reviewModalContainer .body {
     flex: 50%;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
     font-size: 1.7rem;
     text-align: center;
 }
-.modalContainer .body.lighterM {
+.reviewModalContainer .body.lighterR {
     opacity: .5;
     pointer-events: none;
 }
-.modalContainer input {
-    width: 19rem;
+.reviewHeadlineItem {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+#RHI1 {
+    flex: .8;
+    padding-right: 1.75rem;
+}
+#RHI2 {
+    flex: 1.2;
+}
+#RHI3 {
+    flex: 1.8;
+}
+.reviewHeadlineItem label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: teal;
+    margin-bottom: .5rem;
+}
+#reviewHeadline {
+    font-family: 'Urbanist', sans-serif;
+    width: 85%;
     height: 2.75rem;
-    font-size: 1.35rem;
-    padding: .75rem;
-    border-radius: .5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    padding: .5rem;
+    border-radius: .25rem;
     border: 1px solid #333;
 }
-.modalContainer .footer {
+#reviewDesc {
+    position: absolute;
+    top: 2.25rem;
+    left: 0;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1.125rem;
+    resize: both;
+    min-width: 18.5rem;
+    max-width: 97.5%;
+    min-height: 5rem;
+    max-height: 7.25rem;
+    border-radius: .25rem;
+    padding: .35rem .5rem;
+}
+.reviewModalContainer .footer {
     flex: 20%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: flex-start;
 }
-.modalContainer .footer.lighterM {
+.reviewModalContainer .footer.lighterR {
     opacity: .5;
     pointer-events: none;
 }
-.modalContainer .footer button {
+.reviewModalContainer .footer button {
     width: 150px;
     height: 45px;
-    margin: 10px;
+    margin: 10px 0;
+    margin-right: 20px;
     border: none;
     background-color: cornflowerblue;
     color: white;
@@ -95,13 +163,13 @@
     font-size: 20px;
     cursor: pointer;
 }
-#cancelBtn {
+#reviewCancelBtn {
     background-color: crimson;
 }
-.modalContainer .footer.lighterM button {
+.reviewModalContainer .footer.lighterR button {
     background-color: gray;
 }
-#loadingUpdateUser {
+#loadingUpdateReview {
     position: absolute;
     align-self: center;
     display: inline-block;
@@ -112,10 +180,56 @@
     border-radius: 50%;
     border-top-color: teal;
     animation: spin 1s ease-in-out infinite;
-    -webkit-animation: spin 1s ease-in-out infinite;
+    -webkit-animation: reviewSpin 1s ease-in-out infinite;
     margin-top: -2.5rem;
     margin-bottom: -2.5rem;
 }
-@keyframes spin {
+@keyframes reviewSpin {
     to { -webkit-transform: rotate(360deg); }
+}
+
+/* PAST REVIEWS */
+.pastReviewsContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 2.5rem auto 1rem;
+}
+.pastReview {
+    width: 100%;
+    background-color: white;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    border-radius: .25rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+.pastReviewHeader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.pastReviewHeader p span {
+    display: inline-block;
+}
+.pastReviewHeader p {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-left: 1rem;
+}
+.pastReviewBody {
+    margin-top: .5rem;
+}
+.pastReviewBox {
+    margin-bottom: .65rem;
+}
+.pastReviewTitle {
+    font-size: 1.8rem;
+    text-transform: capitalize;
+}
+.pastReviewDate {
+    font-size: 1rem;
+}
+.pastReviewDesc {
+    font-size: 1.2rem;
 }

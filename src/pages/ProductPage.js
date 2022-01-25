@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { addProduct } from "../redux/cartRedux"
 import { editWishlist } from "../redux/authRedux"
 import { editReviews } from "../redux/authRedux"
-import { Add, Remove, ArrowBack, Favorite, FavoriteBorder, Close } from "@material-ui/icons"
+import { Add, Remove, ArrowBack, Favorite, FavoriteBorder } from "@material-ui/icons"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import Menu from "../components/Menu"
+import { Rating } from 'react-simple-star-rating'
 import { generalRequest } from "../request"
 import { mobile } from "../responsive"
 
@@ -48,6 +49,7 @@ const Desc = styled.p`
 const Price = styled.span`
     font-weight: 100;
     font-size: 45px;
+    margin-right: 2rem;
 `
 const FilterContainer = styled.div`
     width: fit-content;
@@ -127,10 +129,14 @@ const TitleContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
 `
+const PriceWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+`
 
 function ProductPage() {
     const navigate = useNavigate()
-    useEffect(() => window.scrollTo(0, 0))
     const dispatch = useDispatch()
     const location = useLocation()
     const productID = location.pathname.split("/").at(-1)
@@ -143,38 +149,59 @@ function ProductPage() {
     const [loading, setLoading] = useState(false)
     const [reviewTitle, setReviewTitle] = useState("")
     const [reviewDesc, setReviewDesc] = useState("")
-    const [reviewRating, setReviewRating] = useState(null)
+    const [reviewRating, setReviewRating] = useState(0)
     const currentUser = useSelector((state) => state.user.currentUser)
     const currentWishlist = useSelector((state) => state.wishlist.wishlist)
     const wishlistID = useSelector((state) => state.wishlist.wishlistId)
-    const currentReviews = useSelector((state) => state.reviews)
+    const currentReviews = useSelector((state) => state.reviews.reviews.reviews)
     const liked = currentWishlist?.includes(product._id)
+
+    const handleRating = (rate) => setReviewRating(rate)
+    const productColors = product.color?.slice(0, -1)
+
+    let currentdate = new Date();
+    let datetime = "Last Sync: " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+
+    console.log(datetime)
 
     function handleSubmitReview(e) {
         e.preventDefault()
-        // const productId = product._id
+        const productId = product._id
         const username = currentUser?.username
         const newReview = {
+            // id: Math.random(currentUser._id),
             username: username,
             title: reviewTitle,
             desc: reviewDesc,
-            rating: reviewRating
+            rating: reviewRating,
         }
-        console.log(newReview)
-        // setLoading(true)
-        // editReviews(username, NEW_REVIEW, dispatch)
+        const reviewData = {
+            reviews: [...currentReviews, newReview]
+        }
+        console.log(reviewData)
+        setLoading(true)
+        editReviews(productId, reviewData, dispatch)
         setTimeout(() => {reviewHelper()}, 1500)
     }
     function reviewHelper() {
         document.getElementById("modalReviewFormID").reset()
+        setReviewTitle("")
+        setReviewDesc("")
+        setReviewRating(0)
         setLoading(false)
         setOpenReview(false)
     }
-    function handleCloseReview() {
+    function handleCloseReview(e) {
+        e.preventDefault()
         document.getElementById("modalReviewFormID").reset()
         setReviewTitle("")
         setReviewDesc("")
-        setReviewRating(null)
+        setReviewRating(0)
         setOpenReview(false)
     }
 
@@ -192,7 +219,7 @@ function ProductPage() {
             }
         }
         getProduct()
-    }, [productID])
+    }, [currentReviews, productID])
 
     const handleQuantity = (input) => {
         input === "remove" ? quantity > 1 && setQuantity(quantity - 1) : setQuantity(quantity + 1)
@@ -224,10 +251,6 @@ function ProductPage() {
         editWishlist(wishlistID, userInput, dispatch)
     }
 
-    // console.log(currentReviews)
-
-    const productColors = product.color?.slice(0, -1)
-
     return (
         <Container>
         <Navbar />
@@ -243,7 +266,10 @@ function ProductPage() {
                 <Title>{product.title}</Title>
             </TitleContainer>
             <Desc>{product.desc}</Desc>
-            <Price>$ {product.price}</Price>
+            <PriceWrapper>
+                <Price>$ {product.price}</Price>
+                <Rating size={40} ratingValue={30} readonly={true}/>
+            </PriceWrapper>
             <FilterContainer>
                 <Filter>
                 <FilterTitle>Color</FilterTitle>
@@ -271,26 +297,54 @@ function ProductPage() {
             </InfoContainer>
         </Wrapper>
         <div className="reviewsContainer">
-            <h1>REVIEWS HERE</h1>
-            <button onClick={() => setOpenReview(true)}>Leave Review</button>
-            <div style={openReview ? null : {display: "none"}} className="modalBackground">
-                <form id='modalReviewFormID' className="modalContainer" onSubmit={handleSubmitReview}>
-                        <div className={`titleCloseBtnM ${loading ? 'lighterM' : ''}`}>
-                            <button onClick={handleCloseReview}><Close id="closeModalX"/></button>
+            <h1 className="reviewTopTitle">2 Reviews for {product.title}</h1>
+            <div className="reviewsHeader">
+                <Rating size={40} ratingValue={30} readonly={true}/>
+                <p>3.0 out of 5 stars</p>
+            </div>
+            <div className="reviewsForm">
+                <button style={openReview ? {display: "none"} : null} className="reviewsFormOpenButton" onClick={() => setOpenReview(true)}>Leave a Review</button>
+                <form style={openReview ? null : {display: "none"}} id='modalReviewFormID' className="reviewModalContainer" onSubmit={handleSubmitReview}>
+                        <div className={`title ${loading ? 'lighterR' : ''}`}>
+                            <h1>Write a Review for: <span>{product.title}</span></h1>
                         </div>
-                        <div className={`title ${loading ? 'lighterM' : ''}`}>
-                            <h1>Leave a Review for {product.title}</h1>
+                        <div className={`body ${loading ? 'lighterR' : ''}`}>
+                            <div id="RHI1" className="reviewHeadlineItem">
+                                <label htmlFor="reviewHeadline">Overall Rating:</label>
+                                <Rating id="reviewRating" onClick={handleRating} ratingValue={reviewRating} allowHalfIcon={true}/>
+                            </div>
+                            <div id="RHI2" className="reviewHeadlineItem">
+                                <label htmlFor="reviewHeadline">Add Headline:</label>
+                                <input type="text" id="reviewHeadline" placeholder="Title your review" onChange={(e) => setReviewTitle(e.target.value)} required/>
+                            </div>
+                            <div id="RHI3" className="reviewHeadlineItem">
+                                <label htmlFor="reviewDesc">Review:</label>
+                                <textarea id="reviewDesc" placeholder="What did you like or dislike?" onChange={(e) => setReviewDesc(e.target.value)} required/>
+                            </div>
                         </div>
-                        <div className={`body ${loading ? 'lighterM' : ''}`}>
-                            <input type="text" placeholder="Title" onChange={(e) => setReviewTitle(e.target.value)} required/>
-                            <input type="text" placeholder="Description" onChange={(e) => setReviewDesc(e.target.value)} required/>
+                        <div className={`footer ${loading ? 'lighterR' : ''}`}>
+                            <button onClick={handleCloseReview} id="reviewCancelBtn">Cancel</button>
+                            <button type='submit'>Submit</button>
                         </div>
-                        <div className={`footer ${loading ? 'lighterM' : ''}`}>
-                            <button onClick={handleCloseReview} id="cancelBtn">Cancel</button>
-                            <button type='submit'>Update</button>
-                        </div>
-                    {loading && <div id="loadingUpdateUser"></div>}
+                    {loading && <div id="loadingUpdateReview"></div>}
                 </form>
+            </div>
+            <div className="pastReviewsContainer">
+                {currentReviews.map((review) => (
+                    <div className="pastReview">
+                        <div className="pastReviewHeader">
+                            <Rating size={32.5} ratingValue={review.rating} readonly={true}/>
+                            <p><span>by</span> {review.username}</p>
+                        </div>
+                        <div className="pastReviewBody">
+                            <div className="pastReviewBox">
+                                <h1 className="pastReviewTitle">{review.title}</h1>
+                                <p className="pastReviewDate">Reviewed on Jun 28, 2022</p>
+                            </div>
+                            <p className="pastReviewDesc">{review.desc}</p>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
         <Footer />
