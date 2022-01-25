@@ -8,7 +8,7 @@ async function registerRequest(dispatch, user) {
     dispatch(loginStart())
     try {
         const registerResponse = await generalRequest.post(`auth/register`, user)
-        const userId = registerResponse.data._id
+        const userId = await registerResponse.data._id
         const wishlistResponse = await generalRequest.post(`wishlist`, {userId: userId})
         const reviewsResponse = await generalRequest.get(`reviews`)
         dispatch(loginSuccess(registerResponse.data))
@@ -22,7 +22,7 @@ async function loginRequest(dispatch, user) {
     dispatch(loginStart())
     try {
         const loginResponse = await generalRequest.post("auth/login", user)
-        const userId = loginResponse.data._id
+        const userId = await loginResponse.data._id
         const wishlistResponse = await generalRequest.get(`wishlist/${userId}`)
         const reviewsResponse = await generalRequest.get(`reviews`)
         dispatch(loginSuccess(loginResponse.data))

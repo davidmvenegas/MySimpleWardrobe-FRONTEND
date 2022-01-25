@@ -1,9 +1,11 @@
+import "./productpage.css"
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addProduct } from "../redux/cartRedux"
 import { editWishlist } from "../redux/authRedux"
-import { Add, Remove, ArrowBack, Favorite, FavoriteBorder } from "@material-ui/icons"
+import { editReviews } from "../redux/authRedux"
+import { Add, Remove, ArrowBack, Favorite, FavoriteBorder, Close } from "@material-ui/icons"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
@@ -137,11 +139,44 @@ function ProductPage() {
     const [color, setColor] = useState(null)
     const [size, setSize] = useState(null)
     const [inCart, setInCart] = useState(false)
+    const [openReview, setOpenReview] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [reviewTitle, setReviewTitle] = useState("")
+    const [reviewDesc, setReviewDesc] = useState("")
+    const [reviewRating, setReviewRating] = useState(null)
     const currentUser = useSelector((state) => state.user.currentUser)
     const currentWishlist = useSelector((state) => state.wishlist.wishlist)
     const wishlistID = useSelector((state) => state.wishlist.wishlistId)
     const currentReviews = useSelector((state) => state.reviews)
     const liked = currentWishlist?.includes(product._id)
+
+    function handleSubmitReview(e) {
+        e.preventDefault()
+        // const productId = product._id
+        const username = currentUser?.username
+        const newReview = {
+            username: username,
+            title: reviewTitle,
+            desc: reviewDesc,
+            rating: reviewRating
+        }
+        console.log(newReview)
+        // setLoading(true)
+        // editReviews(username, NEW_REVIEW, dispatch)
+        setTimeout(() => {reviewHelper()}, 1500)
+    }
+    function reviewHelper() {
+        document.getElementById("modalReviewFormID").reset()
+        setLoading(false)
+        setOpenReview(false)
+    }
+    function handleCloseReview() {
+        document.getElementById("modalReviewFormID").reset()
+        setReviewTitle("")
+        setReviewDesc("")
+        setReviewRating(null)
+        setOpenReview(false)
+    }
 
     useEffect(() => {
         async function getProduct() {
@@ -189,7 +224,7 @@ function ProductPage() {
         editWishlist(wishlistID, userInput, dispatch)
     }
 
-    console.log(currentReviews)
+    // console.log(currentReviews)
 
     const productColors = product.color?.slice(0, -1)
 
@@ -237,6 +272,26 @@ function ProductPage() {
         </Wrapper>
         <div className="reviewsContainer">
             <h1>REVIEWS HERE</h1>
+            <button onClick={() => setOpenReview(true)}>Leave Review</button>
+            <div style={openReview ? null : {display: "none"}} className="modalBackground">
+                <form id='modalReviewFormID' className="modalContainer" onSubmit={handleSubmitReview}>
+                        <div className={`titleCloseBtnM ${loading ? 'lighterM' : ''}`}>
+                            <button onClick={handleCloseReview}><Close id="closeModalX"/></button>
+                        </div>
+                        <div className={`title ${loading ? 'lighterM' : ''}`}>
+                            <h1>Leave a Review for {product.title}</h1>
+                        </div>
+                        <div className={`body ${loading ? 'lighterM' : ''}`}>
+                            <input type="text" placeholder="Title" onChange={(e) => setReviewTitle(e.target.value)} required/>
+                            <input type="text" placeholder="Description" onChange={(e) => setReviewDesc(e.target.value)} required/>
+                        </div>
+                        <div className={`footer ${loading ? 'lighterM' : ''}`}>
+                            <button onClick={handleCloseReview} id="cancelBtn">Cancel</button>
+                            <button type='submit'>Update</button>
+                        </div>
+                    {loading && <div id="loadingUpdateUser"></div>}
+                </form>
+            </div>
         </div>
         <Footer />
         </Container>

@@ -34,7 +34,7 @@ const SuccessPage = () => {
         data && createOrder()
     }, [cart, data, currentUser])
 
-    console.log(location.state)
+    // console.log(location.state)
 
     return (
         <div style={{height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>

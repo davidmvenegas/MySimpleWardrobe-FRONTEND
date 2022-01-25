@@ -7,10 +7,10 @@ const reviewsSlice = createSlice({
     },
     reducers: {
         setReviews: (state, action) => {
-            state.reviews = action.payload.reviews
+            state.reviews = action.payload
         },
         editReviewsItem: (state, action) => {
-            state.reviews = action.payload.reviews
+            state.reviews = action.payload
         },
     }
 })
