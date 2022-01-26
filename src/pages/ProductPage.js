@@ -10,6 +10,8 @@ import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import Menu from "../components/Menu"
+import Swal from 'sweetalert2'
+import moment from 'moment'
 import { Rating } from 'react-simple-star-rating'
 import { generalRequest } from "../request"
 import { mobile } from "../responsive"
@@ -150,43 +152,40 @@ function ProductPage() {
     const [reviewTitle, setReviewTitle] = useState("")
     const [reviewDesc, setReviewDesc] = useState("")
     const [reviewRating, setReviewRating] = useState(0)
+    const isAdmin = useSelector((state) => state.user.currentUser?.isAdmin)
     const currentUser = useSelector((state) => state.user.currentUser)
     const currentWishlist = useSelector((state) => state.wishlist.wishlist)
     const wishlistID = useSelector((state) => state.wishlist.wishlistId)
-    const currentReviews = useSelector((state) => state.reviews.reviews.reviews)
+    const currentReviews = useSelector((state) => state.reviews.reviews.find(review => review.productId === product._id))
+    const reviews = currentReviews?.reviews
     const liked = currentWishlist?.includes(product._id)
 
     const handleRating = (rate) => setReviewRating(rate)
     const productColors = product.color?.slice(0, -1)
+    const totalRating = reviews?.length > 0 ? reviews?.map(review => review.rating).reduce((prev, cur) => prev + cur)/reviews?.length : 0
 
-    let currentdate = new Date();
-    let datetime = "Last Sync: " + currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-
-    console.log(datetime)
+    console.log(isAdmin)
 
     function handleSubmitReview(e) {
         e.preventDefault()
         const productId = product._id
         const username = currentUser?.username
+        const userID = currentUser?._id
         const newReview = {
-            // id: Math.random(currentUser._id),
+            id: moment().format(),
+            date: moment().format("MMM Do YYYY"),
             username: username,
+            userID: userID,
             title: reviewTitle,
             desc: reviewDesc,
-            rating: reviewRating,
+            rating: reviewRating
         }
         const reviewData = {
-            reviews: [...currentReviews, newReview]
+            reviews: [...reviews, newReview]
         }
-        console.log(reviewData)
         setLoading(true)
         editReviews(productId, reviewData, dispatch)
-        setTimeout(() => {reviewHelper()}, 1500)
+        setTimeout(() => {reviewHelper()}, 1000)
     }
     function reviewHelper() {
         document.getElementById("modalReviewFormID").reset()
@@ -203,6 +202,26 @@ function ProductPage() {
         setReviewDesc("")
         setReviewRating(0)
         setOpenReview(false)
+    }
+    function handleDeleteReview(reviewID) {
+        Swal.fire({
+            text: "Are you sure you want to delete this review?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const productId = product._id
+                const updatedReviews = reviews.filter((e) => e !== reviewID)
+                const newReviews = {reviews: updatedReviews}
+                editReviews(productId, newReviews, dispatch)
+                Swal.fire(
+                'Your review has been deleted.',
+                )
+            }
+        })
     }
 
     useEffect(() => {
@@ -268,7 +287,7 @@ function ProductPage() {
             <Desc>{product.desc}</Desc>
             <PriceWrapper>
                 <Price>$ {product.price}</Price>
-                <Rating size={40} ratingValue={30} readonly={true}/>
+                <Rating size={40} ratingValue={totalRating} readonly={true}/>
             </PriceWrapper>
             <FilterContainer>
                 <Filter>
@@ -297,10 +316,10 @@ function ProductPage() {
             </InfoContainer>
         </Wrapper>
         <div className="reviewsContainer">
-            <h1 className="reviewTopTitle">2 Reviews for {product.title}</h1>
+            <h1 className="reviewTopTitle">{reviews?.length} {reviews?.length === 1 ? "Review" : "Reviews"} for {product.title}</h1>
             <div className="reviewsHeader">
-                <Rating size={40} ratingValue={30} readonly={true}/>
-                <p>3.0 out of 5 stars</p>
+                <Rating size={40} ratingValue={totalRating} readonly={true}/>
+                <p>{reviews?.length === 0 ? "No Ratings" : (totalRating/20).toFixed(1) + " out of 5 stars"}</p>
             </div>
             <div className="reviewsForm">
                 <button style={openReview ? {display: "none"} : null} className="reviewsFormOpenButton" onClick={() => setOpenReview(true)}>Leave a Review</button>
@@ -330,19 +349,20 @@ function ProductPage() {
                 </form>
             </div>
             <div className="pastReviewsContainer">
-                {currentReviews.map((review) => (
-                    <div className="pastReview">
+                {reviews?.map((review) => (
+                    <div key={review.id} className="pastReview">
                         <div className="pastReviewHeader">
                             <Rating size={32.5} ratingValue={review.rating} readonly={true}/>
-                            <p><span>by</span> {review.username}</p>
+                            <p><span>by</span> {(review?.userID === currentUser?._id) ? <span>{review.username} <span id="authorIndicator">(you)</span></span> : review.username}</p>
                         </div>
                         <div className="pastReviewBody">
                             <div className="pastReviewBox">
                                 <h1 className="pastReviewTitle">{review.title}</h1>
-                                <p className="pastReviewDate">Reviewed on Jun 28, 2022</p>
+                                <p className="pastReviewDate">Reviewed on {review.date}</p>
                             </div>
                             <p className="pastReviewDesc">{review.desc}</p>
                         </div>
+                        {((review?.userID === currentUser?._id) || isAdmin) && <p onClick={() => handleDeleteReview(review)} id="deleteAReview">Delete</p>}
                     </div>
                 ))}
             </div>

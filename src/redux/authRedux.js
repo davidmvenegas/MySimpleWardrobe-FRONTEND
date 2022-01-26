@@ -54,13 +54,22 @@ async function editWishlist(id, item, dispatch) {
 }
 
 // REVIEWS
+async function getReviews(dispatch) {
+    try {
+        const response = await generalRequest.get(`reviews`)
+        dispatch(setReviews(response.data))
+    } catch (error) {
+        console.error(error)
+    }
+}
 async function editReviews(id, item, dispatch) {
     try {
-        const response = await generalRequest.patch(`reviews/${id}`, item)
+        await generalRequest.patch(`reviews/${id}`, item)
+        const response = await generalRequest.get(`reviews`)
         dispatch(editReviewsItem(response.data))
     } catch (error) {
         console.error(error)
     }
 }
 
-export { loginRequest, editUser, editWishlist, registerRequest, editReviews }
+export { registerRequest, loginRequest, editUser, editWishlist, getReviews, editReviews }

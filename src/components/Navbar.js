@@ -85,7 +85,7 @@ function Navbar() {
                     {user &&
                     <Fragment>
                         <MenuItem onClick={handleLogout}>LOG OUT</MenuItem>
-                        <MenuItem onClick={() => navigate('/profile')}><Person style={{fontSize: "2rem"}}/></MenuItem>
+                        <MenuItem onClick={() => navigate('/profile')}>{user.isAdmin ? <Person style={{fontSize: "2rem"}}/> : <Person style={{fontSize: "2rem"}}/>}</MenuItem>
                     </Fragment>}
                     <MenuItem onClick={() => navigate('/cart')}>
                         <Badge badgeContent={quantity} color="primary">
