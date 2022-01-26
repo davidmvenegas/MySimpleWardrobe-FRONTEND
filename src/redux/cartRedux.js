@@ -40,8 +40,7 @@ const cartSlice = createSlice({
             state.products = state.products.filter(e => ((e._id + e.color + e.size) !== (action.payload.item._id + action.payload.item.color.at(0).toString() + action.payload.item.size.at(0).toString())))
             state.total -= action.payload.price * action.payload.quantity
             state.quantity -= 1
-            // console.log(action.payload)
-        },
+        }
     }
 })
 

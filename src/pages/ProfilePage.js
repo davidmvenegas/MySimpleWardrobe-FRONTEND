@@ -4,9 +4,16 @@ import Navbar from "../components/Navbar"
 import AccountSettings from '../components/profile/AccountSettings'
 import PastPurchases from '../components/profile/PastPurchases'
 import WishList from '../components/profile/WishList'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { getOrders } from '../redux/authRedux'
+import { useDispatch, useSelector } from 'react-redux'
 
 function ProfilePage() {
+    const dispatch = useDispatch()
+    const userID = useSelector((state) => state.user.currentUser._id)
+    // useEffect(() => getOrders(userID, dispatch)) OR 👇
+    useEffect(() => getOrders(userID, dispatch), [dispatch, userID])
+
     const [account, setAccount] = useState(true)
     const [wish, setWish] = useState(false)
     const [orders, setOrders] = useState(false)

@@ -12,7 +12,7 @@ import { userRequest } from '../request'
 import { removeAllProduct, removeProduct, addCartProduct } from '../redux/cartRedux'
 import Swal from 'sweetalert2'
 import StripeCheckout from "react-stripe-checkout"
-const KEY = process.env.REACT_APP_STRIPE_KEY
+const KEY = process.env.REACT_APP_TEST_STRIPE_KEY
 
 const Container = styled.div``
 const Wrapper = styled.div`
@@ -233,10 +233,12 @@ function CartPage() {
 
     function handleBuy() {
         Swal.fire({
-            title: 'Hey there!',
-            text: "While this checkout process is PCI compliance and your information secure, the website is for demo purposes only. Feel free to use 4242 4242 4242 4242 as a burner card to enjoy the experience.",
+            icon: 'error',
+            title: "DO NOT USE A REAL CARD",
+            text: "This website is for demo purposes only. The checkout has been put into test mode so it doesn't require real card information. Feel free to use the number below to enjoy the experience!",
             confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Got it!'
+            confirmButtonText: 'Got it!',
+            footer: '<p><b>Copy:</b>&nbsp; 4242 4242 4242 4242</p>'
         }).then((result) => {if (result.isConfirmed) {
             document.getElementById("stripeButton").click()
             }
@@ -311,6 +313,7 @@ function CartPage() {
                         image={LogoImg}
                         billingAddress
                         shippingAddress
+                        allowRememberMe
                         description={`Your total is $${totalAmount}`}
                         amount={totalAmount * 100}
                         token={setToken}

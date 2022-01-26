@@ -2,6 +2,7 @@ import { generalRequest } from "../request"
 import { loginSuccess, loginStart, loginFailure, updateUser } from "./userRedux"
 import { createWishlist, setWishlist, editWishlistItem } from "./wishlistRedux"
 import { setReviews, editReviewsItem } from "./reviewRedux"
+import { setOrders } from './orderRedux'
 
 // USER
 async function registerRequest(dispatch, user) {
@@ -11,9 +12,11 @@ async function registerRequest(dispatch, user) {
         const userId = await registerResponse.data._id
         const wishlistResponse = await generalRequest.post(`wishlist`, {userId: userId})
         const reviewsResponse = await generalRequest.get(`reviews`)
+        const ordersResponse = await generalRequest.get(`orders/${userId}`)
         dispatch(loginSuccess(registerResponse.data))
         dispatch(createWishlist(wishlistResponse.data))
         dispatch(setReviews(reviewsResponse.data))
+        dispatch(setOrders(ordersResponse.data))
     } catch (error) {
         dispatch(loginFailure())
     }
@@ -25,9 +28,11 @@ async function loginRequest(dispatch, user) {
         const userId = await loginResponse.data._id
         const wishlistResponse = await generalRequest.get(`wishlist/${userId}`)
         const reviewsResponse = await generalRequest.get(`reviews`)
+        const ordersResponse = await generalRequest.get(`orders/${userId}`)
         dispatch(loginSuccess(loginResponse.data))
         dispatch(setWishlist(wishlistResponse.data))
         dispatch(setReviews(reviewsResponse.data))
+        dispatch(setOrders(ordersResponse.data))
     } catch (error) {
         dispatch(loginFailure())
         console.error(error)
@@ -72,4 +77,14 @@ async function editReviews(id, item, dispatch) {
     }
 }
 
-export { registerRequest, loginRequest, editUser, editWishlist, getReviews, editReviews }
+// ORDERS
+async function getOrders(userID, dispatch) {
+    try {
+        const response = await generalRequest.get(`orders/${userID}`)
+        dispatch(setOrders(response.data))
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export { registerRequest, loginRequest, editUser, editWishlist, getReviews, editReviews, getOrders }

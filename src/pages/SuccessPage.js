@@ -2,9 +2,8 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { useLocation } from "react-router"
-import { userRequest } from "../request"
+import { generalRequest } from "../request"
 import { emptyCart } from '../redux/cartRedux'
-
 
 const SuccessPage = () => {
     const location = useLocation()
@@ -19,8 +18,8 @@ const SuccessPage = () => {
     useEffect(() => {
         async function createOrder() {
             try {
-                const response = await userRequest.post("orders", {
-                    userId: currentUser._id,
+                const response = await generalRequest.post("orders", {
+                    userId: (currentUser?._id || null),
                     products: cart.products.map((item) => ({
                         productId: item._id,
                         quantity: item._quantity,
@@ -29,12 +28,14 @@ const SuccessPage = () => {
                     address: data.billing_details.address,
                     })
                 setOrderId(response.data._id)
-            } catch {}
+            } catch(error) {
+                console.error(error)
+            }
         }
         data && createOrder()
     }, [cart, data, currentUser])
 
-    // console.log(location.state)
+    console.log(location.state)
 
     return (
         <div style={{height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>

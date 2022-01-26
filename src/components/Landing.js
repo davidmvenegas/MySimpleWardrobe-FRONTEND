@@ -16,7 +16,7 @@ function Landing() {
 
     useEffect(() => {
         resetTimeout()
-        timeoutRef.current = setTimeout(() => nextSlide(), 4500)
+        timeoutRef.current = setTimeout(() => nextSlide(), 4000)
         return () => resetTimeout()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [slideIndex])
