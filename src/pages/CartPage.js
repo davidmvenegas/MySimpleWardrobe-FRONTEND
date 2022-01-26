@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom"
 import { Add, Remove } from "@material-ui/icons"
@@ -261,27 +261,29 @@ function CartPage() {
                 <Bottom>
                 <Info>
                     {cart.products.map((product) => (
-                        <><Product>
-                            <ProductDetail>
-                                <Image src={product.img} onClick={() => navigate(`/product/${product._id}`)}/>
-                                <Details>
-                                    <ProductName><b>Product:</b> {product.title}</ProductName>
-                                    <ProductId><b>ID:</b> {(product._id).substring(0, 10)}</ProductId>
-                                    <ProductColor color={product.color} />
-                                    <ProductSize><b>Size:</b> {product.size}</ProductSize>
-                                </Details>
-                            </ProductDetail>
-                            <PriceDetail>
-                                <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
-                                <ProductAmountContainer>
-                                    <Remove style={{cursor:"pointer"}} onClick={() => handleRemoveProduct(product)}/>
-                                    <ProductAmount>{product.quantity}</ProductAmount>
-                                    <Add style={{cursor:"pointer"}} onClick={() => handleAddProduct(product)}/>
-                                </ProductAmountContainer>
-                                <RemoveButton onClick={() => handleRemoveAllProduct(product)}>Remove</RemoveButton>
-                            </PriceDetail>
-                        </Product>
-                        <Hr /></>
+                        <Fragment key={product._id+product.color+product.size}>
+                            <Product>
+                                <ProductDetail>
+                                    <Image src={product.img} onClick={() => navigate(`/product/${product._id}`)}/>
+                                    <Details>
+                                        <ProductName><b>Product:</b> {product.title}</ProductName>
+                                        <ProductId><b>ID:</b> {(product._id).substring(0, 10)}</ProductId>
+                                        <ProductColor color={product.color} />
+                                        <ProductSize><b>Size:</b> {product.size}</ProductSize>
+                                    </Details>
+                                </ProductDetail>
+                                <PriceDetail>
+                                    <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
+                                    <ProductAmountContainer>
+                                        <Remove style={{cursor:"pointer"}} onClick={() => handleRemoveProduct(product)}/>
+                                        <ProductAmount>{product.quantity}</ProductAmount>
+                                        <Add style={{cursor:"pointer"}} onClick={() => handleAddProduct(product)}/>
+                                    </ProductAmountContainer>
+                                    <RemoveButton onClick={() => handleRemoveAllProduct(product)}>Remove</RemoveButton>
+                                </PriceDetail>
+                            </Product>
+                            <Hr />
+                        </Fragment>
                     ))}
                 </Info>
                 {cart.total > 0 ?
