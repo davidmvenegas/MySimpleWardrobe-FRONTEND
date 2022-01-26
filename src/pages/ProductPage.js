@@ -322,7 +322,7 @@ function ProductPage() {
                 <p>{reviews?.length === 0 ? "No Ratings" : (totalRating/20).toFixed(1) + " out of 5 stars"}</p>
             </div>
             <div className="reviewsForm">
-                <button style={openReview ? {display: "none"} : null} className="reviewsFormOpenButton" onClick={() => setOpenReview(true)}>Leave a Review</button>
+                <button style={openReview ? {display: "none"} : null} className="reviewsFormOpenButton" onClick={() => setOpenReview(true)} disabled={!currentUser}>{currentUser ? "Leave a Review" : "Sign In to Leave a Review"}</button>
                 <form style={openReview ? null : {display: "none"}} id='modalReviewFormID' className="reviewModalContainer" onSubmit={handleSubmitReview}>
                         <div className={`title ${loading ? 'lighterR' : ''}`}>
                             <h1>Write a Review for: <span>{product.title}</span></h1>

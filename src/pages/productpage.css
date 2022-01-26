@@ -42,6 +42,10 @@
 .reviewsFormOpenButton:hover {
     background-color: rgb(0, 140, 140);
 }
+.reviewsFormOpenButton:disabled {
+    background-color: rgb(101, 145, 145);
+    cursor: not-allowed;
+}
 .reviewModalContainer {
     position: relative;
     width: 100%;

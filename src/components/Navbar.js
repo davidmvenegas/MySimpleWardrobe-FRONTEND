@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { ShoppingCartOutlined, Person } from '@material-ui/icons'
+import { ShoppingCartOutlined, Person, SupervisorAccount } from '@material-ui/icons'
 import { Badge } from '@mui/material'
 import LogoImage from '../images/logo.png'
 import { logout } from "../redux/userRedux"
@@ -85,7 +85,7 @@ function Navbar() {
                     {user &&
                     <Fragment>
                         <MenuItem onClick={handleLogout}>LOG OUT</MenuItem>
-                        <MenuItem onClick={() => navigate('/profile')}>{user.isAdmin ? <Person style={{fontSize: "2rem"}}/> : <Person style={{fontSize: "2rem"}}/>}</MenuItem>
+                        <MenuItem onClick={() => navigate('/profile')}>{user.isAdmin ? <SupervisorAccount style={{fontSize: "2rem"}}/> : <Person style={{fontSize: "2rem"}}/>}</MenuItem>
                     </Fragment>}
                     <MenuItem onClick={() => navigate('/cart')}>
                         <Badge badgeContent={quantity} color="primary">

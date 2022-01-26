@@ -8,6 +8,7 @@ import { generalRequest } from '../../request'
 function Wishlist() {
     const dispatch = useDispatch()
     const [products, setProducts] = useState([])
+    const currentUser = useSelector((state) => state.user.currentUser)
     const currentWishlist = useSelector((state) => state.wishlist.wishlist)
     const wishlistID = useSelector((state) => state.wishlist.wishlistId)
     
@@ -30,18 +31,21 @@ function Wishlist() {
         editWishlist(wishlistID, userInput, dispatch)
     }
 
+    console.log(currentWishlist)
+
     return (
     <div className='wishlistContainer'>
         <div className="wishlistWrapper">
             <div className="wishlistHeading">
                 <div className="wishlistHeadingTop">
                     <Favorite id="wishlistIconHeart"/>
-                    <h1>David's Favorites</h1>
+                    <h1><span style={{textTransform: "capitalize"}}>{currentUser.username}</span>'s Favorites</h1>
                 </div>
-                <p>1 Item</p>
+                <p>{currentWishlist?.length || 0} {currentWishlist?.length === 1 ? "Item" : "Items"}</p>
             </div>
             <div className="wishlistBody">
-                {products.map((favorite) => (
+                {currentWishlist?.length === 0 ? <p id='favsAreEmpty'>Favorites are Empty</p> :
+                products.map((favorite) => (
                 <div key={favorite._id} className="wishlistItem">
                     <div className="wishlistImageWrapper">
                         <img src={favorite.img} alt="Favorite Product" />
