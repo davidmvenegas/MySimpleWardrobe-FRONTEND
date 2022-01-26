@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import styled from "styled-components"
 import { useDispatch, useSelector } from 'react-redux'
 import { editWishlist } from "../../redux/authRedux"
-import { Favorite, FavoriteBorder, ShoppingCartOutlined } from "@material-ui/icons"
+import { addProduct, removeFromShopping } from '../../redux/cartRedux'
+import { Favorite, FavoriteBorder, ShoppingCart, ShoppingCartOutlined } from "@material-ui/icons"
 
 const Image = styled.img`
     height: 75%;
@@ -79,7 +80,9 @@ function ShoppingItem({item}) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => state.user.currentUser)
     const currentWishlist = useSelector((state) => state.wishlist.wishlist)
+    const currentCart = useSelector((state) => state.cart.products)
     const wishlistID = useSelector((state) => state.wishlist.wishlistId)
+    const inCart = currentCart.some(e => (e._id + e.color + e.size) === (item._id + item.color.at(0).toString() + item.size.at(0).toString()))
     const liked = currentWishlist.includes(item._id)
     
     function handleAddToWishlist() {
@@ -93,6 +96,17 @@ function ShoppingItem({item}) {
         const userInput = {wishlist: updatedWishlist}
         editWishlist(wishlistID, userInput, dispatch)
     }
+    function handleAddToCart() {
+        const quantity = 1
+        const color = item.color.at(0).toString()
+        const size = item.size.at(0).toString()
+        dispatch(addProduct({...item, quantity, color, size}))
+    }
+    function handleRemoveFromCart() {
+        const price = item.price
+        const quantity = 1
+        dispatch(removeFromShopping({item, price, quantity}))
+    }
 
     return (
         <Container>
@@ -102,7 +116,7 @@ function ShoppingItem({item}) {
                 <Title>{item.title}</Title>
                 <IconContainer>
                     <Icon>
-                        <ShoppingCartOutlined/>
+                        {inCart ? <ShoppingCart id="shoppingIconAdded" onClick={() => handleRemoveFromCart()}/> :<ShoppingCartOutlined id="shoppingIconAdded" onClick={() => handleAddToCart()}/>}
                     </Icon>
                     {currentUser &&
                     <Icon>

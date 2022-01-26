@@ -41,6 +41,7 @@
     width: 100%;
     margin-top: .65rem;
     padding-left: .25rem;
+    border-radius: .25rem;
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
@@ -63,7 +64,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #ddf7fd89;
+    background-color: #ecfcff89;
     border: 1px solid #d9d9d9;
     border-radius: .25rem;
     margin: 0 .25rem;

@@ -12,6 +12,16 @@ const Container = styled.div`
     flex-wrap: wrap;
     padding: 20px;
     margin: 0 2rem;
+    min-height: 35rem;
+`
+const Reminder = styled.h1`
+    position: absolute;
+    left: 50%;
+    top: 57.5%;
+    transform: translate(-50%, -57.5%);
+    font-size: 1.5rem;
+    font-weight: 200;
+    color: #888;
 `
 
 function ProductPageItem({category, filters, sort}) {
@@ -41,9 +51,12 @@ function ProductPageItem({category, filters, sort}) {
 
     return (
         <Container>
-            {products.map((item) => (
-                <ShoppingItem key={item._id} item={item}/>
-            ))}
+            {products.length === 0 ?
+            <Reminder>No Items Match Those Filters</Reminder> :
+                products.map((item) => (
+                    <ShoppingItem key={item._id} item={item}/>
+                ))
+            }
         </Container>
     )
 }

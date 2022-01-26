@@ -6,6 +6,7 @@ import LogoImg from '../images/logo.png'
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
+import Wishlist from "../components/profile/WishList"
 import { mobile } from "../responsive"
 import { userRequest } from '../request' 
 import { removeAllProduct, removeProduct, addCartProduct } from '../redux/cartRedux'
@@ -16,6 +17,7 @@ const KEY = process.env.REACT_APP_STRIPE_KEY
 const Container = styled.div``
 const Wrapper = styled.div`
     padding: 20px;
+    min-height: 38.5rem;
     ${mobile({ padding: "10px" })}
 `
 const Title = styled.h1`
@@ -33,8 +35,12 @@ const TopButton = styled.button`
     font-weight: 600;
     cursor: pointer;
     border: ${(i) => i.type === "filled" && "none"};
-    background-color: ${(i) => i.type === "filled" ? "black" : "transparent"};
     color: ${(i) => i.type === "filled" && "white"};
+    background-color: ${(i) => i.type === "filled" ? "black" : "transparent"};
+    &:disabled {
+        background-color: #aaa;
+        cursor: not-allowed;
+    }
 `
 const TopTexts = styled.div`
     margin-left: -30px;
@@ -175,7 +181,10 @@ function CartPage() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
+    const currentUser = useSelector(state => state.user.currentUser)
+    const currentWishlist = useSelector(state => state.wishlist.wishlist)
     const [stripeToken, setStripeToken] = useState(null)
+    const [wishlist, setWishlist] = useState(false)
 
     function handleRemoveAllProduct(product) {
         const price = product.price
@@ -234,13 +243,15 @@ function CartPage() {
             <Wrapper>
                 <Title>YOUR BAG</Title>
                 <Top>
-                    <TopButton onClick={() => navigate(-1)}>CONTINUE SHOPPING</TopButton>
+                    <TopButton style={wishlist ? {opacity: 0, pointerEvents: "none"} : null} onClick={() => navigate(-1)}>CONTINUE SHOPPING</TopButton>
                     <TopTexts>
-                        <TopText>Shopping Bag({cart.quantity})</TopText>
-                        <TopText>Your Wishlist (0)</TopText>
+                        <TopText onClick={() => setWishlist(false)}>Shopping Bag({cart.quantity})</TopText>
+                        {currentUser && <TopText onClick={() => setWishlist(true)}>Favorites ({currentWishlist.length})</TopText>}
                     </TopTexts>
-                    <TopButton disabled={totalAmount <= 0} type="filled" onClick={() => handleBuy()}>CHECKOUT NOW</TopButton>
+                    <TopButton style={wishlist ? {opacity: 0, pointerEvents: "none"} : null} disabled={totalAmount <= 0} type="filled" onClick={() => handleBuy()}>CHECKOUT NOW</TopButton>
                 </Top>
+                {wishlist ?
+                <Wishlist/> :
                 <Bottom>
                 <Info>
                     {cart.products.map((product) => (
@@ -303,7 +314,7 @@ function CartPage() {
                 <ReminderContainer>
                     <ReminderContent>Bag is Empty</ReminderContent>
                 </ReminderContainer>}
-                </Bottom>
+                </Bottom>}
             </Wrapper>
             <Footer />
         </Container>

@@ -43,7 +43,7 @@
     background-color: rgb(0, 140, 140);
 }
 .reviewsFormOpenButton:disabled {
-    background-color: rgb(101, 145, 145);
+    background-color: lightslategrey;
     cursor: not-allowed;
 }
 .reviewModalContainer {
@@ -134,6 +134,8 @@
     font-family: 'Urbanist', sans-serif;
     font-size: 1.125rem;
     resize: both;
+    height: 7.25rem;
+    width: 97.5%;
     min-width: 18.5rem;
     max-width: 97.5%;
     min-height: 5rem;
@@ -152,10 +154,10 @@
     pointer-events: none;
 }
 .reviewModalContainer .footer button {
-    width: 150px;
-    height: 45px;
+    width: 125px;
+    height: 42.5px;
     margin: 10px 0;
-    margin-right: 20px;
+    margin-right: 25px;
     border: none;
     background-color: cornflowerblue;
     color: white;

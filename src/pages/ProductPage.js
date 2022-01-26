@@ -164,8 +164,6 @@ function ProductPage() {
     const productColors = product.color?.slice(0, -1)
     const totalRating = reviews?.length > 0 ? reviews?.map(review => review.rating).reduce((prev, cur) => prev + cur)/reviews?.length : 0
 
-    console.log(isAdmin)
-
     function handleSubmitReview(e) {
         e.preventDefault()
         const productId = product._id

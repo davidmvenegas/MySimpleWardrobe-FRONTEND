@@ -1,5 +1,5 @@
 import './landing.css'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BtnSlider from './BtnSlider'
 import { ChevronRight } from "@material-ui/icons"
@@ -8,26 +8,21 @@ import { dataSlider } from '../LandingData'
 function Landing() {
     const navigate = useNavigate()
     const [slideIndex, setSlideIndex] = useState(1)
+    const timeoutRef = useRef(null)
 
-    const nextSlide = () => {
-        if(slideIndex !== dataSlider.length) {
-            setSlideIndex(slideIndex + 1)
-        } 
-        else if (slideIndex === dataSlider.length){
-            setSlideIndex(1)
-        }
-    }
-
-    const prevSlide = () => {
-        if(slideIndex !== 1) {
-            setSlideIndex(slideIndex - 1)
-        }
-        else if (slideIndex === 1){
-            setSlideIndex(dataSlider.length)
-        }
-    }
-
+    const nextSlide = () => slideIndex !== dataSlider.length ? setSlideIndex(slideIndex + 1) : setSlideIndex(1)
+    const prevSlide = () => slideIndex !== 1 ? setSlideIndex(slideIndex - 1) : setSlideIndex(dataSlider.length)
     const moveDot = index => setSlideIndex(index)
+
+    useEffect(() => {
+        resetTimeout()
+        timeoutRef.current = setTimeout(() => nextSlide(), 4000)
+        return () => resetTimeout()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [slideIndex])
+
+    const resetTimeout = () => timeoutRef.current && clearTimeout(timeoutRef.current)
+
     return (
         <div className="landingContainer">
             <div className="landingWrapper">

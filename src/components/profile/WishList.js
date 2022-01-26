@@ -1,6 +1,7 @@
 import './wishlist.css'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { addProduct } from "../../redux/cartRedux"
 import { editWishlist } from "../../redux/authRedux"
 import { Favorite } from '@material-ui/icons'
 import { generalRequest } from '../../request'
@@ -31,7 +32,14 @@ function Wishlist() {
         editWishlist(wishlistID, userInput, dispatch)
     }
 
-    console.log(currentWishlist)
+    function handleAddToCart(itemID) {
+        const product = products.find(product => product._id === itemID)
+        const quantity = 1
+        const color = product.color.at(0).toString()
+        const size = product.size.at(0).toString()
+        dispatch(addProduct({...product, quantity, color, size}))
+        handleRemoveFromWishlist(itemID)
+    }
 
     return (
     <div className='wishlistContainer'>
@@ -54,7 +62,7 @@ function Wishlist() {
                         </div>
                     </div>
                     <div className="wishlistItemButtons">
-                        <p>Add to Bag</p>
+                        <p onClick={() => handleAddToCart(favorite._id)}>Add to Bag</p>
                         <p onClick={() => handleRemoveFromWishlist(favorite._id)}>Remove</p>
                     </div>
                 </div>))}
