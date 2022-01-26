@@ -45,7 +45,7 @@
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
-    background-color: rgba(0,0,0,0.065);
+    background-color: rgba(0,0,0,0.05);
 }
 .wishlistBody::-webkit-scrollbar {
     height: 12px;

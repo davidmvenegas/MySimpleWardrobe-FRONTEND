@@ -71,6 +71,12 @@ const ProductDetail = styled.div`
 `
 const Image = styled.img`
     width: 200px;
+    margin: 0 0 .5rem;
+    cursor: pointer;
+    transition: all .2s ease-in;
+    &:hover {
+        transform: scale(1.05);
+    }
 `
 const Details = styled.div`
     padding: 20px;
@@ -257,7 +263,7 @@ function CartPage() {
                     {cart.products.map((product) => (
                         <><Product>
                             <ProductDetail>
-                                <Image src={product.img} />
+                                <Image src={product.img} onClick={() => navigate(`/product/${product._id}`)}/>
                                 <Details>
                                     <ProductName><b>Product:</b> {product.title}</ProductName>
                                     <ProductId><b>ID:</b> {(product._id).substring(0, 10)}</ProductId>
