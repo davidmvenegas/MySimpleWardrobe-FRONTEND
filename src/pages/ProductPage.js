@@ -138,6 +138,7 @@ const PriceWrapper = styled.div`
 `
 
 function ProductPage() {
+    useEffect(() => window.scrollTo(0, 0), [])
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
