@@ -190,6 +190,7 @@ function CartPage() {
     const currentWishlist = useSelector(state => state.wishlist.wishlist)
     const [stripeToken, setStripeToken] = useState(null)
     const [wishlist, setWishlist] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     function handleRemoveAllProduct(product) {
         const price = product.price
@@ -211,6 +212,7 @@ function CartPage() {
 
     useEffect(() => {
         async function makeRequest() {
+            setLoading(true)
             try {
                 const response = await userRequest.post("checkout/payment", {
                     tokenId: stripeToken.id,
@@ -246,17 +248,18 @@ function CartPage() {
 
     return (
         <Container>
-            <Navbar />
+            <Navbar loading={loading} />
             <Wrapper>
-                <Title>YOUR BAG</Title>
-                <Top>
+                <Title style={loading ? {opacity: 0, pointerEvents: "none"} : null}>YOUR BAG</Title>
+                <Top style={loading ? {opacity: 0, pointerEvents: "none"} : null}>
                     <TopButton style={wishlist ? {opacity: 0, pointerEvents: "none"} : null} onClick={() => navigate(-1)}>CONTINUE SHOPPING</TopButton>
                     <TopTexts>
                         <TopText onClick={() => setWishlist(false)}>Shopping Bag({cart.quantity})</TopText>
                         {currentUser && <TopText onClick={() => setWishlist(true)}>Favorites ({currentWishlist.length})</TopText>}
                     </TopTexts>
-                    <TopButton style={wishlist ? {opacity: 0, pointerEvents: "none"} : null} disabled={totalAmount <= 0} type="filled" onClick={() => handleBuy()}>CHECKOUT NOW</TopButton>
+                    <TopButton style={loading ? {opacity: 0, pointerEvents: "none"} : null} disabled={totalAmount <= 0} type="filled" onClick={() => handleBuy()}>CHECKOUT NOW</TopButton>
                 </Top>
+                {!loading ? <div>
                 {wishlist ?
                 <Wishlist/> :
                 <Bottom>
@@ -324,8 +327,10 @@ function CartPage() {
                     <ReminderContent>Bag is Empty</ReminderContent>
                 </ReminderContainer>}
                 </Bottom>}
+                </div> : 
+                <p id='LOADINGcart'>Loading...</p>}
             </Wrapper>
-            <Footer />
+            <Footer loading={loading} />
         </Container>
     )
 }

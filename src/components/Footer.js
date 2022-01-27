@@ -68,9 +68,9 @@ const ContactItem = styled.div`
     align-items: center;
 `
 
-function Footer() {
+function Footer({loading}) {
     return (
-    <Container>
+    <Container style={loading ? {display: "none"} : null}>
         <Left>
             <Logo>My Simple Wardrobe</Logo>
             <Desc>&copy; 2022 - Built and Designed by <a id="personalLink" target="_blank" href="https://github.com/davidmvenegas" rel="noreferrer">David Venegas</a></Desc>

@@ -58,7 +58,7 @@ const MenuItem = styled.div`
     ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `
 
-function Navbar() {
+function Navbar({loading}) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const quantity = useSelector(state => state.cart.quantity)
@@ -68,7 +68,7 @@ function Navbar() {
         navigate("/")
     }
     return (
-        <Container>
+        <Container style={loading ? {display: "none"} : null}>
             <Wrapper>
                 <Left>
                     <ImageLogo onClick={() => navigate('/')} src={LogoImage}/>
