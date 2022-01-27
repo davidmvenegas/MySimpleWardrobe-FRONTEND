@@ -21,7 +21,7 @@ function PastPurchaseItem() {
         <ArrowBack id="arrowBackOrder" onClick={() => navigate("/profile", {state: { fromOrders: true }})}/>
           <div className="piHeaderTop">
             <h1>ORDER #{(item._id).substring(0, 12)}</h1>
-            <p>Date Placed: {moment(item.createdAt, 'YYYY-MM-DD[T00:00:00.000Z]').format("MMMM Do YYYY")}</p>
+            <p>Date Placed: <span>{moment(item.createdAt, 'YYYY-MM-DD[T00:00:00.000Z]').format("MMMM Do YYYY")}</span></p>
           </div>
           <div className="piHeaderBottom">
             <p><span>Shipping Address:</span><br />{item.address.city}, {item.address.state} <br />{item.address.line1} <br />{item.address.postal_code} - {item.address.country}</p>
@@ -37,9 +37,9 @@ function PastPurchaseItem() {
                 <img src={p.productID.img} alt="Product" />
                 <h1>{p.productID.title}</h1>
                 <h5>{p.productID.size}</h5>
-                <h6>{p.productID.color}</h6>
+                <span style={{backgroundColor: `#${p.productID.color}`}}></span>
                 <p>{p.productID.quantity} <span>x</span> {p.productID.price}$</p>
-                <Check style={{color: "green"}}/>
+                <Check style={{color: "green", fontSize: "2rem"}}/>
               </div>
               <div className="piSlineBR"></div>
             </Fragment>
