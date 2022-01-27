@@ -1,12 +1,14 @@
 import './wishlist.css'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { addProduct } from "../../redux/cartRedux"
 import { editWishlist } from "../../redux/authRedux"
 import { Favorite } from '@material-ui/icons'
 import { generalRequest } from '../../request'
 
 function Wishlist() {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [products, setProducts] = useState([])
     const currentUser = useSelector((state) => state.user.currentUser)
@@ -56,7 +58,7 @@ function Wishlist() {
                 products.map((favorite) => (
                 <div key={favorite._id} className="wishlistItem">
                     <div className="wishlistImageWrapper">
-                        <img src={favorite.img} alt="Favorite Product" />
+                        <img src={favorite.img} alt="Favorite Product" onClick={() => navigate(`/product/${favorite._id}`)}/>
                         <div className="wishlistDescriptionWrapper">
                             <h1 id='WDIT'>{favorite.title}</h1>
                         </div>

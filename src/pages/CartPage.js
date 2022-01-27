@@ -233,9 +233,9 @@ function CartPage() {
 
     function handleBuy() {
         Swal.fire({
-            icon: 'error',
-            title: "DO NOT USE A REAL CARD",
-            text: "This website is for demo purposes only. The checkout has been put into test mode so it doesn't require real card information. Feel free to use the number below to enjoy the experience!",
+            icon: 'warning',
+            title: "<b>DON'T USE A REAL CARD</b>",
+            text: "This checkout proccess uses Stripe, but has been changed to Test Mode to enable inauthentic card information. Feel free to use the number below to enjoy the experience!",
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Got it!',
             footer: '<p><b>Copy:</b>&nbsp; 4242 4242 4242 4242</p>'
