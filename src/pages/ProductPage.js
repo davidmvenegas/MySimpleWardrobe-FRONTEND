@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { addProduct } from "../redux/cartRedux"
 import { editWishlist } from "../redux/authRedux"
 import { editReviews } from "../redux/authRedux"
-import { Add, Remove, ArrowBack, Favorite, FavoriteBorder } from "@material-ui/icons"
+import { Add, Remove, ArrowBack, Favorite, FavoriteBorder, Check } from "@material-ui/icons"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
@@ -156,13 +156,17 @@ function ProductPage() {
     const currentUser = useSelector((state) => state.user.currentUser)
     const currentWishlist = useSelector((state) => state.wishlist.wishlist)
     const wishlistID = useSelector((state) => state.wishlist.wishlistId)
-    const currentReviews = useSelector((state) => state.reviews.reviews.find(review => review.productId === product._id))
+    const pastOrders = useSelector((state) => state.orders.orders)
+    const currentReviews = useSelector((state) => state.reviews.reviews.find(review => review.productId === product?._id))
     const reviews = currentReviews?.reviews
-    const liked = currentWishlist?.includes(product._id)
+    const liked = currentWishlist?.includes(product?._id)
 
     const handleRating = (rate) => setReviewRating(rate)
     const productColors = product.color?.slice(0, -1)
     const totalRating = reviews?.length > 0 ? reviews?.map(review => review.rating).reduce((prev, cur) => prev + cur)/reviews?.length : 0
+
+    const pastProductIDs = pastOrders?.map(i => i.products).flat().map(i => i.productID?._id)
+    const verifiedProduct = pastProductIDs.includes(product?._id)
 
     function handleSubmitReview(e) {
         e.preventDefault()
@@ -176,7 +180,8 @@ function ProductPage() {
             userID: userID,
             title: reviewTitle,
             desc: reviewDesc,
-            rating: reviewRating
+            rating: reviewRating,
+            verified: verifiedProduct
         }
         const reviewData = {
             reviews: [...reviews, newReview]
@@ -360,6 +365,7 @@ function ProductPage() {
                             </div>
                             <p className="pastReviewDesc">{review.desc}</p>
                         </div>
+                        {review?.verified && <div id="verifiedWrap"><p>VERIFIED</p><Check id="reviewVer"/></div>}
                         {((review?.userID === currentUser?._id) || isAdmin) && <p onClick={() => handleDeleteReview(review)} id="deleteAReview">Delete</p>}
                     </div>
                 ))}

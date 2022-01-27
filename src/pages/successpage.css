@@ -82,12 +82,14 @@
     font-size: 1.25rem;
     font-weight: 500;
     margin-bottom: 1.075rem;
+    width: 7.5%;
 }
 #sNamePT {
     margin: 0;
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 1rem;
+    width: 30%;
 }
 #sNameC {
     width: 17.5px;
@@ -95,7 +97,17 @@
     border-radius: 50%;
     background-color: gray;
     border: 2px solid #444;
+}
+#sNameCWrapper {
     margin-bottom: 1.35rem;
+    width: 7.5%;
+    display: grid;
+    align-content: center;
+}
+#sNamePrWrapper {
+    width: 17.5%;
+    display: grid;
+    justify-content: flex-end;
 }
 #sNamePr {
     font-size: 1.65rem;
@@ -115,8 +127,7 @@
     font-size: 1.25rem;
 }
 #sNamePr span:last-of-type {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1.65rem;
+    font-size: 1rem;
     font-weight: 300;
 }
 .sAddress {

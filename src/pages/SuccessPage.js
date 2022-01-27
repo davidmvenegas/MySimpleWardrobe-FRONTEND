@@ -57,9 +57,9 @@ const SuccessPage = () => {
                 <div key={product._id+product.color+product.size} className="sProductItem">
                     <img id='sNameI' src={product.img} alt="Product" />
                     <h1 id='sNamePT'>{product.title}</h1>
+                    <div id='sNameCWrapper'><span id='sNameC' style={{backgroundColor: `#${product.color}`}}></span></div>
                     <h1 id='sNameP'>{product.size}</h1>
-                    <span id='sNameC' style={{backgroundColor: `#${product.color}`}}></span>
-                    <p id='sNamePr'><span>{product.quantity}</span> <span>x</span> {product.price}<span>$</span></p>
+                    <div id="sNamePrWrapper"><p id='sNamePr'><span>{product.quantity}</span> <span>x</span> {product.price}.00<span> USD</span></p></div>
                 </div>))}
             </div>
             <div className="sAddress">
