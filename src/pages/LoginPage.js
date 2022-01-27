@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { loginRequest } from "../redux/authRedux"
 import styled from "styled-components"
 import {mobile} from "../responsive"
-import LogoImg from '../images/logo.png'
+import LogoImg from '../images/siteLogo.png'
 
 const Container = styled.div`
     width: 100vw;

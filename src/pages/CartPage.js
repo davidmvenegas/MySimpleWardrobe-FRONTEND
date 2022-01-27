@@ -2,7 +2,6 @@ import { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom"
 import { Add, Remove } from "@material-ui/icons"
-import LogoImg from '../images/logo.png'
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
@@ -310,7 +309,6 @@ function CartPage() {
                     <Button disabled={totalAmount <= 0} onClick={() => handleBuy()}>CHECKOUT NOW</Button>
                     <StripeCheckout
                         name="My Simple Wardrobe"
-                        image={LogoImg}
                         billingAddress
                         shippingAddress
                         allowRememberMe
