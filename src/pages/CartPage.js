@@ -235,7 +235,7 @@ function CartPage() {
         Swal.fire({
             icon: 'warning',
             title: "<b>DON'T USE A REAL CARD</b>",
-            text: "This checkout proccess uses Stripe, but has been changed to Test Mode to enable inauthentic card information. Feel free to use the number below to enjoy the experience!",
+            text: "This checkout proccess uses Stripe, but has been changed to Test Mode to disable authentic card information. Feel free to use the number below to enjoy the experience!",
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Got it!',
             footer: '<p><b>Copy:</b>&nbsp; 4242 4242 4242 4242</p>'

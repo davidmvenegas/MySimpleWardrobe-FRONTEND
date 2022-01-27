@@ -1,22 +1,26 @@
 import './profilepage.css'
+import { useEffect, useState } from 'react'
+import { getOrders } from '../redux/authRedux'
+import { useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import AccountSettings from '../components/profile/AccountSettings'
 import PastPurchases from '../components/profile/PastPurchases'
 import WishList from '../components/profile/WishList'
-import { useEffect, useState } from 'react'
-import { getOrders } from '../redux/authRedux'
-import { useDispatch, useSelector } from 'react-redux'
 
 function ProfilePage() {
     const dispatch = useDispatch()
+    const location = useLocation()
+    const fromOrders = location.state?.fromOrders
     const userID = useSelector((state) => state.user.currentUser._id)
-    // useEffect(() => getOrders(userID, dispatch)) OR 👇
     useEffect(() => getOrders(userID, dispatch), [dispatch, userID])
+    const initialAccount = fromOrders ? false : true
+    const initialOrders = fromOrders ? true : false
 
-    const [account, setAccount] = useState(true)
+    const [account, setAccount] = useState(initialAccount)
     const [wish, setWish] = useState(false)
-    const [orders, setOrders] = useState(false)
+    const [orders, setOrders] = useState(initialOrders)
 
     function handleAccount() {
         setAccount(true)
@@ -43,7 +47,7 @@ function ProfilePage() {
                     <div className="profileHeaderLinks">
                         <p id='sec' className={account ? "secActive" : null} onClick={() => handleAccount()}>Account Settings</p>
                         <p id='sec' className={wish ? "secActive" : null} onClick={() => handleWish()}>Favorites</p>
-                        <p id='sec' className={orders ? "secActive" : null} onClick={() => handleOrders()}>Past Orders</p>
+                        <p id='sec' className={orders ? "secActive" : null} onClick={() => handleOrders()}>Order History</p>
                     </div>
                 </div>
                 <div className="profileBody">
