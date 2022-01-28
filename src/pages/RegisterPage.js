@@ -111,7 +111,7 @@ function RegisterPage() {
                 <Input placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} type="password" required/>
                 <Agreement>
                     By creating an account, I consent to the processing of my personal
-                    data in accordance to the <b>PRIVACY POLICY</b>
+                    data in accordance to the <b id="termsReg" onClick={() => navigate('/terms')}>PRIVACY POLICY</b>
                 </Agreement>
                 <ButtonWrapper>
                     <Button type="submit" disabled={isFetching || currentUser}>REGISTER</Button>
@@ -124,4 +124,4 @@ function RegisterPage() {
     )
 }
 
-export default RegisterPage;
+export default RegisterPage

@@ -8,6 +8,7 @@ import ProductPage from './pages/ProductPage'
 import CartPage from './pages/CartPage'
 import SuccessPage from "./pages/SuccessPage"
 import PastPurchaseItem from "./components/profile/PastPurchaseItem"
+import Terms from "./pages/Terms"
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/cart" element={<CartPage/>} />
           <Route path="/success" element={<SuccessPage/>} />
           <Route path="/order/:id" element={<PastPurchaseItem/>} />
+          <Route path="/terms" element={<Terms/>} />
       </Routes>
     </BrowserRouter>
   );
