@@ -14,14 +14,14 @@ import Swal from 'sweetalert2'
 import moment from 'moment'
 import { Rating } from 'react-simple-star-rating'
 import { generalRequest } from "../request"
-import { mobile } from "../responsive"
+import { large, medium, mobile, small, smaller, tiny } from "../responsive"
 
 const Container = styled.div``
 const Wrapper = styled.div`
     position: relative;
     padding: 0 50px;
     display: flex;
-    ${mobile({ padding: "10px", flexDirection:"column" })}
+    ${small({ padding: "10px", flexDirection:"column" })}
 `
 const ImgContainer = styled.div`
     flex: 5;
@@ -32,39 +32,59 @@ const Image = styled.img`
     margin-top: 5vh;
     margin-bottom: 5vh;
     object-fit: cover;
-    ${mobile({ height: "40vh" })}
+    ${large({ height: "65vh" })}
+    ${medium({ height: "57.5vh" })}
+    ${small({ height: "50vh", width: "50%", marginLeft: '5vw', marginTop: "0vh", marginBottom: "0vh" })}
+    ${smaller({ height: "38.5vh"})}
+    ${mobile({ height: "25vh", marginTop: "3.5vh", marginLeft: '0vw' })}
+    ${tiny({ height: "20vh", marginTop: "3vh" })}
 `
 const InfoContainer = styled.div`
     flex: 4;
     padding: 75px 50px;
-    ${mobile({ padding: "10px" })}
-`
+    ${medium({ padding: "75px 20px" })}
+    ${small({ padding: "10px 100px 50px" })}
+    ${smaller({ padding: "10px 50px 50px" })}
+    ${mobile({ padding: "10px 10px 50px" })}
+    ${tiny({ padding: "40px 0px 50px" })}
+    `
 const Title = styled.h1`
     font-weight: 200;
     font-size: 3rem;
-`
+    ${medium({ fontSize: "2.5rem" })}
+    ${small({ fontSize: "2.25rem" })}
+    ${smaller({ fontSize: "1.75rem", fontWeight: "500" })}
+    ${mobile({ fontSize: "1.35rem", fontWeight: "900" })}
+    `
 const Desc = styled.p`
     margin: 20px 0px 22.5px;
     font-size: 1.25rem;
     font-weight: 200;
+    ${small({ position: "absolute", top: "20vh", right: "6.5%", width: "37.5%", fontSize: "1.125rem" })}
+    ${smaller({ top: "15vh", right: "5%", width: "40%" })}
+    ${mobile({ top: "11.5vh", right: "2.5%", width: "47.5%" })}
 `
 const Price = styled.span`
     font-weight: 100;
     font-size: 45px;
     margin-right: 2rem;
+    ${medium({ fontSize: "38.5px" })}
+    ${small({ fontSize: "35px" })}
+    ${mobile({ visibility: "visible", fontSize: "28.5px", fontWeight: "300" })}
 `
 const FilterContainer = styled.div`
     width: fit-content;
     margin: 25px 0 32.5px;
     display: flex;
     justify-content: space-between;
-    ${mobile({ width: "100%" })}
-`
+    ${small({ width: "100%", justifyContent: "space-around", marginTop: "-1rem" })}
+    ${smaller({ marginTop: ".5rem" })}
+    `
 const Filter = styled.div`
     display: flex;
     align-items: center;
     margin-right: 1.5rem;
-`
+    `
 const FilterTitle = styled.span`
     font-size: 22.5px;
     font-weight: 200;
@@ -84,17 +104,20 @@ const FilterSize = styled.select`
 `
 const FilterSizeOption = styled.option``
 const AddContainer = styled.div`
-    width: 50%;
+    width: 57.5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    ${mobile({ width: "100%" })}
-`
+    ${large({ width: "70%" })}
+    ${medium({ width: "80%" })}
+    ${small({ width: "90%" })}
+    `
 const AmountContainer = styled.div`
     display: flex;
     align-items: center;
     font-weight: 700;
-`
+    ${small({ marginLeft: "10%" })}
+    `
 const Amount = styled.span`
     width: 30px;
     height: 30px;
@@ -115,6 +138,7 @@ const Button = styled.button`
     &:hover{
         background-color: #f8f4f4;
     }
+    ${small({ width: "10rem" })}
 `
 const AbsoluteBack = styled.div`
     position: absolute;
@@ -130,11 +154,17 @@ const TitleContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    ${small({ position: "absolute", top: "15vh", width: "37.5%", right: "6.5%" })}
+    ${smaller({ top: "10vh", width: "40%", right: "5%" })}
+    ${mobile({ top: "8.5vh", width: "51.5%", right: "2.5%" })}
 `
 const PriceWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    ${small({ position: "absolute", top: "30vh", width: "37.5%", right: "6.5%", flexDirection: "column", alignItems: "flex-start", gap: ".75rem" })}
+    ${smaller({ top: "27.5vh", width: "40%", right: "5%", flexDirection: "column", alignItems: "flex-start", gap: ".75rem" })}
+    ${mobile({ top: "24.5vh", gap: "0", visibility: "hidden", width: "47.5%", right: "2.5%" })}
 `
 
 function ProductPage() {
@@ -284,39 +314,39 @@ function ProductPage() {
             <Image src={product.img} />
             </ImgContainer>
             <InfoContainer>
-            <TitleContainer>
-                {currentUser && (liked ? <Favorite onClick={handleRemoveFromWishlist} id="favoriteProductButtonSolid"/> : <FavoriteBorder onClick={handleAddToWishlist} id="favoriteProductButtonOutline"/>)}
-                <Title>{product.title}</Title>
-            </TitleContainer>
-            <Desc>{product.desc}</Desc>
-            <PriceWrapper>
-                <Price>$ {product.price}</Price>
-                <Rating size={40} ratingValue={totalRating} readonly={true}/>
-            </PriceWrapper>
-            <FilterContainer>
-                <Filter>
-                <FilterTitle>Color</FilterTitle>
-                    {productColors?.map((colorItem) => (
-                        <FilterColor key={colorItem} color={colorItem} onClick={() => handleColor(colorItem)} style={color === colorItem ? {border: "3px solid #888"} : null} />
-                    ))}
-                </Filter>
-                <Filter>
-                <FilterTitle>Size</FilterTitle>
-                <FilterSize onChange={(e) => handleSize(e)}>
-                    {product.size?.map((sizeItem) => (
-                        <FilterSizeOption key={sizeItem}>{sizeItem}</FilterSizeOption>
-                    ))}
-                </FilterSize>
-                </Filter>
-            </FilterContainer>
-            <AddContainer>
-                <AmountContainer>
-                <Remove style={quantity <= 1 ? {cursor: "not-allowed"} : {cursor: "pointer"}} onClick={()=>handleQuantity("remove")} />
-                <Amount>{quantity}</Amount>
-                <Add style={{cursor: "pointer"}} onClick={()=>handleQuantity("add")}/>
-                </AmountContainer>
-                <Button onClick={handleAddToCart}>{inCart ? "ADDED!" : "ADD TO CART"}</Button>
-            </AddContainer>
+                <TitleContainer>
+                    {currentUser && (liked ? <Favorite onClick={handleRemoveFromWishlist} id="favoriteProductButtonSolid"/> : <FavoriteBorder onClick={handleAddToWishlist} id="favoriteProductButtonOutline"/>)}
+                    <Title>{product.title}</Title>
+                </TitleContainer>
+                <Desc>{product.desc}</Desc>
+                <PriceWrapper>
+                    <Price>$ {product.price}</Price>
+                    <Rating id="ratingByByStars" size={40} ratingValue={totalRating} readonly={true}/>
+                </PriceWrapper>
+                <FilterContainer>
+                    <Filter>
+                    <FilterTitle>Color</FilterTitle>
+                        {productColors?.map((colorItem) => (
+                            <FilterColor key={colorItem} color={colorItem} onClick={() => handleColor(colorItem)} style={color === colorItem ? {border: "3px solid #888"} : null} />
+                        ))}
+                    </Filter>
+                    <Filter>
+                    <FilterTitle>Size</FilterTitle>
+                    <FilterSize onChange={(e) => handleSize(e)}>
+                        {product.size?.map((sizeItem) => (
+                            <FilterSizeOption key={sizeItem}>{sizeItem}</FilterSizeOption>
+                        ))}
+                    </FilterSize>
+                    </Filter>
+                </FilterContainer>
+                <AddContainer>
+                    <AmountContainer>
+                    <Remove style={quantity <= 1 ? {cursor: "not-allowed"} : {cursor: "pointer"}} onClick={()=>handleQuantity("remove")} />
+                    <Amount>{quantity}</Amount>
+                    <Add style={{cursor: "pointer"}} onClick={()=>handleQuantity("add")}/>
+                    </AmountContainer>
+                    <Button onClick={handleAddToCart}>{inCart ? "ADDED!" : "ADD TO CART"}</Button>
+                </AddContainer>
             </InfoContainer>
         </Wrapper>
         <div className="reviewsContainer">
@@ -341,7 +371,7 @@ function ProductPage() {
                                 <input type="text" id="reviewHeadline" placeholder="Title your review" onChange={(e) => setReviewTitle(e.target.value)} required/>
                             </div>
                             <div id="RHI3" className="reviewHeadlineItem">
-                                <label htmlFor="reviewDesc">Review:</label>
+                                <label id="reviewTextAriaThing" htmlFor="reviewDesc">Review:</label>
                                 <textarea id="reviewDesc" placeholder="What did you like or dislike?" onChange={(e) => setReviewDesc(e.target.value)} required/>
                             </div>
                         </div>

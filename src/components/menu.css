@@ -46,6 +46,12 @@
     background-color: #333;
     border-radius: 10px;
 }
+
+@media (max-width: 625px) {
+    .menu-link {
+        padding: 1rem 1.85rem;
+    }
+}
 @media (max-width: 480px) {
     .menu-navbar {
         flex-direction: column;
@@ -54,6 +60,7 @@
     .menu-toggle-button {
         display: flex;
         cursor: pointer;
+        z-index: 1000;
     }
     .menu-bar {
         transition: all .5s ease-in-out;
@@ -92,6 +99,5 @@
     }
     #badgeCart {
         margin-left: 2.5rem;
-        /* font-size: 2rem !important; */
     }
 }

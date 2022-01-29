@@ -254,4 +254,11 @@
     }
 }
 @media (max-width: 480px) {
+    .landingContainer {
+        height: 30rem;
+    }
+    .slideTextWrapper {
+        width: 26.5rem;
+        top: 13.5rem;
+    }
 }

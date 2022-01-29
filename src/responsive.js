@@ -1,5 +1,12 @@
 import { css } from "styled-components";
 
+export const large = (i) => {
+    return css`
+        @media (max-width: 1225px) {
+            ${i}
+        }
+    `
+}
 export const medium = (i) => {
     return css`
         @media (max-width: 1050px) {
@@ -24,6 +31,13 @@ export const smaller = (i) => {
 export const mobile = (i) => {
     return css`
         @media only screen and (max-width: 480px) {
+            ${i}
+        }
+    `
+}
+export const tiny = (i) => {
+    return css`
+        @media only screen and (max-width: 350px) {
             ${i}
         }
     `

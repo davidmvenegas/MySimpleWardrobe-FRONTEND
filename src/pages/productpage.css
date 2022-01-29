@@ -236,6 +236,7 @@
 }
 .pastReviewDesc {
     font-size: 1.2rem;
+    width: 95%;
 }
 #deleteAReview {
     position: absolute;
@@ -267,4 +268,103 @@
     font-size: 1.25rem;
     margin-left: .25rem;
     color: green;
+}
+
+@media (max-width: 1050px) {
+}
+@media (max-width: 850px) {
+    .reviewsContainer {
+        padding: 2rem 2.5rem;
+    }
+    .reviewTopTitle {
+        font-size: 2.5rem;
+        font-weight: 400;
+    }
+    .reviewModalContainer {
+        height: 33.5rem;
+        align-items: center;
+    }
+    .reviewModalContainer .title h1 {
+        font-size: 1.85rem;
+    }
+    .reviewModalContainer .title h1 span {
+        font-size: 2rem;
+    }
+    .reviewModalContainer .body {
+        align-items: center;
+        flex-direction: column;
+        margin-top: -1rem;
+    }
+    .reviewHeadlineItem {
+        align-items: center;
+        margin-bottom: .5rem;
+    }
+    #RHI1 {
+        padding-right: 0rem;
+    }
+    #reviewDesc {
+        top: 2.5rem;
+        left: 2.5rem;
+        transform: translateX(-50%);
+        resize: none;
+        width: 100%;
+    }
+    #reviewTextAriaThing {
+        margin-bottom: 5rem;
+        margin-top: .25rem;
+    }
+    .reviewModalContainer .footer button {
+        width: 90px;
+        height: 35px;
+        margin-right: 0px;
+        margin: 0 .75rem;
+        font-size: 17.5px;
+        border-radius: 5px;
+    }
+    .reviewModalContainer .footer {
+        margin-top: 3.5rem;
+    }
+    .pastReviewDesc {
+        width: 92.5%;
+    }
+}
+@media (max-width: 480px) {
+    .reviewsContainer {
+        padding: 2rem 1.5rem;
+    }
+    .reviewsHeader {
+        margin: .25rem 0 .75rem;
+        flex-direction: column;
+    }
+    .reviewTopTitle {
+        font-size: 2rem;
+        font-weight: 500;
+        width: 90%;
+        margin-left: 5%;
+    }
+    .reviewModalContainer .title h1 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .reviewModalContainer .title h1 span {
+        font-size: 1.75rem;
+    }
+    .pastReviewDesc {
+        width: 85%;
+    }
+    .pastReviewHeader {
+        margin-top: .5rem;
+    }
+    #verifiedWrap {
+        top: .65rem;
+        right: .65rem;
+    }
+    #favoriteProductButtonOutline {
+        margin-right: .4rem;
+        font-size: 1.75rem;
+    }
+    #favoriteProductButtonSolid {
+        font-size: 1.75rem;
+        margin-right: .4rem;
+    }
 }
