@@ -201,3 +201,11 @@
     cursor: pointer;
     text-decoration: underline;
 }
+@media (max-width: 850px) {
+    #bybySortPrdct {
+        display: none;
+    }
+    #selectedFilterShopping2 {
+        margin-right: 0px;
+    }
+}

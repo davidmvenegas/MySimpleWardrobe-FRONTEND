@@ -5,37 +5,39 @@ import Navbar from "../components/Navbar"
 import Menu from "../components/Menu"
 import Shopping from "../components/shopping/Shopping"
 import Footer from "../components/Footer"
-import { mobile } from "../responsive"
+import { mobile, small, smaller } from "../responsive"
 
 const Container = styled.div``
 const Title = styled.h1`
     margin: 20px 56.75px 0;
     font-size: 2.65rem;
+    ${small({ margin: "20px 50px 0" })}
 `
 const FilterContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 0 1.125rem 0 2.35rem;
-`
+    ${small({ justifyContent: "flex-start" })}
+    ${mobile({ margin: "0 1.125rem 0" })}
+    `
 const Filter = styled.div`
     margin: 20px 20px 5px;
     display: flex;
     align-items: center;
-    ${mobile({ width: "0px 20px", display: "flex", flexDirection: "column" })}
-`
+    ${small({ margin: "20px 0px 5px 20px" })}
+    `
 const FilterText = styled.span`
     font-size: 20px;
     font-weight: 600;
     margin-right: 20px;
-    ${mobile({ marginRight: "0px" })}
+    ${smaller({ display: "none" })}
 `
 const Select = styled.select`
     padding: 10px;
     margin-right: 20px;
     cursor: pointer;
-    ${mobile({ margin: "10px 0px" })}
 `
-const Option = styled.option``;
+const Option = styled.option``
 const FilterTextContainer = styled.div`
     position: relative;
 `
@@ -103,7 +105,7 @@ function ShoppingPage() {
             </Select>
             </Filter>
             <Filter>
-            <FilterText>Sort Products:</FilterText>
+            <FilterText id="bybySortPrdct">Sort Products:</FilterText>
             <Select onChange={e => setSort(e.target.value)}>
                 <Option value="newest">Newest</Option>
                 <Option value="low">Price (Low)</Option>

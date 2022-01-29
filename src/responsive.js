@@ -14,6 +14,13 @@ export const small = (i) => {
         }
     `
 }
+export const smaller = (i) => {
+    return css`
+        @media (max-width: 625px) {
+            ${i}
+        }
+    `
+}
 export const mobile = (i) => {
     return css`
         @media only screen and (max-width: 480px) {

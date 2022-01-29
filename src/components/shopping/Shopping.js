@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 import ShoppingItem from "./ShoppingItem"
 import { generalRequest } from "../../request"
+import { medium, small } from "../../responsive"
 
 
 const Container = styled.div`
@@ -13,6 +14,8 @@ const Container = styled.div`
     padding: 20px;
     margin: 0 2rem;
     min-height: 35rem;
+    ${medium({ gridTemplateColumns: "auto auto", gridTemplateRows: "auto auto" })}
+    ${small({ gridTemplateColumns: "auto", gridTemplateRows: "auto" })}
 `
 const Reminder = styled.h1`
     position: absolute;
