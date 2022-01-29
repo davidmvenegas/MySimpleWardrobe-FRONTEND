@@ -190,3 +190,68 @@
 #personalLink:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 1050px) {
+    .slideTextWrapper h1 {
+        font-size: 2.75rem;
+    }
+    .slideTextWrapper h4 {
+        font-size: .9rem;
+        font-weight: 200;
+    }
+    #sliderButtonHome {
+        font-size: 1rem;
+    }
+    #sliderButtonWrapperIhateyou {
+        padding: .4rem .2rem .4rem .85rem;
+    }
+}
+@media (max-width: 850px) {
+    .landingContainer {
+        height: 33.5rem;
+    }
+    #sliderButtonHome {
+        font-size: .75rem;
+    }
+    #sliderButtonWrapperIhateyou {
+        padding: .3rem .2rem .325rem .85rem;
+    }
+    .container-slider {
+        margin: 0 auto;
+        height: 50vh;
+    }
+    .sliderContainerWrapper {
+        height: 50vh;
+        width: 100%;
+    }
+    .btn-slide {
+        display: none;
+    }
+    .slide {
+        height: 35rem;
+    }
+    .btn-slide {
+        opacity: 1;
+    }
+    .container-dots {
+        bottom: 20px;
+    }
+    .slideTextWrapper {
+        width: 27.5rem;
+    }
+    .slideTextWrapper h1 {
+        font-size: 2.5rem;
+    }
+    .slideTextWrapper h4 {
+        font-size: 1rem;
+    }
+    #sliderButtonWrapperIhateyou {
+        padding: .35rem .2rem .35rem .85rem;
+        transition: all .2s ease;
+    }
+    #sliderButtonHome {
+        font-size: 1rem;
+    }
+}
+@media (max-width: 480px) {
+}

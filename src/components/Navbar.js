@@ -6,56 +6,62 @@ import { ShoppingCartOutlined, Person, SupervisorAccount } from '@material-ui/ic
 import { Badge } from '@mui/material'
 import LogoImage from '../images/logo.png'
 import { logout } from "../redux/userRedux"
-import { mobile } from "../responsive"
+import { mobile, medium, small } from "../responsive"
 
 const Container = styled.div`
     height: 70px;
     background-color: white;
     margin-bottom: .25rem;
     box-shadow: 0 2px 6px -2px #00000045;
-    ${mobile({ height: "50px", marginTop: "40px" })}
+    ${small({ height: "60px" })}
+    ${mobile({ height: "100px", paddingTop: "45px" })}
 `
 const Wrapper = styled.div`
     padding: 13.5px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    ${mobile({ padding: "10px 0px" })}
 `
 const Left = styled.div`
     flex: 1;
     display: flex;
     align-items: center;
     height: 2rem;
-    ${mobile({ justifyContent: "center" })}
+    ${medium({ flex: 1 })}
+    ${small({ flex: 0 })}
+    ${mobile({ display: "none" })}
 `
 const ImageLogo = styled.img`
     height: 3.75rem;
     width: 3.75rem;
     cursor: pointer;
+    ${small({ height: "3rem", width: "3rem" })}
 `
 const Center = styled.div`
     flex: 1;
     text-align: center;
+    ${medium({ flex: 3})}
     ${mobile({ flex: 0 })}
-`
+    `
 const Logo = styled.h1`
     font-weight: 600;
     cursor: pointer;
-    ${mobile({ position: "absolute", fontSize: "26px", top: "6px", left: 0, width: "100%" })}
+    ${mobile({ position: "absolute", fontSize: "26px", top: "10px", left: 0, width: "100%", zIndex: 100 })}
 `
 const Right = styled.div`
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    ${medium({ flex: 1.75 })}
     ${mobile({ justifyContent: "center" })}
     `
 const MenuItem = styled.div`
     font-size: 14px;
     cursor: pointer;
     margin-left: 25px;
-    ${mobile({ fontSize: "12px", marginLeft: "10px" })}
+    ${small({ marginLeft: "15px", fontSize: "12px" })}
+    ${mobile({ fontSize: "15px", margin: "0 15px" })}
 `
 
 function Navbar({loading}) {
@@ -87,7 +93,7 @@ function Navbar({loading}) {
                         <MenuItem onClick={handleLogout}>LOG OUT</MenuItem>
                         <MenuItem onClick={() => navigate('/profile')}>{user.isAdmin ? <SupervisorAccount style={{fontSize: "2rem"}}/> : <Person style={{fontSize: "2rem"}}/>}</MenuItem>
                     </Fragment>}
-                    <MenuItem onClick={() => navigate('/cart')}>
+                    <MenuItem id="badgeCart" onClick={() => navigate('/cart')}>
                         <Badge badgeContent={quantity} color="primary">
                             <ShoppingCartOutlined style={{fontSize: "1.75rem"}}/>
                         </Badge>

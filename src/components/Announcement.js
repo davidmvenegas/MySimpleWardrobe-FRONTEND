@@ -11,7 +11,7 @@ import { mobile } from "../responsive"
         display: flex;
         align-items: center;
         justify-content: center;
-        ${mobile({ margin: "2.5px 0 6.5px" })}
+        ${mobile({ display: "none"})}
         z-index: 100;
     `
     const Content = styled.div`

@@ -90,4 +90,8 @@
     .menu-navbar-links.menuActive {
         display: flex;
     }
+    #badgeCart {
+        margin-left: 2.5rem;
+        /* font-size: 2rem !important; */
+    }
 }
