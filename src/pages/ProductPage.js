@@ -33,20 +33,20 @@ const Image = styled.img`
     margin-bottom: 5vh;
     object-fit: cover;
     ${large({ height: "65vh" })}
-    ${medium({ height: "57.5vh" })}
-    ${small({ height: "50vh", width: "50%", marginLeft: '5vw', marginTop: "0vh", marginBottom: "0vh" })}
+    ${medium({ height: "55vh" })}
+    ${small({ height: "47.5vh", width: "50%", marginLeft: '5vw', marginTop: "0vh", marginBottom: "0vh" })}
     ${smaller({ height: "38.5vh"})}
-    ${mobile({ height: "25vh", marginTop: "3.5vh", marginLeft: '0vw' })}
-    ${tiny({ height: "20vh", marginTop: "3vh" })}
+    ${mobile({ height: "24.5vh", marginTop: "3.5vh", marginLeft: '2.5vw', width: "40%" })}
+    ${tiny({ height: "20vh", marginTop: "5vh" })}
 `
 const InfoContainer = styled.div`
     flex: 4;
     padding: 75px 50px;
     ${medium({ padding: "75px 20px" })}
-    ${small({ padding: "10px 100px 50px" })}
+    ${small({ padding: "25px 100px 50px" })}
     ${smaller({ padding: "10px 50px 50px" })}
     ${mobile({ padding: "10px 10px 50px" })}
-    ${tiny({ padding: "40px 0px 50px" })}
+    ${tiny({ padding: "30px 0px 50px" })}
     `
 const Title = styled.h1`
     font-weight: 200;
@@ -62,7 +62,7 @@ const Desc = styled.p`
     font-weight: 200;
     ${small({ position: "absolute", top: "20vh", right: "6.5%", width: "37.5%", fontSize: "1.125rem" })}
     ${smaller({ top: "15vh", right: "5%", width: "40%" })}
-    ${mobile({ top: "11.5vh", right: "2.5%", width: "47.5%" })}
+    ${mobile({ top: "10.5vh", right: "2.5%", width: "50%", margin: "10px 0 22.5px" })}
 `
 const Price = styled.span`
     font-weight: 100;
@@ -156,7 +156,7 @@ const TitleContainer = styled.div`
     justify-content: flex-start;
     ${small({ position: "absolute", top: "15vh", width: "37.5%", right: "6.5%" })}
     ${smaller({ top: "10vh", width: "40%", right: "5%" })}
-    ${mobile({ top: "8.5vh", width: "51.5%", right: "2.5%" })}
+    ${mobile({ top: "7.5vh", width: "50%", right: "2.5%" })}
 `
 const PriceWrapper = styled.div`
     display: flex;
@@ -164,7 +164,7 @@ const PriceWrapper = styled.div`
     justify-content: flex-start;
     ${small({ position: "absolute", top: "30vh", width: "37.5%", right: "6.5%", flexDirection: "column", alignItems: "flex-start", gap: ".75rem" })}
     ${smaller({ top: "27.5vh", width: "40%", right: "5%", flexDirection: "column", alignItems: "flex-start", gap: ".75rem" })}
-    ${mobile({ top: "24.5vh", gap: "0", visibility: "hidden", width: "47.5%", right: "2.5%" })}
+    ${mobile({ top: "23.5vh", gap: "0", visibility: "hidden", width: "50%", right: "2.5%" })}
 `
 
 function ProductPage() {

@@ -360,11 +360,13 @@
         right: .65rem;
     }
     #favoriteProductButtonOutline {
-        margin-right: .4rem;
-        font-size: 1.75rem;
+        position: absolute;
+        top: 10rem;
+        right: 3rem;
     }
     #favoriteProductButtonSolid {
-        font-size: 1.75rem;
-        margin-right: .4rem;
+        position: absolute;
+        top: 10rem;
+        right: 3rem;
     }
 }

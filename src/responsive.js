@@ -1,5 +1,12 @@
 import { css } from "styled-components";
 
+export const veryLarge = (i) => {
+    return css`
+        @media (max-width: 1350px) {
+            ${i}
+        }
+    `
+}
 export const large = (i) => {
     return css`
         @media (max-width: 1225px) {

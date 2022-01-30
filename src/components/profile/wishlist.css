@@ -144,3 +144,17 @@
     font-weight: 200;
     color: #444;
 }
+
+@media (max-width: 850px) {
+    #favsAreEmpty {
+        top: 45%;
+        transform: translate(-50%, -45%);
+    }
+}
+@media (max-width: 480px) {
+    #favsAreEmpty {
+        font-size: 1.25rem;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

@@ -6,7 +6,7 @@ import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import Wishlist from "../components/profile/WishList"
-import { mobile } from "../responsive"
+import { large, medium, mobile, small, smaller, veryLarge } from "../responsive"
 import { userRequest } from '../request' 
 import { removeAllProduct, removeProduct, addCartProduct } from '../redux/cartRedux'
 import Swal from 'sweetalert2'
@@ -17,7 +17,7 @@ const Container = styled.div``
 const Wrapper = styled.div`
     padding: 20px;
     min-height: 38.5rem;
-    ${mobile({ padding: "10px" })}
+    ${small({ padding: "25px 0px", minHeight: "25rem" })}
 `
 const Title = styled.h1`
     font-weight: 300;
@@ -28,6 +28,8 @@ const Top = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 20px;
+    ${small({ padding: "10px 0px 0px" })}
+
 `
 const TopButton = styled.button`
     padding: 10px;
@@ -40,29 +42,33 @@ const TopButton = styled.button`
         background-color: #aaa;
         cursor: not-allowed;
     }
+    ${small({ display: "none" })}
 `
 const TopTexts = styled.div`
     margin-left: -30px;
-    ${mobile({ display: "none" })}
+    ${small({ marginLeft: "0px", margin: "1rem auto" })}
 `
 const TopText = styled.span`
-    text-decoration: underline;
     cursor: pointer;
     margin: 0px 10px;
+    &:hover {
+        text-decoration: underline;
+    }
+    ${small({ fontSize: "1.175rem" })}
 `
 const Bottom = styled.div`
     display: flex;
     justify-content: space-between;
-    ${mobile({ flexDirection: "column" })}
+    ${small({ position: "relative" })}
 `
 const Info = styled.div`
     width: 74vw;
     min-height: 25rem;
+    ${small({ width: "90vw", marginLeft: "5vw" })}
 `
 const Product = styled.div`
     display: flex;
     justify-content: space-between;
-    ${mobile({ flexDirection: "column" })}
 `
 const ProductDetail = styled.div`
     flex: 4;
@@ -76,6 +82,8 @@ const Image = styled.img`
     &:hover {
         transform: scale(1.05);
     }
+    ${small({ width: "150px" })}
+    ${mobile({ width: "125px", height: "125px", margin: "1rem 0" })}
 `
 const Details = styled.div`
     padding: 20px;
@@ -84,12 +92,15 @@ const Details = styled.div`
     justify-content: space-around;
 `
 const ProductName = styled.span``
-const ProductId = styled.span``
+const ProductId = styled.span`
+    ${mobile({ display: "none" })}
+    `
 const ProductColor = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background-color: #${(i) => i.color};
+    ${mobile({ margin: "10px 0" })}
 `
 const ProductSize = styled.span``
 const PriceDetail = styled.div`
@@ -98,6 +109,10 @@ const PriceDetail = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    ${veryLarge({ marginRight: "2.5rem" })}
+    ${large({ marginRight: "6.5rem" })}
+    ${medium({ marginRight: "7.5rem" })}
+    ${small({ marginRight: "1rem" })}
 `
 const ProductAmountContainer = styled.div`
     display: flex;
@@ -113,18 +128,24 @@ const ProductAmount = styled.div`
     padding: 0 .5rem;
     border-radius: .5rem;
     text-align: center;
-    ${mobile({ margin: "5px 15px" })}
+    ${small({ fontSize: "20px" })}
 `
 const ProductPrice = styled.div`
     font-size: 30px;
     font-weight: 200;
-    ${mobile({ marginBottom: "20px" })}
+    ${small({ fontSize: "25px", marginTop: ".5rem", marginBottom: "-.5rem" })}
 `
 const Hr = styled.hr`
     background-color: #ddd;
     border: none;
     height: 1px;
     margin-bottom: 15px;
+`
+const HrMobile = styled.hr`
+    background-color: transparent;
+    border: none;
+    height: 0;
+    ${small({ marginTop: "24rem" })}
 `
 const Summary = styled.div`
     flex: 1;
@@ -136,9 +157,13 @@ const Summary = styled.div`
     padding: 20px 30px;
     max-height: 43vh;
     background-color: white;
+    ${medium({ width: "30%" })}
+    ${small({ position: "absolute", top: "1rem", left: "50%", transform: "translateX(-50%)", width: "80%" })}
 `
 const SummaryTitle = styled.h1`
     font-weight: 200;
+    ${medium({ fontSize: "1.5rem", textAlign: "center" })}
+    ${small({ fontSize: "2rem" })}
 `
 const SummaryItem = styled.div`
     margin: 30px 0px;
@@ -146,6 +171,7 @@ const SummaryItem = styled.div`
     justify-content: space-between;
     font-weight: ${(i) => i.type === "total" && "500"};
     font-size: ${(i) => i.type === "total" && "24px"};
+    ${medium({ margin: "20px 0" })}
 `
 const SummaryItemText = styled.span``
 const SummaryItemPrice = styled.span``
@@ -156,6 +182,8 @@ const Button = styled.button`
     color: white;
     font-weight: 600;
     cursor: pointer;
+    ${small({ width: "50%", marginLeft: "25%" })}
+    ${smaller({ width: "100%", marginLeft: "0%" })}
 `
 const RemoveButton = styled.h3`
     font-size: .925rem;
@@ -175,6 +203,7 @@ const ReminderContainer = styled.div`
     margin-left: -75vw;
     margin-top: .5rem;
     border-top: 1px solid lightgray;
+    ${small({ borderTop: "none", marginLeft: "-100vw" })}
 `
 const ReminderContent = styled.h1`
     font-size: 1.5rem;
@@ -254,16 +283,17 @@ function CartPage() {
                 <Top style={loading ? {opacity: 0, pointerEvents: "none"} : null}>
                     <TopButton style={wishlist ? {opacity: 0, pointerEvents: "none"} : null} onClick={() => navigate(-1)}>CONTINUE SHOPPING</TopButton>
                     <TopTexts>
-                        <TopText onClick={() => setWishlist(false)}>Shopping Bag({cart.quantity})</TopText>
-                        {currentUser && <TopText onClick={() => setWishlist(true)}>Favorites ({currentWishlist.length})</TopText>}
+                        <TopText style={!wishlist ? {textDecoration: "underline"} : null} onClick={() => setWishlist(false)}>Shopping Bag({cart.quantity})</TopText>
+                        {currentUser && <TopText style={wishlist ? {textDecoration: "underline"} : null} onClick={() => setWishlist(true)}>Favorites ({currentWishlist.length})</TopText>}
                     </TopTexts>
-                    <TopButton style={loading ? {opacity: 0, pointerEvents: "none"} : null} disabled={totalAmount <= 0} type="filled" onClick={() => handleBuy()}>CHECKOUT NOW</TopButton>
+                    <TopButton style={(loading || wishlist) ? {opacity: 0, pointerEvents: "none"} : null} disabled={totalAmount <= 0} type="filled" onClick={() => handleBuy()}>CHECKOUT NOW</TopButton>
                 </Top>
                 {!loading ? <div>
                 {wishlist ?
                 <Wishlist/> :
                 <Bottom>
                 <Info>
+                <HrMobile />
                     {cart.products.map((product) => (
                         <Fragment key={product._id+product.color+product.size}>
                             <Product>
@@ -294,19 +324,19 @@ function CartPage() {
                 <Summary>
                     <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                     <SummaryItem>
-                        <SummaryItemText>Subtotal</SummaryItemText>
+                        <SummaryItemText>Subtotal:</SummaryItemText>
                         <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem>
-                        <SummaryItemText>Estimated Shipping</SummaryItemText>
+                        <SummaryItemText>Estimated Shipping:</SummaryItemText>
                         <SummaryItemPrice>$ {shippingAmount}</SummaryItemPrice>
                     </SummaryItem>
                     {cart.total >= 50 && <SummaryItem>
-                        <SummaryItemText>Free Shipping Discount</SummaryItemText>
+                        <SummaryItemText>Free Shipping Discount:</SummaryItemText>
                         <SummaryItemPrice>$ -6.99</SummaryItemPrice>
                     </SummaryItem>}
                     <SummaryItem type="total">
-                        <SummaryItemText>Total</SummaryItemText>
+                        <SummaryItemText>Total:</SummaryItemText>
                         <SummaryItemPrice>$ {totalAmount}</SummaryItemPrice>
                     </SummaryItem>
                     <Button disabled={totalAmount <= 0} onClick={() => handleBuy()}>CHECKOUT NOW</Button>
