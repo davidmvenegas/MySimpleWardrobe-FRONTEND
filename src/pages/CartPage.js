@@ -279,7 +279,7 @@ function CartPage() {
         <Container>
             <Navbar loading={loading} />
             <Wrapper>
-            <ArrowBack style={loading ? {opacity: 0, pointerEvents: "none"} : null} id="arrowBackCart" onClick={() => navigate("/profile", {state: { fromOrders: true }})}/>
+            <ArrowBack style={loading ? {opacity: 0, pointerEvents: "none"} : null} id="arrowBackCart" onClick={() => navigate(-1)}/>
                 <Title style={loading ? {opacity: 0, pointerEvents: "none"} : null}>YOUR BAG</Title>
                 <Top style={loading ? {opacity: 0, pointerEvents: "none"} : null}>
                     <TopButton style={wishlist ? {opacity: 0, pointerEvents: "none"} : null} onClick={() => navigate(-1)}>CONTINUE SHOPPING</TopButton>

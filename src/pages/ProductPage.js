@@ -139,7 +139,7 @@ const Button = styled.button`
         background-color: #f8f4f4;
     }
     ${small({ width: "10rem" })}
-`
+    `
 const AbsoluteBack = styled.div`
     position: absolute;
     top: 1rem;
@@ -149,6 +149,7 @@ const AbsoluteBack = styled.div`
     background-color: transparent;
     border: none;
     outline: none;
+    ${small({ top: ".65rem", left: ".65rem" })}
 `
 const TitleContainer = styled.div`
     display: flex;
@@ -174,6 +175,7 @@ function ProductPage() {
     const location = useLocation()
     const productID = location.pathname.split("/").at(-1)
     const [product, setProduct] = useState([])
+    const [thisCategory, setThisCategory] = useState('')
     const [quantity, setQuantity] = useState(1)
     const [color, setColor] = useState(null)
     const [size, setSize] = useState(null)
@@ -267,6 +269,7 @@ function ProductPage() {
                 setColor(selectedColor)
                 setSize(selectedSize)
                 setProduct(response.data)
+                setThisCategory(response.data.categories[0])
             } catch (error) {
                 console.error(error)
             }
@@ -309,7 +312,7 @@ function ProductPage() {
         <Navbar />
         <Menu/>
         <Wrapper>
-            <AbsoluteBack><ArrowBack style={{cursor: "pointer", fontSize: "2.5rem"}} onClick={() => navigate(-1)}/></AbsoluteBack>
+            <AbsoluteBack><ArrowBack id="arrowBackProductActual" style={{cursor: "pointer", fontSize: "2.5rem"}} onClick={() => navigate(`/products/${thisCategory}`)}/></AbsoluteBack>
             <ImgContainer>
             <Image src={product.img} />
             </ImgContainer>

@@ -17,8 +17,8 @@
 }
 .aIU {
     flex: 2;
-    font-size: 1.75rem;
-    font-weight: 700;
+    font-size: 1.5rem;
+    font-weight: 800;
     padding-left: 2rem;
 }
 .aIM {
@@ -39,11 +39,10 @@
 .aIB:hover {
     color: #777;
 }
-
 .modalBackground {
     width: 100vw;
     height: 100vh;
-    margin-top: -75vh;
+    margin-top: -75.25vh;
     margin-left: -20vw;
     position: fixed;
     display: flex;
@@ -160,4 +159,77 @@
 }
 @keyframes spin {
     to { -webkit-transform: rotate(360deg); }
+}
+
+@media (max-width: 1250px) {
+    .accountContainer {
+        width: 70%;
+    }
+    .modalBackground {
+        margin-left: -15vw;
+    }
+    .aIU {
+        flex: 2;
+        font-size: 1.35rem;
+        font-weight: 800;
+    }
+}
+@media (max-width: 1050px) {
+    .accountContainer {
+        width: 80%;
+    }
+    .modalBackground {
+        margin-left: -10vw;
+    }
+}
+@media (max-width: 850px) {
+    .accountContainer {
+        width: 90%;
+    }
+    .modalBackground {
+        margin-top: -61vh;
+        margin-left: -5vw;
+    }
+    .aIU {
+        flex: 2;
+        font-size: 1.25rem;
+        padding-left: 2rem;
+    }
+    .aIM {
+        font-size: 1.35rem;
+    }
+    .aIB {
+        flex: .75;
+    }
+}
+@media (max-width: 625px) {
+    .aIU {
+        font-size: 1.25rem;
+        padding-left: 1.5rem;
+        flex: 1.5;
+    }
+    .aIM {
+        font-size: 1.25rem;
+        margin-left: 1rem;
+    }
+    .aIB {
+        flex: 1;
+    }
+    .modalContainer {
+        width: 400px;
+    }
+}
+@media (max-width: 480px) {
+    .modalBackground {
+        margin-top: -65.5vh;
+    }
+    .modalContainer {
+        width: 350px;
+        height: 300px;
+    }
+}
+@media (max-width: 380px) {
+    .modalContainer {
+        width: 325px;
+    }
 }

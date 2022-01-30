@@ -178,3 +178,95 @@
     cursor: pointer;
     color: black;
 }
+
+@media (max-width: 1050px) {
+    .piHeaderTop h1 {
+        font-size: 2rem;
+    }
+    .piHeaderBottom h6 {
+        font-size: 1.5rem;
+    }
+    .piHeaderBottom h6 span {
+        font-size: 1.85rem;
+    }
+    .piBodyItem h1 {
+        font-size: 1.5rem;
+    }
+}
+@media (max-width: 625px) {
+    .piWrapper {
+        width: 87.5vw;
+    }
+    .piBodyItem h1 {
+        font-size: 1.35rem;
+    }
+    .piBodyItem h5 {
+        font-size: 1.125rem;
+    }
+    .piBodyItem > span {
+        width: 15px;
+        height: 15px;
+    }
+    .piBodyItem p {
+        font-size: 1.125rem;
+    }
+    .piHeaderTop h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    .piHeaderBottom h6 {
+        font-size: 1.25rem;
+    }
+    .piHeaderBottom h6 span {
+        font-size: 1.5rem;
+    }
+    #arrowBackOrder {
+        top: 1rem;
+        left: 1rem;
+    }
+    
+}
+@media (max-width: 480px) {
+    .piWrapper {
+        width: 90vw;
+    }
+    .piBodyItem {
+        padding: 0;
+    }
+    .piBodyItem h1 {
+        font-size: 1.25rem;
+    }
+    .piBodyItem h5 {
+        font-size: 1rem;
+    }
+    .piBodyItem img {
+        height: 3.25rem;
+        width: 3.25rem;
+    }
+    .piBodyItem > span {
+        width: 13.5px;
+        height: 13.5px;
+    }
+    .piHeaderTop h1 {
+        font-size: 1.125rem;
+        font-weight: 900;
+    }
+    .piHeaderBottom h6 {
+        font-size: 1rem;
+    }
+    .piHeaderBottom h6 span {
+        font-size: 1.35rem;
+    }
+    .piHeaderTop p {
+        font-size: .8rem;
+    }
+    .piHeaderTop p span {
+        font-weight: 600;
+    }
+    .piHeaderBottom p {
+        font-size: .85rem;
+    }
+    .piHeaderBottom p span {
+        font-size: 1.125rem;
+    }
+}

@@ -121,3 +121,19 @@
 .trFiller {
     height: .65rem;
 }
+
+@media (max-width: 1325px) {
+    .historyContainer {
+        width: 70%;
+    }
+}
+@media (max-width: 1050px) {
+    .historyContainer {
+        width: 80%;
+    }
+}
+@media (max-width: 650px) {
+    .historyContainer {
+        width: 90%;
+    }
+}

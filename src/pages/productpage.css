@@ -279,8 +279,6 @@
     color: black;
 }
 
-@media (max-width: 1050px) {
-}
 @media (max-width: 850px) {
     .reviewsContainer {
         padding: 2rem 2.5rem;
@@ -338,6 +336,9 @@
     }
     #arrowBackCart {
         display: block;
+    }
+    #arrowBackProductActual {
+        font-size: 2rem !important;
     }
 }
 @media (max-width: 480px) {

@@ -20,7 +20,7 @@ function PastPurchaseItem() {
         <div className="piHeader">
         <ArrowBack id="arrowBackOrder" onClick={() => navigate("/profile", {state: { fromOrders: true }})}/>
           <div className="piHeaderTop">
-            <h1>ORDER #{(item._id).substring(0, 12)}</h1>
+            <h1>Order <span>#{(item._id).substring(0, 12)}</span></h1>
             <p>Date Placed: <span>{moment(item.createdAt, 'YYYY-MM-DD[T00:00:00.000Z]').format("MMMM Do YYYY")}</span></p>
           </div>
           <div className="piHeaderBottom">

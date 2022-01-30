@@ -1,17 +1,19 @@
 import './profilepage.css'
 import { useEffect, useState } from 'react'
 import { getOrders } from '../redux/authRedux'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import AccountSettings from '../components/profile/AccountSettings'
 import PastPurchases from '../components/profile/PastPurchases'
 import WishList from '../components/profile/WishList'
+import { ArrowBack } from '@material-ui/icons'
 
 function ProfilePage() {
     const dispatch = useDispatch()
     const location = useLocation()
+    const navigate = useNavigate()
     const fromOrders = location.state?.fromOrders
     const userID = useSelector((state) => state.user.currentUser._id)
     useEffect(() => getOrders(userID, dispatch), [dispatch, userID])
@@ -42,6 +44,7 @@ function ProfilePage() {
     <div>
         <Navbar/>
             <div className='profileContainer'>
+            <ArrowBack id="arrowBackProfile" onClick={() => navigate('/')}/>
                 <div className="profileHeader">
                     <h1>Your Profile</h1>
                     <div className="profileHeaderLinks">
