@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { registerRequest } from "../redux/authRedux"
 import Swal from 'sweetalert2'
 import styled from "styled-components"
-import { mobile } from "../responsive"
+import { large, medium, mobile, small } from "../responsive"
 import LogoImg from '../images/siteLogo.png'
 
 const Container = styled.div`
@@ -17,10 +17,14 @@ const Container = styled.div`
     justify-content: center;
 `
 const Wrapper = styled.div`
-    width: 45%;
+    width: 30%;
     padding: 40px 25px;
     background-color: white;
-    ${mobile({ width: "75%" })}
+    margin-top: 2rem;
+    ${large({ width: "45%" })}
+    ${medium({ width: "55%" })}
+    ${small({ width: "65%" })}
+    ${mobile({ width: "90%" })}
 `
 const Title = styled.h1`
     font-size: 24px;
@@ -43,6 +47,7 @@ const Input = styled.input`
 const Agreement = styled.span`
     font-size: 12px;
     margin: 20px 0px;
+    ${mobile({ margin: "20px 0 10px" })}
 `
 const Button = styled.button`
     width: 40%;
@@ -58,7 +63,7 @@ const Error = styled.span`
 const ButtonWrapper = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin: 1rem 0 0;
     width: 100%;
 `
@@ -67,6 +72,11 @@ const Link = styled.a`
     font-size: 14px;
     text-decoration: underline;
     cursor: pointer;
+`
+const InputWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 `
 
 function RegisterPage() {
@@ -105,13 +115,15 @@ function RegisterPage() {
         <Wrapper>
             <Title>CREATE AN ACCOUNT</Title>
             <Form onSubmit={handleSubmit}>
-                <Input placeholder="Username" onChange={(e) => setUsername(e.target.value)} required />
-                <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} type="email" required/>
-                <Input placeholder="Password" onChange={(e) => setPassword(e.target.value)} type="password" required />
-                <Input placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} type="password" required/>
+                <InputWrapper>
+                    <Input placeholder="Username" onChange={(e) => setUsername(e.target.value)} required />
+                    <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} type="email" required/>
+                    <Input placeholder="Password" onChange={(e) => setPassword(e.target.value)} type="password" required />
+                    <Input placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} type="password" required/>
+                </InputWrapper>
                 <Agreement>
                     By creating an account, I consent to the processing of my personal
-                    data in accordance to the <b id="termsReg" onClick={() => navigate('/terms')}>PRIVACY POLICY</b>
+                    data in accordance to the <b id="termsReg" onClick={() => navigate('/terms')}>TERMS AND CONDITIONS</b>
                 </Agreement>
                 <ButtonWrapper>
                     <Button type="submit" disabled={isFetching || currentUser}>REGISTER</Button>

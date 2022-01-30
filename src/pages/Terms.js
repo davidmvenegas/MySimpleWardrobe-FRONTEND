@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import { mobile } from "../responsive"
+import { large, medium, mobile, small } from "../responsive"
 import { ArrowBack } from "@material-ui/icons"
 import LogoImg from '../images/siteLogo.png'
 
@@ -17,13 +17,17 @@ const Wrapper = styled.div`
     width: 45%;
     padding: 40px 25px;
     background-color: white;
-    ${mobile({ width: "75%" })}
-`
+    ${large({ width: "65%" })}
+    ${medium({ width: "75%" })}
+    ${small({ width: "80%", marginTop: "5rem" })}
+    ${mobile({ width: "90%", marginTop: "8.5rem" })}
+    `
 const Title = styled.h1`
     font-size: 32px;
     font-weight: 500;
     margin-bottom: 1rem;
     text-align: center;
+    ${small({ marginBottom: "2rem" })}
 `
 const Information = styled.p`
     font-size: 16px;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { loginRequest } from "../redux/authRedux"
 import styled from "styled-components"
-import {mobile} from "../responsive"
+import {large, medium, mobile, small} from "../responsive"
 import LogoImg from '../images/siteLogo.png'
 
 const Container = styled.div`
@@ -16,26 +16,29 @@ const Container = styled.div`
     justify-content: center;
 `
 const Wrapper = styled.div`
-    width: 25%;
+    width: 30%;
     padding: 25px 30px;
     background-color: white;
-    ${mobile({ width: "75%" })}
-`
+    ${large({ width: "45%" })}
+    ${medium({ width: "55%" })}
+    ${small({ width: "65%" })}
+    ${mobile({ width: "90%" })}
+    `
 const Title = styled.h1`
     font-size: 24px;
     font-weight: 300;
     margin-bottom: .25rem;
-`
+    `
 const Form = styled.form`
     display: flex;
     flex-direction: column;
-`
+    `
 const Input = styled.input`
     flex: 1;
     min-width: 40%;
     margin: 10px 0 5px;
     padding: 12px 10px;
-`
+    `
 const Button = styled.button`
     width: 40%;
     border: none;
@@ -48,12 +51,13 @@ const Button = styled.button`
         background-color: gray;
         cursor: not-allowed;
     }
-`
+    `
 const Link = styled.a`
     margin: 5px 0px;
     font-size: 14px;
     text-decoration: underline;
     cursor: pointer;
+    ${small({ fontSize: "12px" })}
 `
 const Error = styled.span`
     color: red;

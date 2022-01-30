@@ -49,10 +49,3 @@ export const tiny = (i) => {
         }
     `
 }
-
-// @media (max-width: 1050px) {
-// }
-// @media (max-width: 850px) {
-// }
-// @media (max-width: 480px) {
-// }
