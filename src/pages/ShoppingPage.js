@@ -62,7 +62,6 @@ function ShoppingPage() {
     const [filtersOn, setFiltersOn] = useState(true)
     const [sort, setSort] = useState("newest")
 
-
     function handleFilters(e) {
         setFilters({...filters, [e.target.name]: e.target.value})
         setFiltersOn(true)
