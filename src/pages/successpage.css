@@ -202,11 +202,84 @@
     text-decoration: underline;
 }
 
+@media (max-width: 1050px) {
+    #sNamePT {
+        font-size: 1.25rem;
+    }
+    #sNamePr {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+}
 @media (max-width: 850px) {
     #bybySortPrdct {
         display: none;
     }
     #selectedFilterShopping2 {
         margin-right: 0px;
+    }
+    #sNameC {
+        width: 15px;
+        height: 15px;
+    }
+}
+@media (max-width: 675px) {
+    #sNamePT {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        width: 40%;
+    }
+    #sNameC {
+        margin-left: -.75rem;
+    }
+    #sNamePr {
+        margin-bottom: .25rem;
+    }
+    #sNameP {
+        font-size: 1rem;
+        margin-bottom: 1.35rem;
+    }
+    .sAddress {
+        width: 80vw;
+        justify-content: space-between;
+    }
+}
+@media (max-width: 480px) {
+    .sAddress {
+        width: 90vw;
+    }
+    #sTitle {
+        width: 90vw;
+    }
+    .sProducts {
+        width: 90vw;
+    }
+    #sNamePT {
+        font-size: .85rem;
+        margin-bottom: 1.5rem;
+    }
+    #sNameP {
+        font-size: .9rem;
+    }
+    #sNameC {
+        width: 13.5px;
+        height: 13.5px;
+    }
+    #sNamePr {
+        font-size: 1rem;
+        margin-bottom: .65rem;
+    }
+    .sAddressBox p {
+        font-size: .95rem;
+    }
+    .sAddressBox p span {
+        font-size: .95rem;
+    }
+    .sTotal h4 {
+        font-size: 1rem;
+    }
+    .sTotal span {
+        font-size: 1.125rem;
     }
 }

@@ -269,6 +269,15 @@
     margin-left: .25rem;
     color: green;
 }
+#arrowBackCart {
+    display: none;
+    position: absolute;
+    top: 7.5rem;
+    left: 2.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: black;
+}
 
 @media (max-width: 1050px) {
 }
@@ -327,6 +336,9 @@
     .pastReviewDesc {
         width: 92.5%;
     }
+    #arrowBackCart {
+        display: block;
+    }
 }
 @media (max-width: 480px) {
     .reviewsContainer {
@@ -361,12 +373,17 @@
     }
     #favoriteProductButtonOutline {
         position: absolute;
-        top: 10rem;
+        top: 10.9rem;
         right: 3rem;
     }
     #favoriteProductButtonSolid {
         position: absolute;
-        top: 10rem;
+        top: 10.9rem;
         right: 3rem;
+    }
+    #arrowBackCart {
+        display: block;
+        top: 9rem;
+        left: 1.5rem;
     }
 }

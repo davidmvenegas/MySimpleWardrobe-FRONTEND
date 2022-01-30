@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom"
-import { Add, Remove } from "@material-ui/icons"
+import { Add, ArrowBack, Remove } from "@material-ui/icons"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
@@ -279,6 +279,7 @@ function CartPage() {
         <Container>
             <Navbar loading={loading} />
             <Wrapper>
+            <ArrowBack style={loading ? {opacity: 0, pointerEvents: "none"} : null} id="arrowBackCart" onClick={() => navigate("/profile", {state: { fromOrders: true }})}/>
                 <Title style={loading ? {opacity: 0, pointerEvents: "none"} : null}>YOUR BAG</Title>
                 <Top style={loading ? {opacity: 0, pointerEvents: "none"} : null}>
                     <TopButton style={wishlist ? {opacity: 0, pointerEvents: "none"} : null} onClick={() => navigate(-1)}>CONTINUE SHOPPING</TopButton>
