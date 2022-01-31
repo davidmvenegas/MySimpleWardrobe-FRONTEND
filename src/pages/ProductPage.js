@@ -14,7 +14,7 @@ import Swal from 'sweetalert2'
 import moment from 'moment'
 import { Rating } from 'react-simple-star-rating'
 import { generalRequest } from "../request"
-import { large, medium, mobile, small, smaller, tiny } from "../responsive"
+import { large, medium, mobile, small, smaller, tiny, veryLarge } from "../responsive"
 
 const Container = styled.div``
 const Wrapper = styled.div`
@@ -32,11 +32,12 @@ const Image = styled.img`
     margin-top: 5vh;
     margin-bottom: 5vh;
     object-fit: cover;
-    ${large({ height: "65vh" })}
-    ${medium({ height: "55vh" })}
-    ${small({ height: "47.5vh", width: "50%", marginLeft: '5vw', marginTop: "0vh", marginBottom: "0vh" })}
-    ${smaller({ height: "38.5vh"})}
-    ${mobile({ height: "24.5vh", marginTop: "3.5vh", marginLeft: '2.5vw', width: "40%" })}
+    ${veryLarge({ height: "65vh" })}
+    ${large({ height: "57.5vh" })}
+    ${medium({ height: "52.5vh" })}
+    ${small({ height: "45vh", width: "50%", marginLeft: '5vw', marginTop: "0vh", marginBottom: "0vh" })}
+    ${smaller({ height: "35vh"})}
+    ${mobile({ height: "22.5vh", marginTop: "3.5vh", marginLeft: '2.5vw', width: "45%" })}
     ${tiny({ height: "20vh", marginTop: "5vh" })}
 `
 const InfoContainer = styled.div`
@@ -62,7 +63,7 @@ const Desc = styled.p`
     font-weight: 200;
     ${small({ position: "absolute", top: "20vh", right: "6.5%", width: "37.5%", fontSize: "1.125rem" })}
     ${smaller({ top: "15vh", right: "5%", width: "40%" })}
-    ${mobile({ top: "10.5vh", right: "2.5%", width: "50%", margin: "10px 0 22.5px" })}
+    ${mobile({ top: "10.5vh", right: "2.5%", width: "48.5%", margin: "10px 0 22.5px" })}
 `
 const Price = styled.span`
     font-weight: 100;
@@ -104,11 +105,11 @@ const FilterSize = styled.select`
 `
 const FilterSizeOption = styled.option``
 const AddContainer = styled.div`
-    width: 57.5%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    ${large({ width: "70%" })}
+    ${large({ width: "65%" })}
     ${medium({ width: "80%" })}
     ${small({ width: "90%" })}
     `
@@ -157,7 +158,7 @@ const TitleContainer = styled.div`
     justify-content: flex-start;
     ${small({ position: "absolute", top: "15vh", width: "37.5%", right: "6.5%" })}
     ${smaller({ top: "10vh", width: "40%", right: "5%" })}
-    ${mobile({ top: "7.5vh", width: "50%", right: "2.5%" })}
+    ${mobile({ top: "7.5vh", width: "48.5%", right: "2.5%" })}
 `
 const PriceWrapper = styled.div`
     display: flex;
@@ -165,7 +166,7 @@ const PriceWrapper = styled.div`
     justify-content: flex-start;
     ${small({ position: "absolute", top: "30vh", width: "37.5%", right: "6.5%", flexDirection: "column", alignItems: "flex-start", gap: ".75rem" })}
     ${smaller({ top: "27.5vh", width: "40%", right: "5%", flexDirection: "column", alignItems: "flex-start", gap: ".75rem" })}
-    ${mobile({ top: "23.5vh", gap: "0", visibility: "hidden", width: "50%", right: "2.5%" })}
+    ${mobile({ top: "23.5vh", gap: "0", visibility: "hidden", width: "48.5%", right: "2.5%" })}
 `
 
 function ProductPage() {

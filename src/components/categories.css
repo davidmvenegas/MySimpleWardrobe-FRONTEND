@@ -104,6 +104,9 @@
     }
 }
 @media (max-width: 480px) {
+    .categoriesContainer {
+        margin: 4.5rem 0 3.5rem;
+    }
     .aCategory {
         height: 18rem;
     }
