@@ -51,6 +51,7 @@ position: absolute;
         color: red;
         cursor: pointer;
     }
+    ${smaller({ marginTop: "22.5px"})}
 `
 
 function ShoppingPage() {
