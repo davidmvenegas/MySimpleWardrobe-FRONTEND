@@ -30,7 +30,7 @@ export const dataSlider = [
     {
         id: uuidv4(),
         title: "Shoes",
-        subtitle: "Slip into easy Style and Comfort.",
+        subtitle: "Slip into easy Style and Comfort",
         category: "shoes",
         img: shoeSlide
     },
