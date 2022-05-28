@@ -1,1 +1,1 @@
-# Electronic Store
+# Clothing E-Commerce Store
